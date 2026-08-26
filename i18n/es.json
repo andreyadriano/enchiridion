@@ -1,0 +1,27 @@
+{
+  "_readme": "Diccionario de textos fijos (encabezado/pie, nombres del menú, etiquetas de impresión) del template de manual white-label. NO contiene el contenido de las páginas (títulos/párrafos): eso vive directamente en cada archivo pages/**/*.html como HTML simple, para que alguien sin conocimientos técnicos solo necesite abrir un archivo HTML para cambiar lo que dice la página. Solo edite este JSON para renombrar una entrada del menú/barra lateral, o cambiar el texto del encabezado/pie/botones. Mantenga en.json, pt.json y es.json con exactamente las mismas claves.",
+
+  "product.name": "Nombre del producto",
+  "a11y.skipToContent": "Saltar al contenido",
+
+  "header.language": "Idioma",
+  "header.layout": "Diseño",
+  "header.brand": "Marca",
+  "header.downloadPdf": "Descargar PDF",
+  "header.downloadPdfTitle": "Abre el manual completo en PDF, listo para guardar",
+  "header.searchPlaceholder": "Buscar en el manual…",
+  "search.noResults": "No se encontraron resultados.",
+  "footer.text": "Nombre del producto — manual del usuario.",
+  "footer.downloadPdf": "Descargar en PDF",
+  "print.subtitle": "Manual del usuario",
+  "print.toc": "Índice",
+  "print.backToManual": "Volver al manual",
+
+  "nav.menu1": "Primeros Pasos",
+  "nav.menu1.submenu1": "Instalación",
+  "nav.menu1.submenu2": "Configuración Inicial",
+  "nav.menu2": "Especificaciones",
+  "nav.menu2.submenu1": "Cumplimiento",
+  "nav.menu3": "Soporte",
+  "nav.menu3.submenu1": "Temas Avanzados"
+}

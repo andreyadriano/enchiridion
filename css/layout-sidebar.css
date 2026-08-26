@@ -1,0 +1,38 @@
+/* Layout 1 — fixed sidebar with the full menu tree, always visible. */
+
+body.layout-sidebar .layout-shell {
+  display: flex;
+  /* Not flex-start: stretch (the default, stated explicitly here) is what
+     lets .site-nav fill exactly however tall .layout-shell actually ends up
+     being — see base.css's sticky-footer flex column on body — instead of
+     the nav needing its own hard-coded `100vh - header-height` height,
+     which forced that much vertical space to exist even on a short page,
+     pushing the footer below the fold until you scrolled for it. */
+  align-items: stretch;
+}
+
+body.layout-sidebar .site-nav {
+  width: 260px;
+  flex-shrink: 0;
+  position: sticky;
+  top: var(--header-height);
+  overflow-y: auto;
+  border-right: 1px solid var(--color-secondary, #e5e5e5);
+  padding: 1.5rem 1rem;
+  background: var(--color-sidebar-bg, var(--color-bg, #ffffff));
+}
+
+body.layout-sidebar .nav-sublist {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+body.layout-sidebar .page-content {
+  flex: 1;
+  min-width: 0;
+  /* Deliberately no auto-centering here: content sits right up against the
+     sidebar (its own base.css padding is the only gap), not floated away
+     from it — any leftover space on wide viewports lands after the content
+     (right edge), not before it. */
+}

@@ -1,0 +1,69 @@
+/* Backs js/print-fallback.js: makes a plain browser Ctrl+P from
+   'sidebar'/'navbar' layout print the whole manual, not just the one page
+   on screen. See css/print.css for the separate, more polished export
+   (cover, resolved table of contents, Paged.js pagination) at print.html —
+   this is the lightweight fallback for people who just hit Ctrl+P instead
+   of using the "Download as PDF" link. */
+
+.print-manual {
+  display: none;
+}
+
+@media print {
+  @page {
+    margin: 2cm;
+  }
+
+  .site-header,
+  .site-nav,
+  .site-footer,
+  .skip-link {
+    display: none !important;
+  }
+
+  body.layout-sidebar #page-content,
+  body.layout-navbar #page-content {
+    display: none !important;
+  }
+
+  /* Scoped to sidebar/navbar only — in 'scroll' layout #page-content is
+     already the whole manual, so #print-manual (if a stale one is ever
+     left over from switching layouts mid-session) must stay hidden there
+     to avoid printing the manual twice. */
+  body.layout-sidebar .print-manual,
+  body.layout-navbar .print-manual {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  .print-manual .chapter-section + .chapter-section {
+    break-before: page;
+  }
+
+  .print-manual .spec-table,
+  .print-manual .manual-figure {
+    break-inside: avoid;
+  }
+
+  .print-manual-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--color-secondary, #e5e5e5);
+  }
+
+  .print-manual-logo {
+    height: 40px;
+    width: auto;
+  }
+
+  .print-manual-title {
+    font-family: var(--font-heading, sans-serif);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary, #0057b8);
+  }
+}

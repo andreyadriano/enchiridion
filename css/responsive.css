@@ -1,0 +1,127 @@
+/* Small-viewport fallback for all 4 layouts. Loaded last (after
+   layout-*.css) so it overrides them at the breakpoint — but each
+   layout-*.css rule is qualified as `body.layout-X .selector` (two class
+   selectors), so overrides here must match that same specificity
+   (`body.layout-sidebar .selector, body.layout-navbar .selector, ...`);
+   a plain `.selector` here would lose to them regardless of load order.
+
+   Below the breakpoint every layout collapses to the same shape: a
+   full-width, in-flow nav (no more fixed/sticky column stealing width from
+   a phone-sized viewport) stacked above full-width content. */
+
+@media (max-width: 760px) {
+  :root {
+    /* The header wraps to ~2 rows once .header-controls goes full-width
+       below; scroll-margin-top (base.css) and the scroll-layout nav's
+       sticky offset both key off this variable, so bump it to match. */
+    --header-height: 112px;
+  }
+
+  .site-header {
+    height: auto;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    row-gap: 0.6rem;
+  }
+
+  .header-controls {
+    width: 100%;
+    justify-content: flex-start;
+    row-gap: 0.5rem;
+  }
+
+  .header-search,
+  .search-input {
+    width: 100%;
+  }
+
+  .search-results {
+    width: 100%;
+  }
+
+  .product-name {
+    font-size: 1.05rem;
+  }
+
+  .page-content {
+    padding: 1.25rem;
+  }
+
+  body.layout-sidebar .page-content,
+  body.layout-navbar .page-content,
+  body.layout-scroll .page-content,
+  body.layout-hybrid .page-content {
+    max-width: none;
+  }
+
+  body.layout-sidebar .layout-shell,
+  body.layout-navbar .layout-shell,
+  body.layout-scroll .layout-shell,
+  body.layout-hybrid .layout-shell {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+  }
+
+  body.layout-sidebar .site-nav,
+  body.layout-navbar .site-nav,
+  body.layout-scroll .site-nav {
+    position: static;
+    width: auto;
+    height: auto;
+    max-height: none;
+    overflow: visible;
+    border: none;
+    border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+    padding: 1rem 1.25rem;
+    margin: 0;
+  }
+
+  /* hybrid layout: .layout-shell going `display: block` above already
+     un-grids the container, so .site-nav's own `display: contents` (see
+     css/layout-hybrid.css) just leaves its two children — the topbar and
+     the contextual sidebar — stacked in normal document flow, in that
+     order, above the main content. Only their own sizing/positioning needs
+     resetting here. */
+  body.layout-hybrid .hybrid-topbar {
+    padding: 1rem 1.25rem;
+  }
+
+  body.layout-hybrid .hybrid-sidebar {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    border: none;
+    border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+    padding: 1rem 1.25rem;
+  }
+
+  /* navbar layout: hover-only dropdowns don't work on touch, so just list
+     everything in one flat, always-open column instead. */
+  body.layout-navbar .nav-list {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  body.layout-navbar .nav-sublist {
+    display: block;
+    position: static;
+    border: none;
+    padding: 0 0 0 1rem;
+  }
+
+  body.layout-scroll .chapter-section + .chapter-section {
+    margin-top: 2.25rem;
+    padding-top: 1.25rem;
+  }
+
+  body.layout-scroll .chapter-subsection {
+    margin-top: 1.75rem;
+    padding-top: 1rem;
+  }
+}

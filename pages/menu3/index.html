@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <h1>Support</h1>
+      <p>What to check yourself, and how to reach the manufacturer if that doesn't resolve it.</p>
+
+      <h2 id="menu3-topic1">Getting Help</h2>
+      <p>Support is available Monday–Friday, 9 AM–6 PM, through the manufacturer's support portal, by email, or by phone — see the back cover of the printed manual (or this template's own footer) for the actual contact details.</p>
+
+      <h2 id="menu3-topic2">Before You Contact Support</h2>
+      <p>Having these on hand speeds up any support call:</p>
+      <ul class="contents-list">
+        <li>The device's model number and serial number (see the label on the bottom of the unit)</li>
+        <li>What the status LEDs are currently doing — see <a href="../menu2/index.html#menu2-topic4">LED Indicators</a></li>
+        <li>Whether the issue started right after a change (new cable, new firmware, power outage)</li>
+        <li>Whether you've already tried a power cycle (unplug for 10 seconds, then reconnect)</li>
+      </ul>
+
+      <h2 id="menu3-topic3">Troubleshooting</h2>
+      <p>A symptom / possible cause / solution table is the standard shape for a troubleshooting section — same <code>.spec-table</code> pattern, three columns instead of two.</p>
+      <table class="spec-table">
+        <caption>Table 6 — Troubleshooting</caption>
+        <thead>
+          <tr>
+            <th>Symptom</th>
+            <th>Possible cause</th>
+            <th>Solution</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Power LED does not light up</td><td>Power adapter not connected, or faulty outlet</td><td>Check both cable ends and try a different outlet</td></tr>
+          <tr><td>Power LED blinks red</td><td>Startup self-test failed</td><td>Unplug for 10 seconds, then power on again; contact support if it persists</td></tr>
+          <tr><td>No internet access</td><td>WAN cable disconnected, or ISP outage</td><td>Check the WAN LED (see <a href="../menu2/index.html#menu2-topic4">LED Indicators</a>); confirm the cable at both ends</td></tr>
+          <tr><td>Can't reach the web interface</td><td>Computer is on a different subnet</td><td>Confirm the computer got an IP address from the device via DHCP</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-warning">
+        <p class="callout-title">Warning</p>
+        <p>If none of the steps above resolve the issue, do not attempt to open the device — contact authorized technical support instead.</p>
+      </div>
+
+      <h2 id="menu3-topic4">Frequently Asked Questions</h2>
+      <p>An FAQ reads better as question/answer pairs than as a table — this uses the <code>.faq-list</code> pattern, a plain <code>&lt;dl&gt;</code> with one <code>&lt;dt&gt;</code>/<code>&lt;dd&gt;</code> pair per question.</p>
+      <dl class="faq-list">
+        <dt>How do I reset the device to factory defaults?</dt>
+        <dd>See <a href="../menu3/submenu1.html#menu3-submenu1-topic4">Firmware Update Procedure</a>, which also covers the factory-reset button.</dd>
+        <dt>Can I use a third-party power adapter?</dt>
+        <dd>No — see the Warning in <a href="../menu1/index.html#menu1-topic4">Safety Warnings</a>.</dd>
+        <dt>Where do I find the device's serial number?</dt>
+        <dd>Printed on a label on the bottom of the unit, and also shown on the web interface's status page.</dd>
+      </dl>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../js/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalação</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <h1>Instalação</h1>
+      <p>Este capítulo cobre a instalação física do dispositivo — onde colocá-lo, o que conectar nele, e os passos exatos para colocá-lo em funcionamento.</p>
+
+      <h2 id="menu1-submenu1-topic1">Escolhendo um Local</h2>
+      <p>Coloque o dispositivo em uma superfície plana e estável, ou monte-o na parede usando o suporte incluso. Deixe pelo menos 10 cm de espaço livre em todos os lados para ventilação, e mantenha-o afastado de outros eletrônicos, armários metálicos e paredes espessas que possam enfraquecer o sinal sem fio.</p>
+
+      <h2 id="menu1-submenu1-topic2">Conexões Físicas em Resumo</h2>
+      <p>O painel traseiro (veja a figura em <a href="../menu2/index.pt.html#menu2-topic3">Especificações Técnicas</a>) tem quatro tipos de conectores usados durante a instalação:</p>
+      <ul class="contents-list">
+        <li><strong>WAN</strong> — conecta à sua fonte de internet (ONT, modem)</li>
+        <li><strong>LAN 1–4</strong> — conectam dispositivos com fio à sua rede local</li>
+        <li><strong>USB</strong> — para um disco externo compartilhado ou impressora</li>
+        <li><strong>Alimentação</strong> — somente a fonte de 12 V / 1 A inclusa</li>
+      </ul>
+
+      <h2 id="menu1-submenu1-topic3">Etapas de Instalação</h2>
+      <p>Instruções numeradas passo a passo são a espinha dorsal de qualquer seção de instalação — usa o padrão <code>.steps</code> (uma <code>&lt;ol&gt;</code> simples estilizada com círculos numerados via CSS counters, sem JS).</p>
+      <ol class="steps">
+        <li>Escolha uma superfície plana e ventilada, ou o suporte de parede incluso, longe da luz solar direta e de outras fontes de calor.</li>
+        <li>Conecte um cabo Ethernet da tomada de parede (ONT/modem) à porta WAN do dispositivo.</li>
+        <li>Conecte o dispositivo ao seu roteador ou switch usando um segundo cabo Ethernet.</li>
+        <li>Conecte a fonte de alimentação e aguarde o LED de status ficar verde fixo (cerca de 60 segundos).</li>
+        <li>Continue para <a href="../menu1/submenu2.pt.html">Configuração Inicial</a>.</li>
+      </ol>
+
+      <figure class="manual-figure">
+        <img src="../../assets/example-installation-diagram.svg" alt="Diagrama de instalação típico: da tomada de parede para este produto, depois para o roteador ou switch, e então para os dispositivos finais" width="640" height="220">
+        <figcaption><strong>Figura 2.</strong> Diagrama de instalação típico.</figcaption>
+      </figure>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../js/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

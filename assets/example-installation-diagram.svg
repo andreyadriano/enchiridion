@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" width="640" height="220" role="img" aria-labelledby="example-installation-diagram-title">
+  <title id="example-installation-diagram-title">Example typical installation diagram</title>
+
+  <!-- Wall socket / ONT -->
+  <g>
+    <rect x="20" y="70" width="90" height="70" rx="6" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
+    <circle cx="65" cy="95" r="6" fill="#3a3f44"/>
+    <text x="65" y="160" font-family="system-ui, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">Wall socket</text>
+    <text x="65" y="176" font-family="system-ui, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">(ONT/modem)</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g stroke="#5b6167" stroke-width="2" fill="none">
+    <line x1="110" y1="105" x2="185" y2="105"/>
+    <polygon points="185,100 195,105 185,110" fill="#5b6167"/>
+  </g>
+
+  <!-- Product (this device) -->
+  <g>
+    <rect x="200" y="60" width="120" height="90" rx="8" fill="#3a3f44" stroke="#22262a" stroke-width="2"/>
+    <rect x="220" y="90" width="30" height="22" rx="3" fill="#c7ccd1" stroke="#2b6cb0" stroke-width="2"/>
+    <rect x="260" y="90" width="30" height="22" rx="3" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
+    <text x="260" y="170" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#1a1a1a" text-anchor="middle">This product</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g stroke="#5b6167" stroke-width="2" fill="none">
+    <line x1="320" y1="105" x2="395" y2="105"/>
+    <polygon points="395,100 405,105 395,110" fill="#5b6167"/>
+  </g>
+
+  <!-- Router / switch -->
+  <g>
+    <rect x="410" y="80" width="100" height="50" rx="6" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
+    <text x="460" y="150" font-family="system-ui, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">Router / switch</text>
+    <text x="460" y="166" font-family="system-ui, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">(existing network)</text>
+  </g>
+
+  <!-- Arrow 3 (wireless, dashed) -->
+  <g stroke="#8a8f94" stroke-width="2" fill="none" stroke-dasharray="5 4">
+    <line x1="510" y1="105" x2="585" y2="105"/>
+    <polygon points="585,100 595,105 585,110" fill="#8a8f94" stroke="none"/>
+  </g>
+
+  <!-- End devices -->
+  <g>
+    <rect x="596" y="80" width="34" height="50" rx="4" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
+    <text x="613" y="150" font-family="system-ui, sans-serif" font-size="12" fill="#1a1a1a" text-anchor="middle">Devices</text>
+  </g>
+</svg>

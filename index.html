@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting…</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="assets/favicon.svg">
+  <script type="module">
+    // Landing page: sends the visitor straight to the first manual page,
+    // preserving any deep-link query params (?brand=&lang=&layout=).
+    const target = new URL('pages/menu1/index.html', window.location.href);
+    target.search = window.location.search;
+    window.location.replace(target.href);
+  </script>
+</head>
+<body>
+  <p>Redirecting to the user guide… If nothing happens, <a href="pages/menu1/index.html">click here</a>.</p>
+</body>
+</html>

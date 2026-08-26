@@ -1,0 +1,59 @@
+/* Layout 2 — horizontal top navbar with dropdown submenus, "institutional
+   site" feel rather than documentation-app feel. */
+
+body.layout-navbar .layout-shell {
+  display: block;
+}
+
+body.layout-navbar .site-nav {
+  width: 100%;
+  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+  padding: 0.5rem 1.5rem;
+}
+
+body.layout-navbar .nav-list {
+  display: flex;
+  /* Matches .page-content's own max-width/centering below, so the menu bar
+     lines up with the content column's edges instead of just floating a
+     small cluster of items in the middle of the full-bleed bar. */
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  gap: 0.5rem;
+}
+
+body.layout-navbar .nav-item {
+  position: relative;
+  /* Each item stretches to fill an equal share of the bar instead of just
+     sitting at its own text width with gaps in between — the request was
+     for the buttons themselves to fill the space, not only for the group
+     of them to be spread across it. */
+  flex: 1;
+}
+
+body.layout-navbar .nav-item > .nav-link {
+  text-align: center;
+}
+
+body.layout-navbar .nav-sublist {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: var(--color-submenu-bg, var(--color-bg, #fff));
+  border: 1px solid var(--color-submenu-border, var(--color-secondary, #e5e5e5));
+  border-radius: var(--border-radius, 4px);
+  padding: 0.5rem;
+  z-index: 20;
+}
+
+body.layout-navbar .nav-item:hover .nav-sublist,
+body.layout-navbar .nav-item:focus-within .nav-sublist {
+  display: block;
+}
+
+body.layout-navbar .page-content {
+  max-width: 960px;
+  margin: 0 auto;
+}

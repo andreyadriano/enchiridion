@@ -1,0 +1,27 @@
+{
+  "_readme": "UI-chrome dictionary for the white-label manual template — header/footer text, nav menu labels, and print labels. It does NOT hold page content (titles/paragraphs): those live directly in each pages/**/*.html file as plain HTML, so a non-technical editor only ever needs to open an HTML file to change what a page says. Only edit this JSON to rename an entry in the menu/sidebar, or to change header/footer/button wording. Keep en.json, pt.json, and es.json with the exact same set of keys.",
+
+  "product.name": "Product name",
+  "a11y.skipToContent": "Skip to content",
+
+  "header.language": "Language",
+  "header.layout": "Layout",
+  "header.brand": "Brand",
+  "header.downloadPdf": "Download PDF",
+  "header.downloadPdfTitle": "Opens the full manual as a PDF, ready to save",
+  "header.searchPlaceholder": "Search the manual…",
+  "search.noResults": "No results found.",
+  "footer.text": "Product name — user guide.",
+  "footer.downloadPdf": "Download as PDF",
+  "print.subtitle": "User Guide",
+  "print.toc": "Table of contents",
+  "print.backToManual": "Back to manual",
+
+  "nav.menu1": "Getting Started",
+  "nav.menu1.submenu1": "Installation",
+  "nav.menu1.submenu2": "Initial Setup",
+  "nav.menu2": "Specifications",
+  "nav.menu2.submenu1": "Compliance",
+  "nav.menu3": "Support",
+  "nav.menu3.submenu1": "Advanced Topics"
+}

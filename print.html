@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Print / PDF export</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="assets/favicon.svg">
+  <link rel="stylesheet" id="theme-css" href="themes/theme-generic.css">
+  <link rel="stylesheet" href="css/print.css">
+  <style>
+    /* Minimal on-screen chrome around the paginated preview — not part of
+       the exported document itself (Paged.js only paginates #source). */
+    body { margin: 0; font-family: var(--font-body, sans-serif); }
+    .print-toolbar {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.75rem 1.5rem; background: #fafafa; border-bottom: 1px solid #ddd;
+    }
+    .print-toolbar select { padding: 0.25rem 0.5rem; }
+    #status { font-size: 0.85rem; color: #555; }
+    #back-to-manual {
+      font-family: inherit;
+      font-size: 0.85rem;
+      text-decoration: none;
+      color: var(--color-primary, #0057b8);
+      border: 1px solid var(--color-primary, #0057b8);
+      border-radius: var(--border-radius, 4px);
+      padding: 0.3rem 0.7rem;
+      margin-left: auto;
+    }
+    #back-to-manual:hover { opacity: 0.8; }
+    @media print {
+      .print-toolbar { display: none; }
+    }
+  </style>
+  <script>window.PagedConfig = { auto: false };</script>
+  <script src="vendor/paged.polyfill.js"></script>
+</head>
+<body>
+  <div class="print-toolbar">
+    <label>Brand:
+      <select id="brand-selector"></select>
+    </label>
+    <label>Language:
+      <select id="lang-selector"></select>
+    </label>
+    <span id="status">Building document…</span>
+    <a id="back-to-manual" href="index.html" data-i18n="print.backToManual">Back to manual</a>
+  </div>
+
+  <!-- Assembled here (cover + TOC + every chapter, in nav-config.js order),
+       then handed to Paged.js and hidden once #output holds the paginated
+       result. -->
+  <div id="source" hidden></div>
+  <div id="output"></div>
+
+  <script type="module">
+    import { BRANDS, LANGS, LANG_LABELS } from './js/brands-config.js';
+    import { resolveState } from './js/state.js';
+    import { buildAndPaginate } from './js/print-builder.js';
+
+    // Defaults to whatever brand/language the visitor is currently
+    // browsing the manual in (see js/state.js) — a plain "Download as PDF"
+    // link with no query string still produces the right document.
+    const initial = resolveState();
+    const brandSelect = document.getElementById('brand-selector');
+    const langSelect = document.getElementById('lang-selector');
+
+    for (const [id, b] of Object.entries(BRANDS)) {
+      const opt = new Option(b.label, id);
+      brandSelect.appendChild(opt);
+    }
+    for (const lang of LANGS) {
+      langSelect.appendChild(new Option(LANG_LABELS[lang] || lang.toUpperCase(), lang));
+    }
+    brandSelect.value = initial.brand;
+    langSelect.value = initial.lang;
+
+    function regenerate() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('brand', brandSelect.value);
+      url.searchParams.set('lang', langSelect.value);
+      window.location.href = url.href; // full reload: re-runs pagination cleanly
+    }
+    brandSelect.addEventListener('change', regenerate);
+    langSelect.addEventListener('change', regenerate);
+
+    buildAndPaginate({
+      sourceEl: document.getElementById('source'),
+      outputEl: document.getElementById('output'),
+      statusEl: document.getElementById('status'),
+    }).then((translations) => {
+      // The browser's native print header/footer (when enabled) shows
+      // document.title — brand it instead of leaving the generic
+      // "Print / PDF export" tab title.
+      document.title = `${translations['product.name'] || ''} — ${translations['print.subtitle'] || ''}`.trim();
+
+      // Opened via the header's one-click "download PDF" button
+      // (js/page-init.js): skip straight to the browser's print dialog
+      // instead of making the visitor press Ctrl+P themselves once ready.
+      if (new URLSearchParams(window.location.search).get('autoprint') === '1') {
+        window.print();
+      }
+    });
+  </script>
+</body>
+</html>

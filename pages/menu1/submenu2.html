@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Initial Setup</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <h1>Initial Setup</h1>
+      <p>Once the device is physically installed (see <a href="../menu1/submenu1.html">Installation</a>), this chapter walks through first-time configuration — both from the web interface and from the command line.</p>
+
+      <h2 id="menu1-submenu2-topic1">Accessing the Web Interface</h2>
+      <p>Connect a computer to any LAN port (or to the default Wi-Fi network printed on the device's label) and open <code>http://192.168.1.1</code> in a browser.</p>
+      <div class="callout callout-note">
+        <p class="callout-title">Note</p>
+        <p>The default administrator username is <code>admin</code>; the default password is printed on the device label. You'll be prompted to set a new password on first login.</p>
+      </div>
+
+      <h2 id="menu1-submenu2-topic2">Command-Line Configuration Example</h2>
+      <p>Router/switch/gateway manuals routinely include a CLI session to copy-paste — the <code>.cli-block</code> pattern below is a plain <code>&lt;pre&gt;&lt;code&gt;</code> styled like a terminal.</p>
+      <pre class="cli-block"><code>login as: admin
+admin@192.168.1.1's password:
+
+device&gt; configure
+device(config)&gt; interface wan0
+device(config-if)&gt; ip address dhcp
+device(config-if)&gt; exit
+device(config)&gt; save
+Configuration saved.</code></pre>
+      <div class="callout callout-tip">
+        <p class="callout-title">Tip</p>
+        <p>Prefer the web interface? The same setting is under <strong>Network → WAN → IP Assignment</strong>.</p>
+      </div>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../js/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

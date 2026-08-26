@@ -1,0 +1,12 @@
+{
+  "name": "whitelabel-userguide-tests",
+  "private": true,
+  "type": "module",
+  "description": "QA tooling for the manual template. Not part of the served site — the site itself has no build step or dependencies (see README.md).",
+  "scripts": {
+    "test": "node tests/smoke.test.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^23.0.0"
+  }
+}

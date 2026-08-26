@@ -1,0 +1,48 @@
+<div class="header-inner">
+  <a class="header-brand" href="#" data-home-link>
+    <img class="header-logo" data-brand-logo src="" alt="Brand logo">
+    <span class="product-name" data-i18n="product.name">Product name</span>
+  </a>
+
+  <div class="header-controls">
+    <div class="header-control header-search" id="search-control">
+      <input
+        type="search"
+        id="search-input"
+        class="search-input"
+        autocomplete="off"
+        data-i18n-attr="placeholder:header.searchPlaceholder"
+        placeholder="Search the manual…"
+      >
+      <div id="search-results" class="search-results" hidden></div>
+    </div>
+
+    <label class="header-control">
+      <span data-i18n="header.language">Language</span>
+      <select id="lang-selector"></select>
+    </label>
+
+    <label class="header-control">
+      <span data-i18n="header.layout">Layout</span>
+      <select id="layout-selector"></select>
+    </label>
+
+    <!-- INÍCIO: THEME SWITCHER (remover para build de marca única — ver README.md) -->
+    <label class="header-control" id="brand-selector-wrap">
+      <span data-i18n="header.brand">Brand</span>
+      <select id="brand-selector"></select>
+    </label>
+    <!-- FIM: THEME SWITCHER -->
+
+    <button
+      type="button"
+      id="pdf-download-button"
+      class="pdf-download-button"
+      data-i18n="header.downloadPdf"
+      data-i18n-attr="title:header.downloadPdfTitle"
+      title="Opens the full manual as a PDF, ready to save"
+    >
+      Download PDF
+    </button>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tópicos Avançados</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <h1>Tópicos Avançados</h1>
+      <p>Material de referência para usuários mais experientes: terminologia, como restaurar/fazer backup do dispositivo, e como atualizar o firmware.</p>
+
+      <h2 id="menu3-submenu1-topic1">Restaurando o Dispositivo</h2>
+      <p>Um ciclo de energia rápido (desligue por 10 segundos) resolve a maioria dos problemas temporários sem perder nenhuma configuração. Um reset de fábrica completo — coberto em <a href="#menu3-submenu1-topic4">Procedimento de Atualização de Firmware</a> abaixo — apaga toda a configuração personalizada e deve ser usado apenas como último recurso.</p>
+
+      <h2 id="menu3-submenu1-topic2">Fazendo Backup da Sua Configuração</h2>
+      <p>Antes de um reset de fábrica ou de uma atualização de firmware, exporte suas configurações atuais em <strong>Sistema → Backup e Restauração → Baixar Arquivo de Backup</strong>. O arquivo baixado pode ser reimportado na mesma página para restaurar todas as configurações em uma única etapa.</p>
+
+      <h2 id="menu3-submenu1-topic3">Glossário</h2>
+      <p>Um glossário de termos/siglas é comum em manuais mais técnicos — outro reaproveitamento do padrão <code>.spec-table</code> de rótulo por linha usado no capítulo de Especificações.</p>
+      <table class="spec-table">
+        <caption>Tabela 7 — Glossário</caption>
+        <tbody>
+          <tr><th>WAN</th><td>Wide Area Network — a conexão de uplink com seu provedor de internet</td></tr>
+          <tr><th>LAN</th><td>Local Area Network — as portas que conectam seus próprios dispositivos</td></tr>
+          <tr><th>DHCP</th><td>Dynamic Host Configuration Protocol — atribui endereços IP automaticamente aos dispositivos da rede</td></tr>
+          <tr><th>ONT</th><td>Optical Network Terminal — converte uma conexão de fibra óptica em um sinal Ethernet</td></tr>
+          <tr><th>Firmware</th><td>O software interno do dispositivo, atualizável em campo (veja Procedimento de Atualização de Firmware abaixo)</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="menu3-submenu1-topic4">Procedimento de Atualização de Firmware</h2>
+      <p>Um procedimento de atualização de firmware combina dois padrões já mostrados em outras partes deste manual de demonstração — um aviso no início, depois etapas numeradas <code>.steps</code>.</p>
+      <div class="callout callout-warning">
+        <p class="callout-title">Aviso</p>
+        <p>Não desconecte a energia ou o cabo de rede durante uma atualização de firmware. Uma atualização interrompida pode tornar o dispositivo inutilizável e exigir manutenção para recuperá-lo.</p>
+      </div>
+      <ol class="steps">
+        <li>Baixe o arquivo de firmware mais recente para o seu modelo exato no site de suporte do fabricante.</li>
+        <li>Abra a interface web e vá em <strong>Sistema → Atualização de Firmware</strong>.</li>
+        <li>Selecione o arquivo baixado e clique em <strong>Enviar</strong>.</li>
+        <li>Aguarde a atualização terminar e o dispositivo reiniciar sozinho — isso pode levar até 5 minutos.</li>
+        <li>Confirme o novo número de versão em <strong>Sistema → Status</strong>.</li>
+      </ol>
+      <div class="callout callout-tip">
+        <p class="callout-title">Dica</p>
+        <p>Para restaurar os padrões de fábrica, pressione e segure o botão recuado <strong>Reset</strong> por 10 segundos com o dispositivo ligado.</p>
+      </div>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../js/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

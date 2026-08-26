@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" width="640" height="280" role="img" aria-labelledby="example-product-rear-title">
+  <title id="example-product-rear-title">Example product rear panel diagram</title>
+
+  <!-- Device body -->
+  <rect x="40" y="40" width="560" height="150" rx="8" fill="#3a3f44"/>
+  <rect x="40" y="40" width="560" height="150" rx="8" fill="none" stroke="#22262a" stroke-width="2"/>
+
+  <!-- LAN 1-4 (RJ45) -->
+  <g fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5">
+    <rect x="60"  y="85" width="46" height="34" rx="3"/>
+    <rect x="140" y="85" width="46" height="34" rx="3"/>
+    <rect x="220" y="85" width="46" height="34" rx="3"/>
+    <rect x="300" y="85" width="46" height="34" rx="3"/>
+  </g>
+  <g stroke="#5b6167" stroke-width="1.5">
+    <line x1="75"  y1="85" x2="75"  y2="119"/>
+    <line x1="155" y1="85" x2="155" y2="119"/>
+    <line x1="235" y1="85" x2="235" y2="119"/>
+    <line x1="315" y1="85" x2="315" y2="119"/>
+  </g>
+
+  <!-- WAN (RJ45, accent outline to set it apart) -->
+  <rect x="400" y="85" width="46" height="34" rx="3" fill="#c7ccd1" stroke="#2b6cb0" stroke-width="2"/>
+  <line x1="415" y1="85" x2="415" y2="119" stroke="#2b6cb0" stroke-width="1.5"/>
+
+  <!-- USB -->
+  <rect x="480" y="90" width="40" height="24" rx="4" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
+
+  <!-- Power barrel jack -->
+  <circle cx="555" cy="102" r="16" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
+  <circle cx="555" cy="102" r="6" fill="#3a3f44"/>
+
+  <!-- Labels -->
+  <g font-family="system-ui, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">
+    <text x="83"  y="235">LAN 1</text>
+    <text x="163" y="235">LAN 2</text>
+    <text x="243" y="235">LAN 3</text>
+    <text x="323" y="235">LAN 4</text>
+    <text x="423" y="235">WAN</text>
+    <text x="500" y="235">USB</text>
+    <text x="555" y="235">POWER</text>
+  </g>
+  <g stroke="#8a8f94" stroke-width="1" stroke-dasharray="2 2">
+    <line x1="83"  y1="190" x2="83"  y2="222"/>
+    <line x1="163" y1="190" x2="163" y2="222"/>
+    <line x1="243" y1="190" x2="243" y2="222"/>
+    <line x1="323" y1="190" x2="323" y2="222"/>
+    <line x1="423" y1="190" x2="423" y2="222"/>
+    <line x1="500" y1="190" x2="500" y2="222"/>
+    <line x1="555" y1="190" x2="555" y2="222"/>
+  </g>
+</svg>

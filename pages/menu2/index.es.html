@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especificaciones</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <h1>Especificaciones</h1>
+      <p>El capítulo de referencia: estándares inalámbricos, conexiones, alimentación, dimensiones físicas y comportamiento de los LEDs — el tipo de contenido que más se consulta en lugar de leerse de principio a fin (pruebe el cuadro de búsqueda en el encabezado para cualquiera de estos).</p>
+
+      <h2 id="menu2-topic1">Estándares Inalámbricos</h2>
+      <table class="spec-table">
+        <caption>Tabla 1 — Especificaciones inalámbricas</caption>
+        <tbody>
+          <tr><th>Estándares</th><td>IEEE 802.11a/b/g/n/ac (Wi-Fi 5)</td></tr>
+          <tr><th>Bandas de frecuencia</th><td>2,4 GHz y 5 GHz, dual-band simultáneo</td></tr>
+          <tr><th>Velocidad máxima de enlace</th><td>Hasta 1200 Mbps (5 GHz) + 300 Mbps (2,4 GHz)</td></tr>
+          <tr><th>Antenas</th><td>2× internas, ganancia de 5 dBi</td></tr>
+          <tr><th>Seguridad</th><td>WPA2-PSK, WPA3-SAE</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="menu2-topic2">Rendimiento</h2>
+      <p>Hasta 32 clientes inalámbricos conectados simultáneamente, y enrutamiento Gigabit a velocidad de línea entre el puerto WAN y cualquier puerto LAN en condiciones típicas de tráfico doméstico o de pequeña oficina.</p>
+
+      <h2 id="menu2-topic3">Especificaciones Técnicas</h2>
+      <p>Tablas como las siguientes son comunes en manuales de producto y hojas de datos — copie este patrón para sus propias tablas de conexiones, alimentación y especificaciones físicas.</p>
+
+      <table class="spec-table">
+        <caption>Tabla 2 — Conexiones</caption>
+        <thead>
+          <tr>
+            <th>Conector</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>LAN 1–4</td><td>RJ45, 10/100/1000 Mbps</td><td>Puertos Ethernet Gigabit para dispositivos de la red local</td></tr>
+          <tr><td>WAN</td><td>RJ45, 10/100/1000 Mbps</td><td>Puerto de conexión a internet</td></tr>
+          <tr><td>USB</td><td>USB 2.0 Tipo-A</td><td>Almacenamiento externo o accesorios</td></tr>
+          <tr><td>Alimentación</td><td>Conector DC, 12 V / 1 A</td><td>Entrada del adaptador de corriente externo</td></tr>
+        </tbody>
+      </table>
+
+      <figure class="manual-figure">
+        <img src="../../assets/example-product-rear.svg" alt="Panel trasero del producto, mostrando la posición de los puertos LAN 1-4, WAN, USB y del conector de alimentación" width="640" height="280">
+        <figcaption><strong>Figura 1.</strong> Conexiones del panel trasero.</figcaption>
+      </figure>
+
+      <table class="spec-table">
+        <caption>Tabla 3 — Alimentación y especificaciones físicas</caption>
+        <tbody>
+          <tr><th>Fuente de alimentación</th><td>Entrada 100–240 V AC, 50/60 Hz — Salida 12 V DC / 1 A</td></tr>
+          <tr><th>Consumo de energía</th><td>Hasta 12 W</td></tr>
+          <tr><th>Dimensiones (An &times; Pr &times; Al)</th><td>180 &times; 120 &times; 30 mm</td></tr>
+          <tr><th>Peso</th><td>350 g</td></tr>
+          <tr><th>Temperatura de operación</th><td>0 &deg;C a 40 &deg;C</td></tr>
+          <tr><th>Humedad de almacenamiento</th><td>10% a 90%, sin condensación</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="menu2-topic4">Indicadores LED</h2>
+      <p>Una tabla de estado de LEDs es otra página casi universal en los manuales de telecomunicaciones — reutiliza el mismo patrón <code>.spec-table</code> de arriba, solo con encabezados de columna diferentes.</p>
+      <table class="spec-table">
+        <caption>Tabla 4 — Comportamiento de los LEDs</caption>
+        <thead>
+          <tr>
+            <th>LED</th>
+            <th>Color / estado</th>
+            <th>Significado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Power</td><td>Verde fijo</td><td>Dispositivo encendido y listo</td></tr>
+          <tr><td>Power</td><td>Rojo parpadeante</td><td>Falló la autoprueba de inicio — vea <a href="../menu3/index.es.html#menu3-topic3">Solución de Problemas</a></td></tr>
+          <tr><td>WAN</td><td>Verde fijo</td><td>Conexión a internet activa</td></tr>
+          <tr><td>WAN</td><td>Apagado</td><td>No se detecta cable o el enlace está caído</td></tr>
+          <tr><td>LAN 1–4</td><td>Verde parpadeante</td><td>Enlace activo, transfiriendo datos</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../js/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

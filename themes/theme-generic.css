@@ -1,0 +1,33 @@
+/* Neutral fallback theme — also the default used before a brand is chosen.
+   See themes/theme-schema.md for the full variable contract every theme
+   file must implement. Every variable below is commented in plain English —
+   change a value, save, reload the page. No other file needs to change. */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #2b6cb0;   /* links, active menu item, buttons, accents */
+  --color-secondary: #edf2f7; /* borders, subtle backgrounds */
+  --color-accent: #38a169;    /* optional second accent color, free to use */
+  --color-text: #1a202c;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: system-ui, sans-serif; /* h1/h2/h3, product name */
+  --font-body: system-ui, sans-serif;    /* everything else */
+  --border-radius: 4px;       /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/generic.svg');
+
+  /* --- Component colors (optional) ---
+     Uncomment and edit any of these to recolor that piece on its own.
+     Left alone, each one falls back to a combination of the base palette
+     above, so you only need to touch the ones you actually want to change.
+
+  --color-header-bg: var(--color-bg);              # top header bar
+  --color-footer-bg: var(--color-bg);              # footer
+  --color-sidebar-bg: var(--color-bg);             # sidebar / scroll-layout nav column
+  --color-nav-link-text: var(--color-text);        # menu/submenu link text (normal)
+  --color-nav-link-bg-hover: var(--color-secondary); # menu/submenu link background (hover)
+  --color-nav-link-text-hover: var(--color-text);    # menu/submenu link text (hover)
+  --color-nav-link-bg-active: var(--color-secondary); # menu/submenu link background (selected)
+  --color-nav-link-text-active: var(--color-primary); # menu/submenu link text (selected)
+  --color-submenu-bg: var(--color-bg);             # dropdown submenu panel background (navbar layout)
+  --color-submenu-border: var(--color-secondary);  # dropdown submenu panel border (navbar layout)
+  */
+}

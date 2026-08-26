@@ -1,0 +1,505 @@
+/* Layout-agnostic base styles: typography, header/footer chrome, forms.
+   Colors/fonts/spacing come from theme variables (see themes/theme-schema.md)
+   so this file never hard-codes a brand color — only structure. */
+
+:root {
+  --header-height: 64px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Sticky footer: on a short page (little menu content), the footer should
+   sit at the bottom of the viewport instead of floating right below a
+   half-empty page — but still get pushed down normally, no overlap, once
+   real content is taller than the viewport. body becomes a column flexbox
+   of its 3 real children (header, .layout-shell, footer); .layout-shell
+   (below) is the one that grows to absorb any leftover space. */
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-body, sans-serif);
+  color: var(--color-text, #1a1a1a);
+  background: var(--color-bg, #ffffff);
+  line-height: 1.6;
+}
+
+.layout-shell {
+  flex: 1 0 auto;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading, sans-serif);
+  color: var(--color-text, #1a1a1a);
+}
+
+/* Fixed header overlaps in-page anchors unless headings reserve space for it. */
+h1[id], h2[id], h3[id] {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+}
+
+a {
+  color: var(--color-primary, #0057b8);
+}
+
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--color-bg, #fff);
+  color: var(--color-primary, #0057b8);
+  border: 1px solid var(--color-secondary, #ccc);
+  border-radius: var(--border-radius, 4px);
+}
+
+.skip-link:focus {
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  top: 0.75rem;
+  left: 1rem;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  background: var(--color-header-bg, var(--color-bg, #ffffff));
+  z-index: 10;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1.5rem;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.header-brand:hover .product-name {
+  text-decoration: underline;
+}
+
+.header-logo {
+  height: 32px;
+  width: auto;
+}
+
+.product-name {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary, #0057b8);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.header-control {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.header-control select {
+  font-family: var(--font-body, sans-serif);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-secondary, #ccc);
+  border-radius: var(--border-radius, 4px);
+  background: var(--color-bg, #fff);
+  color: var(--color-text, #1a1a1a);
+  cursor: pointer;
+}
+
+.header-control select:hover {
+  border-color: var(--color-primary, #0057b8);
+}
+
+/* ---------- Header search (js/search.js) ---------- */
+.header-search {
+  position: relative;
+}
+
+.search-input {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.85rem;
+  width: 220px;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-secondary, #ccc);
+  border-radius: var(--border-radius, 4px);
+  background: var(--color-bg, #fff);
+  color: var(--color-text, #1a1a1a);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-primary, #0057b8);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 360px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--color-submenu-bg, var(--color-bg, #fff));
+  border: 1px solid var(--color-submenu-border, var(--color-secondary, #e5e5e5));
+  border-radius: var(--border-radius, 4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  z-index: 30;
+}
+
+.search-result {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  text-decoration: none;
+  color: var(--color-text, #1a1a1a);
+  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+}
+
+.search-result:last-child {
+  border-bottom: none;
+}
+
+.search-result:hover,
+.search-result:focus {
+  background: var(--color-nav-link-bg-hover, var(--color-secondary, #f2f2f2));
+}
+
+.search-result-page {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  opacity: 0.65;
+}
+
+.search-result-heading {
+  display: block;
+  font-weight: 700;
+}
+
+.search-result-snippet {
+  display: block;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 0.15rem;
+}
+
+.search-empty {
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.pdf-download-button {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--color-primary, #0057b8);
+  border-radius: var(--border-radius, 4px);
+  background: var(--color-primary, #0057b8);
+  color: var(--color-bg, #fff);
+  cursor: pointer;
+}
+
+.pdf-download-button:hover {
+  opacity: 0.85;
+}
+
+/* ---------- Nav (shared basics; layout-*.css controls placement) ---------- */
+.nav-list, .nav-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: block;
+  text-decoration: none;
+  color: var(--color-nav-link-text, var(--color-text, #1a1a1a));
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--border-radius, 4px);
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.nav-link:hover {
+  background: var(--color-nav-link-bg-hover, var(--color-secondary, #f2f2f2));
+  color: var(--color-nav-link-text-hover, var(--color-text, #1a1a1a));
+}
+
+.nav-link.is-active {
+  color: var(--color-nav-link-text-active, var(--color-primary, #0057b8));
+  font-weight: 700;
+  background: var(--color-nav-link-bg-active, var(--color-secondary, #f2f2f2));
+}
+
+/* ---------- Content ---------- */
+.page-content {
+  padding: 2rem;
+  max-width: 900px;
+}
+
+/* 'hybrid' layout's contextual sidebar (see css/layout-hybrid.css /
+   js/page-init.js's getHybridSidebarRoot()) — created once and left in the
+   DOM even when a different layout is active, so hidden by default here;
+   css/layout-hybrid.css turns it back on with a higher-specificity rule. */
+.hybrid-sidebar {
+  display: none;
+}
+
+/* ---------- Spec tables (connections, power, dimensions, etc.) ---------- */
+.spec-table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0 1.5rem;
+  font-size: 0.95rem;
+}
+
+.spec-table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 700;
+  font-family: var(--font-heading, sans-serif);
+  margin-bottom: 0.5rem;
+  color: var(--color-text, #1a1a1a);
+}
+
+.spec-table th,
+.spec-table td {
+  border: 1px solid var(--color-secondary, #e5e5e5);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.spec-table thead th {
+  background: var(--color-secondary, #f2f2f2);
+  font-weight: 700;
+}
+
+/* Row-label tables (one spec per row, e.g. dimensions/weight) use a <th>
+   per row instead of a header row — keep it visually distinct from a data
+   cell without a second border color. */
+.spec-table tbody th {
+  font-weight: 600;
+  width: 40%;
+  background: transparent;
+}
+
+.spec-table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ---------- Figures (example images with a manual-style caption) ---------- */
+.manual-figure {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.manual-figure img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--color-secondary, #e5e5e5);
+  border-radius: var(--border-radius, 4px);
+}
+
+.manual-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.75;
+}
+
+/* ---------- Callouts (note / tip / warning / danger) ---------- */
+/* Common in every telecom hardware manual: safety warnings before a power
+   or wiring step, tips for a smoother setup, notes calling out an edge
+   case. Color is intentionally NOT driven by --color-primary (a callout's
+   meaning — "this is a safety warning" — has to stay legible/recognizable
+   no matter which brand's accent color is active). */
+.callout {
+  margin: 1rem 0 1.5rem;
+  padding: 0.9rem 1.1rem;
+  border-left: 4px solid;
+  border-radius: 0 var(--border-radius, 4px) var(--border-radius, 4px) 0;
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.callout p {
+  margin: 0.3rem 0 0;
+}
+
+.callout p:first-child {
+  margin-top: 0;
+}
+
+.callout-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.callout-note {
+  border-left-color: #2b6cb0;
+}
+.callout-note .callout-title {
+  color: #2b6cb0;
+}
+
+.callout-tip {
+  border-left-color: #2f855a;
+}
+.callout-tip .callout-title {
+  color: #2f855a;
+}
+
+.callout-warning {
+  border-left-color: #b7791f;
+}
+.callout-warning .callout-title {
+  color: #b7791f;
+}
+
+.callout-danger {
+  border-left-color: #c53030;
+}
+.callout-danger .callout-title {
+  color: #c53030;
+}
+
+/* ---------- Numbered step-by-step instructions ---------- */
+/* Installation / firmware-update / factory-reset procedures — anywhere a
+   manual needs "do these things, in this order, one at a time." */
+.steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 0.15rem 0 0.9rem 2.75rem;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--color-primary, #0057b8);
+  color: var(--color-bg, #fff);
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Command-line / config-file example blocks ---------- */
+/* Router/switch/gateway manuals routinely show a CLI session or a config
+   file snippet to copy-paste — a plain <pre><code> reads fine on its own,
+   this just gives it manual-style chrome (dark "terminal" background, a
+   label for what the block actually is). */
+.cli-block {
+  margin: 1rem 0 1.5rem;
+  padding: 0.9rem 1.1rem;
+  background: #1e1e1e;
+  color: #e5e5e5;
+  border-radius: var(--border-radius, 4px);
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.cli-block code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+/* ---------- "What's in the box" / feature checklists ---------- */
+.contents-list {
+  list-style: none;
+  margin: 1rem 0 1.5rem;
+  padding: 0;
+}
+
+.contents-list li {
+  padding: 0.3rem 0 0.3rem 1.6rem;
+  position: relative;
+}
+
+.contents-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary, #0057b8);
+  font-weight: 700;
+}
+
+/* ---------- FAQ (question/answer pairs) ---------- */
+.faq-list dt {
+  font-weight: 700;
+  margin-top: 1.1rem;
+}
+
+.faq-list dd {
+  margin: 0.3rem 0 0;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--color-secondary, #e5e5e5);
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--color-text, #1a1a1a);
+  background: var(--color-footer-bg, var(--color-bg, #ffffff));
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  opacity: 0.75;
+}
+
+.footer-inner a {
+  color: inherit;
+}

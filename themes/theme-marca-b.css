@@ -1,0 +1,29 @@
+/* Example brand theme. See themes/theme-schema.md for the full variable
+   contract every theme file must implement. Every variable is commented in
+   plain English — change a value, save, reload the page.
+
+   This file also shows the optional "component colors" in actual use (not
+   just commented out), so there's a live example of each one doing
+   something: a tinted sidebar column and a slightly different "selected
+   menu item" color than the plain default. */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #7a1fa2;   /* links, active menu item, buttons, accents */
+  --color-secondary: #f3ecf7; /* borders, subtle backgrounds */
+  --color-accent: #ffb703;    /* optional second accent color, free to use */
+  --color-text: #22192b;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: 'Georgia', serif;   /* h1/h2/h3, product name */
+  --font-body: 'Verdana', sans-serif; /* everything else */
+  --border-radius: 2px;       /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/marca-b.svg');
+
+  /* --- Component colors (optional) ---
+     Every one of these falls back to a combination of the base palette
+     above if left out; set here just to show them working. */
+  --color-sidebar-bg: #faf7fc;              /* sidebar / scroll-layout nav column */
+  --color-nav-link-bg-active: #ecdcf5;      /* menu/submenu link background (selected) */
+  --color-nav-link-text-active: #5a1678;    /* menu/submenu link text (selected) */
+  --color-submenu-bg: #faf7fc;              /* dropdown submenu panel background (navbar layout) */
+  --color-submenu-border: #dcc7e8;          /* dropdown submenu panel border (navbar layout) */
+}

@@ -1,0 +1,73 @@
+/* Layout 5 — the entire manual composed onto one continuously-scrolling
+   page (js/continuous-manual.js): every chapter, and every submenu inside
+   it, in nav-config order. The nav tree stays the same full site menu as
+   the other layouts, except every entry is an in-page anchor here — and as
+   the visitor scrolls, js/scrollspy.js highlights whichever chapter/
+   submenu is currently in view directly in that tree. */
+
+body.layout-scroll .layout-shell {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+  /* Full-bleed on purpose: the nav column docks against the true right
+     edge of the viewport (like `sidebar` docks its nav against the true
+     left edge — see the nav rule below), so this shell itself must not be
+     width-capped or centered, or the nav would float away from the edge
+     with a gap, same complaint as the sidebar layout previously had.
+     Left padding is deliberately more generous than the right: content
+     starting flush against the viewport's own edge read as a mistake, but
+     the nav column already provides its own visual boundary on the right
+     (border + background), so it doesn't need the same breathing room. */
+  padding: 0 1rem 0 3rem;
+}
+
+body.layout-scroll .site-nav {
+  width: 280px;
+  flex-shrink: 0;
+  /* nav comes before main in the DOM (shared across all 3 layouts); `order`
+     renders it after .page-content so reading content leads and the nav
+     trails. `margin-left: auto` is what actually docks it against the true
+     right edge of the viewport — without it, a plain flex row just packs
+     content+nav together starting from the left, leaving the nav floating
+     wherever the content's own width happens to end. */
+  order: 2;
+  margin-left: auto;
+  position: sticky;
+  top: calc(var(--header-height) + 24px);
+  max-height: calc(100vh - var(--header-height) - 48px);
+  overflow-y: auto;
+  border-left: 1px solid var(--color-secondary, #e5e5e5);
+  padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+  background: var(--color-sidebar-bg, var(--color-bg, #ffffff));
+}
+
+body.layout-scroll .nav-sublist {
+  padding-left: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+body.layout-scroll .page-content {
+  flex: 1;
+  min-width: 0;
+  max-width: 820px;
+}
+
+/* One .chapter-section per top-level menu. */
+body.layout-scroll .chapter-section + .chapter-section {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-secondary, #e5e5e5);
+}
+
+/* One .chapter-subsection per submenu, nested inside its chapter. */
+body.layout-scroll .chapter-subsection {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px dashed var(--color-secondary, #e5e5e5);
+}
+
+/* Smooth in-page scroll when clicking a nav entry. */
+html:has(body.layout-scroll) {
+  scroll-behavior: smooth;
+}

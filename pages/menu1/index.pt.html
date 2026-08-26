@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primeiros Passos</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../css/responsive.css">
+  <link rel="stylesheet" href="../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <h1>Primeiros Passos</h1>
+      <p>Este é o capítulo de abertura típico de um manual de hardware de telecom: o que é o produto, o que vem na caixa, e as informações de segurança a serem lidas antes da instalação. Todo o conteúdo deste manual de demonstração é útil e real, não é lorem ipsum — leia como um tour do que este template comporta, não só de como ele parece.</p>
+
+      <h2 id="menu1-topic1">Visão Geral</h2>
+      <p>Este produto é um gateway de banda larga dual-band que combina um roteador, um switch Gigabit de 4 portas e uma porta USB para compartilhamento de armazenamento em uma única unidade — a mesma classe de dispositivo descrita no capítulo <a href="../menu2/index.pt.html">Especificações</a>. Ele deve ficar entre sua conexão de internet (ONT de fibra, modem a cabo ou modem DSL) e os dispositivos da sua rede local.</p>
+
+      <h2 id="menu1-topic2">Principais Recursos</h2>
+      <ul class="contents-list">
+        <li>Wi-Fi dual-band simultâneo (2,4 GHz e 5 GHz)</li>
+        <li>4× portas Ethernet Gigabit LAN, 1× porta Gigabit WAN</li>
+        <li>Porta USB 2.0 para armazenamento compartilhado ou impressora</li>
+        <li>Configuração via interface web e linha de comando — veja <a href="../menu1/submenu2.pt.html">Configuração Inicial</a></li>
+        <li>Atualizações de firmware remotas — veja <a href="../menu3/submenu1.pt.html">Tópicos Avançados</a></li>
+      </ul>
+
+      <h2 id="menu1-topic3">Conteúdo da Embalagem</h2>
+      <p>Quase todo manual de hardware começa com uma lista "o que vem na caixa" logo após a introdução — copie o padrão <code>.contents-list</code> abaixo para o seu próprio.</p>
+      <ul class="contents-list">
+        <li>1× unidade principal</li>
+        <li>1× fonte de alimentação externa (12 V / 1 A)</li>
+        <li>1× cabo Ethernet (1,5 m)</li>
+        <li>1× suporte para fixação na parede e parafusos</li>
+        <li>1× guia de início rápido</li>
+      </ul>
+
+      <h2 id="menu1-topic4">Avisos de Segurança</h2>
+      <p>Logo após o conteúdo da embalagem é onde normalmente ficam os avisos de segurança, antes que alguém mexa em qualquer cabo — usam o padrão <code>.callout</code> (quatro variantes: <code>callout-note</code>, <code>callout-tip</code>, <code>callout-warning</code>, <code>callout-danger</code>), com cores independentes da marca ativa para continuarem reconhecíveis em qualquer tema.</p>
+      <div class="callout callout-danger">
+        <p class="callout-title">Perigo</p>
+        <p>Desconecte a fonte de alimentação antes de limpar o dispositivo ou conectar/desconectar qualquer cabo. Nunca abra o gabinete — não há peças que possam ser reparadas pelo usuário.</p>
+      </div>
+      <div class="callout callout-warning">
+        <p class="callout-title">Aviso</p>
+        <p>Use somente a fonte de alimentação fornecida com o dispositivo. Usar uma fonte diferente pode danificar o aparelho e anula a garantia.</p>
+      </div>
+      <div class="callout callout-note">
+        <p class="callout-title">Nota</p>
+        <p>Instale o dispositivo em um local bem ventilado, longe da luz solar direta e de fontes de calor, para uma operação confiável a longo prazo.</p>
+      </div>
+      <div class="callout callout-tip">
+        <p class="callout-title">Dica</p>
+        <p>Guarde a embalagem original pelos primeiros 12 meses — é a forma mais fácil de enviar o dispositivo de volta para serviço em garantia.</p>
+      </div>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../js/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>
