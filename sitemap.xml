@@ -2,83 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://manualgen.andreyrosa.dev/</loc>
+    <loc>https://enchiridion.andreyrosa.dev/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/generator/</loc>
+    <loc>https://enchiridion.andreyrosa.dev/generator/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/generator/templates.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/generator/templates.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu1/index.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu1/index.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu1/index.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu1/index.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu1/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu1/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu1/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu1/index.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu1/submenu1.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu1/submenu1.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu1/submenu1.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu1/submenu1.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu1/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu1/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu1/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu1/submenu1.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu1/submenu2.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu1/submenu2.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu1/submenu2.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu1/submenu2.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu1/submenu2.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu1/submenu2.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu1/submenu2.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu1/submenu2.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu2/index.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu2/index.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu2/index.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu2/index.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu2/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu2/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu2/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu2/index.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu2/submenu1.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu2/submenu1.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu2/submenu1.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu2/submenu1.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu2/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu2/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu2/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu2/submenu1.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu3/index.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu3/index.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu3/index.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu3/index.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu3/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu3/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu3/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu3/index.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu3/submenu1.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu3/submenu1.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu3/submenu1.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu3/submenu1.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu3/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu3/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu3/submenu1.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu3/submenu1.html"/>
   </url>
   <url>
-    <loc>https://manualgen.andreyrosa.dev/pages/en/menu4/index.html</loc>
+    <loc>https://enchiridion.andreyrosa.dev/pages/en/menu4/index.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://manualgen.andreyrosa.dev/pages/en/menu4/index.html"/>
-    <xhtml:link rel="alternate" hreflang="pt" href="https://manualgen.andreyrosa.dev/pages/pt/menu4/index.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://manualgen.andreyrosa.dev/pages/es/menu4/index.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://enchiridion.andreyrosa.dev/pages/en/menu4/index.html"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://enchiridion.andreyrosa.dev/pages/pt/menu4/index.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://enchiridion.andreyrosa.dev/pages/es/menu4/index.html"/>
   </url>
 </urlset>

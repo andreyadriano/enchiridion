@@ -1,13 +1,19 @@
-# html-manual-generator
+# Enchiridion
+
+Live at [enchiridion.andreyrosa.dev](https://enchiridion.andreyrosa.dev).
 
 Turn a plain HTML/CSS/JS template into your own white-label product
 manual — pick colors, logo, layout and languages, and download a
 ready-to-serve site. No build step, no backend, no account.
 
+Named after the *Enchiridion*, Epictetus's short Stoic handbook — the word
+literally means "what's held in the hand." That's the idea: a manual
+people actually keep close and consult, not a document nobody opens.
+
 The demo content is a real working manual for a fictional broadband
-gateway, not lorem ipsum — every content pattern a hardware manual needs
-(safety callouts, spec tables, a troubleshooting table, an FAQ, an A-Z
-index, and more) is already there, in English, Portuguese, and Spanish.
+gateway — every content pattern a hardware manual needs (safety callouts,
+spec tables, a troubleshooting table, an FAQ, an A-Z index, and more) is
+already there, in English, Portuguese, and Spanish.
 
 ## Features
 
@@ -30,14 +36,15 @@ python3 -m http.server 8000
 ```
 
 Then open `http://localhost:8000/` — the landing page links to the
-generator and to the ready-made demo manual. (Double-clicking a file
-directly with `file://` won't work: the header/nav/footer are loaded via
-`fetch()`, which browsers block under `file://`.)
+generator and to Explore, a gallery of the 6 built-in looks you can preview
+live or use as a starting point. (Double-clicking a file directly with
+`file://` won't work: the header/nav/footer are loaded via `fetch()`,
+which browsers block under `file://`.)
 
 ## Project structure
 
 ```
-index.html          landing page (generator + demo links)
+index.html          landing page (generator + Explore links)
 generator/           the manual-generator tool
 pages/<menu>/<lang>/ manual content — one real HTML file per page per language
 js/, css/            application code and styles

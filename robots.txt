@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /print.html
 
-Sitemap: https://manualgen.andreyrosa.dev/sitemap.xml
+Sitemap: https://enchiridion.andreyrosa.dev/sitemap.xml
