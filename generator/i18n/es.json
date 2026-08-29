@@ -54,7 +54,7 @@
   "generator.templates.brand": "Marca",
   "generator.templates.layout": "Diseño",
   "generator.templates.back": "← Volver al generador",
-  "landing.title": "Plantilla de manual whitelabel",
+  "landing.title": "HTML Manual Generator — crea tu propio manual de producto",
   "landing.subtitle": "Una herramienta sin cuenta y sin servidor para convertir esta plantilla en el manual de tu propio producto.",
   "landing.build.title": "Crea tu propio manual",
   "landing.build.desc": "Elige colores, logo, favicon, diseño e idiomas, mira la vista previa actualizarse en vivo y descarga un .zip listo para publicar.",

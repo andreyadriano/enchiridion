@@ -24,6 +24,16 @@ function applyHreflangLinks(item) {
   }
 }
 
+function upsertCanonical(href) {
+  let link = document.querySelector('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    document.head.appendChild(link);
+  }
+  link.setAttribute('href', href);
+}
+
 function upsertMetaDescription(content) {
   let meta = document.querySelector('meta[name="description"]');
   if (!meta) {
@@ -56,6 +66,7 @@ function applyStructuredData({ headline, productName, lang }) {
 // one (there are none today, but this keeps the function safe to call).
 export function applySeoMeta({ item, contentRoot, translations, lang }) {
   applyHreflangLinks(item);
+  if (item) upsertCanonical(resolvePath(langPath(item, lang)));
 
   const productName = (translations && translations['product.name']) || '';
   const heading = contentRoot ? (contentRoot.querySelector('h1')?.textContent || '').trim() : '';

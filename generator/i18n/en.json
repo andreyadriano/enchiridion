@@ -54,7 +54,7 @@
   "generator.templates.brand": "Brand",
   "generator.templates.layout": "Layout",
   "generator.templates.back": "← Back to the generator",
-  "landing.title": "White-label manual template",
+  "landing.title": "HTML Manual Generator — build your own product manual",
   "landing.subtitle": "A no-account, no-server tool for turning this template into your own product manual.",
   "landing.build.title": "Build your own manual",
   "landing.build.desc": "Pick your colors, logo, favicon, layout, and languages, watch a live preview update as you go, then download a ready-to-serve .zip.",
