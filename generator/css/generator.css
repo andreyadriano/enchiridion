@@ -468,9 +468,10 @@ body {
   }
 }
 
-/* ---------- templates.html ---------- */
+/* ---------- templates.html ("Explore") ---------- */
 .templates-page-body {
   padding: 0;
+  overflow-y: auto;
 }
 
 .templates-page-header {
@@ -480,9 +481,16 @@ body {
   background: #fff;
 }
 
+.templates-page-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .templates-page-back {
   display: inline-block;
-  margin-bottom: 0.5rem;
   font-size: 0.85rem;
   color: var(--gen-primary);
   text-decoration: none;
@@ -497,28 +505,176 @@ body {
   font-size: 1.3rem;
 }
 
-.templates-page-controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 0.75rem;
-}
-
-.templates-page-controls .generator-field {
-  width: 200px;
-}
-
-.templates-page-iframe {
-  flex: 1 1 auto;
-  min-height: 0;
-  width: 100%;
-  border: none;
-}
-
 @media (max-width: 640px) {
   .templates-page-header {
     padding: 1rem;
   }
+}
+
+.explore-grid {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem 2rem 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.explore-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gen-border);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+@media (hover: hover) {
+  .explore-card:hover {
+    border-color: var(--gen-primary);
+    box-shadow: 0 4px 16px rgba(43, 108, 176, 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explore-card {
+    transition: none;
+  }
+}
+
+.explore-card-swatch {
+  --swatch-primary: #2b6cb0;
+  --swatch-secondary: #edf2f7;
+  --swatch-text: #1a202c;
+  --swatch-bg: #ffffff;
+  --swatch-font: system-ui, sans-serif;
+  background: var(--swatch-bg);
+  border-bottom: 1px solid var(--gen-border);
+}
+
+.explore-swatch-header {
+  height: 1.5rem;
+  background: var(--swatch-primary);
+}
+
+.explore-swatch-body {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.85rem;
+}
+
+.explore-swatch-nav {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 2.25rem;
+}
+
+.explore-swatch-nav span {
+  display: block;
+  height: 0.4rem;
+  border-radius: 2px;
+  background: var(--swatch-secondary);
+}
+
+.explore-swatch-nav span:first-child {
+  background: var(--swatch-primary);
+}
+
+.explore-swatch-content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+}
+
+.explore-swatch-line {
+  display: block;
+  height: 0.4rem;
+  border-radius: 2px;
+  background: var(--swatch-text);
+  opacity: 0.14;
+}
+
+.explore-swatch-line-title {
+  width: 65%;
+  height: 0.55rem;
+  opacity: 0.35;
+  font-family: var(--swatch-font);
+}
+
+.explore-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.1rem 1.25rem 1.25rem;
+  flex: 1 1 auto;
+}
+
+.explore-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.explore-card-heading h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.explore-card-layout-badge {
+  flex: 0 0 auto;
+  margin-left: auto;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #4a5568;
+  background: var(--gen-bg);
+  border: 1px solid var(--gen-border);
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+}
+
+.explore-card-blurb {
+  margin: 0;
+  color: #4a5568;
+  font-size: 0.9rem;
+  flex: 1 1 auto;
+}
+
+.explore-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.explore-card-cta {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.explore-card-cta-live {
+  color: var(--gen-text);
+}
+
+.explore-card-cta-live:hover {
+  text-decoration: underline;
+}
+
+.explore-card-cta-base {
+  color: var(--gen-primary);
+}
+
+.explore-card-cta-base:hover {
+  text-decoration: underline;
 }
 
 /* ---------- first-visit "use a bigger screen" modal (generator/index.html

@@ -6,12 +6,17 @@ function srgbChannelToLinear(value) {
   return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 }
 
-function relativeLuminance(hex) {
+export function relativeLuminance(hex) {
   const int = parseInt(hex.replace('#', ''), 16);
   const r = srgbChannelToLinear((int >> 16) & 255);
   const g = srgbChannelToLinear((int >> 8) & 255);
   const b = srgbChannelToLinear(int & 255);
   return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+// Drives --color-scheme (see css/base.css) so native form controls match.
+export function isDarkBackground(hex) {
+  return relativeLuminance(hex) < 0.4;
 }
 
 export function contrastRatio(hexA, hexB) {

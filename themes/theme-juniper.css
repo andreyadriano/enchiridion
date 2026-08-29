@@ -1,0 +1,17 @@
+/* Example brand theme — "Juniper". #2f7d54 on white is 5.02:1 (WCAG AA). */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #2f7d54;   /* links, active menu item, buttons, accents */
+  --color-secondary: #e8f1ec; /* borders, subtle backgrounds */
+  --color-text: #1f2b24;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: system-ui, sans-serif; /* h1/h2/h3, product name */
+  --font-body: system-ui, sans-serif;    /* everything else */
+  --border-radius: 10px;      /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/juniper.svg');
+
+  /* --- Component colors (optional) --- */
+  --color-sidebar-bg: #f2f8f4;
+  --color-nav-link-bg-active: #d9ecdf;
+  --color-nav-link-text-active: #1f5c3c;
+}

@@ -4,6 +4,9 @@
 
 :root {
   --header-height: 64px;
+  /* Without this, a dark theme's native form controls keep light-mode
+     chrome even with the right background-color set. */
+  color-scheme: var(--color-scheme, light);
 }
 
 * {
@@ -142,12 +145,22 @@ select:focus-visible {
 
 .header-control select {
   font-family: var(--font-body, sans-serif);
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1.6rem 0.25rem 0.5rem;
   border: 1px solid var(--color-border, var(--color-secondary, #ccc));
   border-radius: var(--border-radius, 4px);
-  background: var(--color-control-bg, #ffffff);
+  background-color: var(--color-control-bg, #ffffff);
   color: var(--color-text, #1a1a1a);
   cursor: pointer;
+  /* Some browsers ignore a custom background-color on a native <select>;
+     this makes every browser respect ours, at the cost of drawing the
+     dropdown arrow ourselves below. */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23888' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round' d='M1.5 2L6 6.2 10.5 2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.55rem center;
+  background-size: 10px 7px;
 }
 
 .header-control select:hover {

@@ -3,6 +3,7 @@
 // by touching iframe.contentDocument directly — no postMessage plumbing
 // needed.
 import { rootUrl } from '../paths.js';
+import { isDarkBackground } from './contrast.js';
 
 const PREVIEW_STYLE_ID = 'custom-theme-preview';
 const FONT_FACE_STYLE_ID = 'custom-font-faces';
@@ -60,11 +61,13 @@ export function applyCustomTheme(iframe, { colors, componentColors = {}, borderR
   const componentLines = Object.entries(componentColors)
     .map(([cssVar, value]) => `  ${cssVar}: ${value};`)
     .join('\n');
+  const colorScheme = isDarkBackground(colors.bg) ? 'dark' : 'light';
   style.textContent = `:root {
   --color-primary: ${colors.primary};
   --color-secondary: ${colors.secondary};
   --color-text: ${colors.text};
   --color-bg: ${colors.bg};
+  --color-scheme: ${colorScheme};
   --border-radius: ${borderRadius};
   --font-heading: ${fontHeading};
   --font-body: ${fontBody};

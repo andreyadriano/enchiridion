@@ -1,0 +1,27 @@
+/* Example brand theme — "Nocturne", the dark-mode option. See
+   themes/theme-schema.md for the full variable contract. Text/primary
+   both pass WCAG AA against #14161f. */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #8ea8ff;   /* links, active menu item, buttons, accents */
+  --color-secondary: #1f2230; /* borders, subtle backgrounds */
+  --color-text: #e5e7f0;      /* body and heading text */
+  --color-bg: #14161f;        /* page background */
+  --font-heading: 'Segoe UI', system-ui, sans-serif; /* h1/h2/h3, product name */
+  --font-body: 'Segoe UI', system-ui, sans-serif;     /* everything else */
+  --border-radius: 8px;       /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/nocturne.svg');
+  --color-scheme: dark;        /* draws native select/scrollbar chrome dark too */
+
+  /* --- Component colors (optional) --- */
+  --color-header-bg: #1a1c28;
+  --color-footer-bg: #1a1c28;
+  --color-sidebar-bg: #1a1c28;
+  --color-nav-link-bg-active: #262a44;
+  --color-nav-link-text-active: #b8c6ff;
+  --color-search-results-bg: #1a1c28;
+  --color-search-results-border: #2a2e42;
+  --color-control-bg: #1f2230;
+  --color-border: #2a2e42;
+  --color-table-header-bg: #1f2230;
+}

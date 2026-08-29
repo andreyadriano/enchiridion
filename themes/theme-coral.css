@@ -1,0 +1,17 @@
+/* Example brand theme — "Coral". #c23b5a on white is 5.16:1 (WCAG AA). */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #c23b5a;   /* links, active menu item, buttons, accents */
+  --color-secondary: #fbe9ee; /* borders, subtle backgrounds */
+  --color-text: #3a1f26;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* h1/h2/h3, product name */
+  --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;    /* everything else */
+  --border-radius: 16px;      /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/coral.svg');
+
+  /* --- Component colors (optional) --- */
+  --color-sidebar-bg: #fdf2f5;
+  --color-nav-link-bg-active: #f6d3dc;
+  --color-nav-link-text-active: #8a1f38;
+}

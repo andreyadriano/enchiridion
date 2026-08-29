@@ -212,7 +212,7 @@ async function main() {
     for (const layout of ['sidebar', 'navbar']) {
       await withPage(browserBox, async (page) => {
         const errors = collectErrors(page);
-        await page.goto(`${BASE}/pages/en/menu1/index.html?layout=${layout}&brand=intelbras&lang=pt`, { waitUntil: 'networkidle0' });
+        await page.goto(`${BASE}/pages/en/menu1/index.html?layout=${layout}&brand=amethyst&lang=pt`, { waitUntil: 'networkidle0' });
         await page.waitForSelector('#site-nav-tree a');
 
         for (const label of ['nav.menu1', 'nav.menu2', 'nav.menu3']) {
@@ -225,7 +225,7 @@ async function main() {
           const cls = await bodyLayoutClass(page);
           const themeHref = await page.$eval('#theme-css', (l) => l.href);
           await assertTrue(`layout preserved after clicking ${label} (query-less link) [${layout}]`, cls === `layout-${layout}`, cls);
-          await assertTrue(`brand preserved after clicking ${label} (query-less link) [${layout}]`, themeHref.includes('intelbras'), themeHref);
+          await assertTrue(`brand preserved after clicking ${label} (query-less link) [${layout}]`, themeHref.includes('amethyst'), themeHref);
         }
         await assertTrue(`no console errors clicking through [${layout}]`, errors.length === 0, errors.join('; '));
       });
@@ -286,7 +286,7 @@ async function main() {
     // ------------------------------------------------------------------
     for (const layout of ['sidebar', 'navbar']) {
       await withPage(browserBox, async (page) => {
-        await page.goto(`${BASE}/pages/en/menu1/index.html?layout=${layout}&brand=intelbras&lang=en`, { waitUntil: 'networkidle0' });
+        await page.goto(`${BASE}/pages/en/menu1/index.html?layout=${layout}&brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
         await page.waitForSelector('#site-nav-tree a');
         const requestUrls = [];
         page.on('request', (req) => requestUrls.push(req.url()));
@@ -469,11 +469,11 @@ async function main() {
       await page.goto(`${BASE}/pages/en/menu1/index.html?layout=navbar&brand=generic&lang=en`, { waitUntil: 'networkidle0' });
       await page.evaluate(() => { window.__marker = true; });
 
-      await page.select('#brand-selector', 'intelbras');
-      await page.waitForFunction(() => document.getElementById('theme-css').href.includes('intelbras'));
+      await page.select('#brand-selector', 'ember');
+      await page.waitForFunction(() => document.getElementById('theme-css').href.includes('ember'));
       const layoutAfterBrand = await bodyLayoutClass(page);
       await assertTrue(
-        "brand switch does NOT change the visitor's current layout, even though intelbras's own default is 'sidebar'",
+        "brand switch does NOT change the visitor's current layout, even though ember's own default is 'hybrid'",
         layoutAfterBrand === 'layout-navbar',
         layoutAfterBrand
       );
@@ -639,7 +639,7 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/pages/en/menu1/index.html?brand=marca-b&lang=pt`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu1/index.html?brand=amethyst&lang=pt`, { waitUntil: 'networkidle0' });
       const pdfHref = await page.$eval('[data-pdf-link]', (a) => a.getAttribute('href'));
       await assertTrue('footer PDF link exists and points at print.html with no query string', pdfHref.endsWith('/print.html'), pdfHref);
 
@@ -647,7 +647,7 @@ async function main() {
       await page.waitForFunction(() => document.getElementById('status').textContent.includes('Ready'), { timeout: 20000 });
       const brandSelectValue = await page.$eval('#brand-selector', (s) => s.value);
       const cover = await page.evaluate(() => document.querySelector('.cover .product-name')?.textContent);
-      await assertTrue('print.html defaults to the brand you were browsing in (via localStorage)', brandSelectValue === 'marca-b', brandSelectValue);
+      await assertTrue('print.html defaults to the brand you were browsing in (via localStorage)', brandSelectValue === 'amethyst', brandSelectValue);
       await assertTrue('PDF cover shows the Portuguese product name (lang carried over too)', cover === 'Nome do produto', cover);
       await assertTrue('no console errors following the footer PDF link', errors.length === 0, errors.join('; '));
     });
@@ -658,7 +658,7 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/print.html?brand=intelbras&lang=pt`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/print.html?brand=amethyst&lang=pt`, { waitUntil: 'networkidle0' });
       await page.waitForFunction(() => document.getElementById('status').textContent.includes('Ready'), { timeout: 20000 });
       const chapterIds = await page.$$eval('#source .chapter', (els) => els.map((e) => e.id));
       await assertTrue(
@@ -734,7 +734,7 @@ async function main() {
       // filler text.
       const chapterTextsPt = await page.$$eval('#source .chapter p', (els) => els.map((e) => e.textContent));
       const enPage = await page.browserContext().newPage();
-      await enPage.goto(`${BASE}/print.html?brand=intelbras&lang=en`, { waitUntil: 'networkidle0' });
+      await enPage.goto(`${BASE}/print.html?brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
       await enPage.waitForFunction(() => document.getElementById('status').textContent.includes('Ready'), { timeout: 20000 });
       const chapterTextsEn = await enPage.$$eval('#source .chapter p', (els) => els.map((e) => e.textContent));
       await enPage.close();
@@ -832,23 +832,23 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=sidebar&brand=intelbras&lang=pt`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=sidebar&brand=amethyst&lang=pt`, { waitUntil: 'networkidle0' });
       await page.waitForFunction(() => document.querySelector('#print-manual[data-ready="true"]'));
 
       const header1 = await page.evaluate(() => ({
         logoSrc: document.querySelector('.print-manual-logo')?.getAttribute('src'),
         title: document.querySelector('.print-manual-title')?.textContent,
       }));
-      await assertTrue('print fallback shows the brand logo', header1.logoSrc?.includes('intelbras.svg'), header1.logoSrc);
+      await assertTrue('print fallback shows the brand logo', header1.logoSrc?.includes('amethyst.svg'), header1.logoSrc);
       await assertTrue('print fallback shows the product name', header1.title === 'Nome do produto', header1.title);
 
       // Switch brand — the fallback's logo should update without a full
       // rebuild (js/print-fallback.js tags it data-brand-logo so the
       // existing applyLogo() updater covers it).
-      await page.select('#brand-selector', 'marca-b');
-      await page.waitForFunction(() => document.querySelector('.print-manual-logo')?.getAttribute('src')?.includes('marca-b.svg'));
+      await page.select('#brand-selector', 'ember');
+      await page.waitForFunction(() => document.querySelector('.print-manual-logo')?.getAttribute('src')?.includes('ember.svg'));
       const logoAfterSwitch = await page.$eval('.print-manual-logo', (img) => img.getAttribute('src'));
-      await assertTrue('print fallback logo updates after a brand switch', logoAfterSwitch.includes('marca-b.svg'), logoAfterSwitch);
+      await assertTrue('print fallback logo updates after a brand switch', logoAfterSwitch.includes('ember.svg'), logoAfterSwitch);
 
       await assertTrue('no console errors', errors.length === 0, errors.join('; '));
     });
@@ -886,7 +886,7 @@ async function main() {
     //      (deterministic: no real popup, no race with page load).
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
-      await page.goto(`${BASE}/pages/en/menu1/index.html?brand=intelbras&lang=en`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu1/index.html?brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
       const openedUrl = await page.evaluate(
         () =>
           new Promise((resolve) => {
@@ -909,8 +909,8 @@ async function main() {
     //      navigation, so there's no race with print.html's own script.
     // ------------------------------------------------------------------
     for (const [label, query, shouldAutoPrint] of [
-      ['with ?autoprint=1', '?autoprint=1&brand=intelbras&lang=en', true],
-      ['without autoprint (plain footer link)', '?brand=intelbras&lang=en', false],
+      ['with ?autoprint=1', '?autoprint=1&brand=amethyst&lang=en', true],
+      ['without autoprint (plain footer link)', '?brand=amethyst&lang=en', false],
     ]) {
       await withPage(browserBox, async (page) => {
         await page.evaluateOnNewDocument(() => {
@@ -932,7 +932,7 @@ async function main() {
     }
 
     // ------------------------------------------------------------------
-    // 13. Granular per-component theme colors actually apply. theme-marca-b
+    // 13. Granular per-component theme colors actually apply. theme-amethyst
     //     sets --color-sidebar-bg / --color-nav-link-bg-active /
     //     --color-nav-link-text-active as a live example — verify the
     //     computed styles pick them up instead of silently falling back to
@@ -941,16 +941,16 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=sidebar&brand=marca-b&lang=en`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=sidebar&brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
       const sidebarBg = await page.$eval('.site-nav', (el) => getComputedStyle(el).backgroundColor);
-      await assertTrue('theme-marca-b sidebar background uses --color-sidebar-bg', sidebarBg === 'rgb(250, 247, 252)', sidebarBg);
+      await assertTrue('theme-amethyst sidebar background uses --color-sidebar-bg', sidebarBg === 'rgb(250, 247, 252)', sidebarBg);
 
       const activeLinkStyle = await page.$eval('.nav-link.is-active', (el) => {
         const s = getComputedStyle(el);
         return { bg: s.backgroundColor, color: s.color };
       });
       await assertTrue(
-        'theme-marca-b active nav link uses --color-nav-link-bg-active/--color-nav-link-text-active',
+        'theme-amethyst active nav link uses --color-nav-link-bg-active/--color-nav-link-text-active',
         activeLinkStyle.bg === 'rgb(236, 220, 245)' && activeLinkStyle.color === 'rgb(90, 22, 120)',
         JSON.stringify(activeLinkStyle)
       );
@@ -968,7 +968,7 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/pages/en/menu2/index.html?layout=hybrid&brand=intelbras&lang=en`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu2/index.html?layout=hybrid&brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
 
       const topLabels = await page.$$eval('#site-nav .nav-link', (els) => els.map((e) => e.textContent.trim()));
       await assertTrue(
@@ -1039,7 +1039,7 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=sidebar&brand=intelbras&lang=en`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=sidebar&brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
       await page.evaluate(() => { window.__marker = 'still-here'; });
 
       await page.type('#search-input', 'RJ45');
@@ -1090,7 +1090,7 @@ async function main() {
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
-      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=scroll&brand=intelbras&lang=en`, { waitUntil: 'networkidle0' });
+      await page.goto(`${BASE}/pages/en/menu1/index.html?layout=scroll&brand=amethyst&lang=en`, { waitUntil: 'networkidle0' });
       const urlBefore = page.url();
 
       await page.type('#search-input', 'RJ45');
@@ -1268,12 +1268,9 @@ async function main() {
     });
 
     // ------------------------------------------------------------------
-    // 18. templates.html: the "browse ready-made templates" secondary path
-    //     is its own dedicated page now (opened in a new tab from a plain
-    //     link in generator.html), not an in-page modal — full screen, own
-    //     brand/layout selectors driving its own preview iframe, and that
-    //     iframe's OWN brand/layout dropdowns hidden too (redundant with
-    //     the page's own selectors).
+    // 18. templates.html ("Explore"): a card per built-in brand look, each
+    //     linking to the real demo (?brand=&layout=) and to the generator
+    //     pre-filled with that look (?preset=).
     // ------------------------------------------------------------------
     await withPage(browserBox, async (page) => {
       const errors = collectErrors(page);
@@ -1283,64 +1280,108 @@ async function main() {
       await assertTrue('generator CTA links to templates.html in a new tab', ctaHref.href === 'templates.html' && ctaHref.target === '_blank', JSON.stringify(ctaHref));
 
       await page.goto(`${BASE}/generator/templates.html`, { waitUntil: 'networkidle0' });
-      await page.waitForFunction(
-        () => {
-          const f = document.getElementById('templates-preview-frame');
-          return !!(f && f.contentDocument && f.contentDocument.getElementById('site-nav-tree'));
-        },
-        { timeout: 15000 }
-      );
+      await page.waitForSelector('.explore-card', { timeout: 15000 });
 
-      const initial = await page.evaluate(() => ({
-        src: document.getElementById('templates-preview-frame').src,
-        brandValue: document.getElementById('templates-brand').value,
-        layoutValue: document.getElementById('templates-layout').value,
-      }));
-      await assertTrue('templates.html defaults to the generic brand', initial.brandValue === 'generic', initial.brandValue);
-      await assertTrue('templates.html defaults to the sidebar layout', initial.layoutValue === 'sidebar', initial.layoutValue);
-
-      await page.select('#templates-brand', 'intelbras');
-      await page.waitForFunction(
-        () => {
-          const doc = document.getElementById('templates-preview-frame').contentDocument;
-          const link = doc && doc.getElementById('theme-css');
-          return link && link.href.includes('intelbras');
-        },
-        { timeout: 10000 }
+      const cards = await page.$$eval('.explore-card', (nodes) =>
+        nodes.map((card) => ({
+          liveHref: card.querySelector('.explore-card-cta-live').getAttribute('href'),
+          baseHref: card.querySelector('.explore-card-cta-base').getAttribute('href'),
+        }))
       );
-      await page.select('#templates-layout', 'navbar');
-      await page.waitForFunction(
-        () => {
-          const doc = document.getElementById('templates-preview-frame').contentDocument;
-          // body.layout-navbar is set synchronously, before js/partial-
-          // loader.js's async fetch() injects the header (and with it
-          // #brand-selector-wrap/#layout-selector-wrap) — wait for the
-          // header to actually be there too, or the hidden-dropdown check
-          // right below can run before those elements exist yet. `doc.body`
-          // itself can briefly be null mid-navigation (the new document
-          // exists but hasn't parsed a <body> yet) — dereferencing
-          // .classList on it then throws, and this environment's
-          // waitForFunction doesn't reliably keep polling past a thrown
-          // exception, so it has to be guarded explicitly.
-          return doc && doc.body && doc.body.classList.contains('layout-navbar') && doc.getElementById('brand-selector-wrap');
-        },
-        { timeout: 10000 }
-      );
-
-      const chromeHidden = await page.evaluate(() => {
-        const doc = document.getElementById('templates-preview-frame').contentDocument;
-        return {
-          brand: getComputedStyle(doc.getElementById('brand-selector-wrap')).display,
-          layout: getComputedStyle(doc.getElementById('layout-selector-wrap')).display,
-        };
-      });
-      await assertTrue("templates.html's preview hides the previewed manual's own brand dropdown", chromeHidden.brand === 'none', chromeHidden.brand);
-      await assertTrue("templates.html's preview hides the previewed manual's own layout dropdown", chromeHidden.layout === 'none', chromeHidden.layout);
+      await assertTrue('Explore shows one card per built-in brand', cards.length === 6, cards.length);
+      for (const { liveHref, baseHref } of cards) {
+        await assertTrue(
+          '"See it live" points at the real demo with brand+layout+lang forced',
+          /^\.\.\/pages\/en\/menu1\/index\.html\?brand=[\w-]+&layout=\w+&lang=en$/.test(liveHref),
+          liveHref
+        );
+        await assertTrue('"Use as a starting point" points at the generator with ?preset=', /^index\.html\?preset=[\w-]+$/.test(baseHref), baseHref);
+      }
 
       const backHref = await page.$eval('.templates-page-back', (a) => a.getAttribute('href'));
       await assertTrue('templates.html has a link back to the generator', backHref === 'index.html', backHref);
 
-      await assertTrue('no console errors browsing templates.html', errors.length === 0, errors.join('; '));
+      const presetIds = await page.$$eval('.explore-card', (nodes) => nodes.map((n) => n.dataset.presetId));
+      const assetChecks = await Promise.all(
+        presetIds.map((id) =>
+          page.evaluate(
+            (pid) =>
+              Promise.all([fetch(`../assets/logos/${pid}.svg`), fetch(`../assets/favicons/${pid}.svg`)]).then(
+                ([logoRes, faviconRes]) => ({ id: pid, logoOk: logoRes.ok, faviconOk: faviconRes.ok })
+              ),
+            id
+          )
+        )
+      );
+      for (const { id, logoOk, faviconOk } of assetChecks) {
+        await assertTrue(`${id} has its own real logo file`, logoOk, id);
+        await assertTrue(`${id} has its own real favicon file`, faviconOk, id);
+      }
+
+      const enLiveHref = await page.$eval('.explore-card .explore-card-cta-live', (a) => a.getAttribute('href'));
+      await page.select('#generator-lang-selector', 'pt');
+      await page.waitForFunction(
+        () => document.querySelector('.explore-card .explore-card-cta-live')?.getAttribute('href')?.includes('lang=pt'),
+        { timeout: 10000 }
+      );
+      const ptLiveHref = await page.$eval('.explore-card .explore-card-cta-live', (a) => a.getAttribute('href'));
+      await assertTrue(
+        'switching the Explore language updates "See it live" to the pt demo pages',
+        ptLiveHref.startsWith('../pages/pt/menu1/index.html') && ptLiveHref.includes('lang=pt'),
+        ptLiveHref
+      );
+      await assertTrue('"See it live" pointed at the en demo before the switch', enLiveHref.startsWith('../pages/en/menu1/index.html'), enLiveHref);
+      const heading = await page.$eval('h1', (el) => el.textContent);
+      await assertTrue('Explore page chrome itself retranslates on language switch', heading === 'Explorar', heading);
+
+      await assertTrue('no console errors browsing the Explore page', errors.length === 0, errors.join('; '));
+    });
+
+    // "See it live" actually lands on the real demo, styled that way — not
+    // a proxy check on the href alone.
+    await withPage(browserBox, async (page) => {
+      const errors = collectErrors(page);
+      await page.goto(`${BASE}/pages/en/menu1/index.html?brand=ember&layout=hybrid`, { waitUntil: 'networkidle0' });
+      const applied = await page.evaluate(() => ({
+        themeHref: document.getElementById('theme-css').href,
+        layoutClass: document.body.className,
+      }));
+      await assertTrue('Explore "see it live" deep link applies the right theme', applied.themeHref.includes('theme-ember.css'), applied.themeHref);
+      await assertTrue('Explore "see it live" deep link applies the right layout', applied.layoutClass.includes('layout-hybrid'), applied.layoutClass);
+      await assertTrue('no console errors following a "see it live" deep link', errors.length === 0, errors.join('; '));
+    });
+
+    // "Use as a starting point" actually pre-fills the generator form, not
+    // just a query string that goes nowhere.
+    await withPage(browserBox, async (page) => {
+      const errors = collectErrors(page);
+      await page.evaluateOnNewDocument(() => localStorage.setItem('generator-desktop-hint-dismissed', '1'));
+      await page.goto(`${BASE}/generator/index.html?preset=ember`, { waitUntil: 'networkidle0' });
+      await page.waitForFunction(() => document.getElementById('custom-color-primary').value.toLowerCase() === '#a3430c', { timeout: 10000 });
+
+      const applied = await page.evaluate(() => ({
+        primary: document.getElementById('custom-color-primary').value,
+        secondary: document.getElementById('custom-color-secondary').value,
+        radius: document.getElementById('custom-border-radius').value,
+        layout: document.querySelector('input[name="custom-layout"]:checked').value,
+        statusText: document.getElementById('save-status').textContent,
+      }));
+      await assertTrue('?preset= pre-fills the primary color', applied.primary.toLowerCase() === '#a3430c', applied.primary);
+      await assertTrue('?preset= pre-fills the secondary color', applied.secondary.toLowerCase() === '#f5ece1', applied.secondary);
+      await assertTrue('?preset= pre-fills the border radius', applied.radius === '8px', applied.radius);
+      await assertTrue('?preset= pre-fills the layout', applied.layout === 'hybrid', applied.layout);
+      await assertTrue('?preset= shows a status message that a starting point was applied', applied.statusText.length > 0, applied.statusText);
+
+      await page.waitForFunction(
+        () => {
+          const doc = document.getElementById('preview-frame').contentDocument;
+          const style = doc && doc.getElementById('custom-theme-preview');
+          return style && style.textContent.includes('#a3430c');
+        },
+        { timeout: 10000 }
+      );
+
+      await assertTrue('no console errors applying a preset via ?preset=', errors.length === 0, errors.join('; '));
     });
 
     // ------------------------------------------------------------------
@@ -1405,7 +1446,9 @@ async function main() {
       await assertTrue(
         'zip does NOT ship any of the original brand theme files, only the generated theme-custom.css',
         result.names.includes('themes/theme-custom.css') &&
-          !result.names.some((n) => ['themes/theme-generic.css', 'themes/theme-intelbras.css', 'themes/theme-marca-b.css'].includes(n)),
+          !result.names.some((n) =>
+            ['themes/theme-generic.css', 'themes/theme-amethyst.css', 'themes/theme-ember.css', 'themes/theme-nocturne.css', 'themes/theme-juniper.css', 'themes/theme-coral.css'].includes(n)
+          ),
         result.names.join(', ')
       );
       await assertTrue(

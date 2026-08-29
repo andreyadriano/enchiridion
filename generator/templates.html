@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="generator.templates.title">Ready-made templates</title>
-  <meta name="description" content="Browse the brand and layout combinations that ship with the HTML Manual Generator template, exactly as they look out of the box.">
+  <title data-i18n="generator.explore.title">Explore — HTML Manual Generator</title>
+  <meta name="description" content="See what the HTML Manual Generator's built-in brand looks feel like in a real manual, then jump straight into the generator with one as your starting point.">
   <link rel="canonical" href="https://manualgen.andreyrosa.dev/generator/templates.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="HTML Manual Generator">
-  <meta property="og:title" content="Ready-made templates — HTML Manual Generator">
-  <meta property="og:description" content="Browse the brand and layout combinations that ship with the template, exactly as they look out of the box.">
+  <meta property="og:title" content="Explore — HTML Manual Generator">
+  <meta property="og:description" content="See what the built-in brand looks feel like in a real manual, then jump into the generator with one as your starting point.">
   <meta property="og:url" content="https://manualgen.andreyrosa.dev/generator/templates.html">
   <meta name="twitter:card" content="summary">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
@@ -17,25 +17,25 @@
 </head>
 <body class="templates-page-body">
   <header class="templates-page-header">
-    <a class="templates-page-back" href="index.html" data-i18n="generator.templates.back">← Back to the generator</a>
-    <h1 data-i18n="generator.templates.title">Ready-made templates</h1>
-    <p class="generator-hint" data-i18n="generator.templates.hint">
-      Browse the existing brand/layout combinations exactly as they ship — nothing to download here, just a way to compare options.
-    </p>
-    <div class="templates-page-controls">
-      <label class="generator-field">
-        <span data-i18n="generator.templates.brand">Brand</span>
-        <select id="templates-brand"></select>
-      </label>
-      <label class="generator-field">
-        <span data-i18n="generator.templates.layout">Layout</span>
-        <select id="templates-layout"></select>
+    <div class="templates-page-header-top">
+      <a class="templates-page-back" href="index.html" data-i18n="generator.explore.back">← Back to the generator</a>
+      <label class="generator-lang-picker">
+        <span class="sr-only" data-i18n="generator.language">Language</span>
+        <select id="generator-lang-selector">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+        </select>
       </label>
     </div>
+    <h1 data-i18n="generator.explore.title">Explore</h1>
+    <p class="generator-hint" data-i18n="generator.explore.hint">
+      See how each built-in look feels in a real manual, then use one as your starting point.
+    </p>
   </header>
 
-  <iframe id="templates-preview-frame" class="templates-page-iframe" title="Ready-made template preview"></iframe>
+  <div class="explore-grid" id="explore-grid"></div>
 
-  <script type="module" src="../js/generator/templates-page.js"></script>
+  <script type="module" src="../js/generator/explore-page.js"></script>
 </body>
 </html>

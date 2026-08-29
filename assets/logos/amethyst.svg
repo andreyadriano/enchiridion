@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
+  <rect width="40" height="40" rx="2" fill="#7a1fa2"/>
+  <g transform="translate(8,8)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M6 3H18L22 9L12 21L2 9Z"/>
+    <path d="M6 3L12 9L18 3M2 9H22M12 9V21"/>
+  </g>
+  <text x="48" y="26" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#7a1fa2">Amethyst</text>
+</svg>

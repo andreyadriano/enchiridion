@@ -1,5 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
   <rect width="40" height="40" rx="4" fill="#2b6cb0"/>
-  <text x="20" y="26" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">G</text>
+  <g transform="translate(8,8)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 2h7l5 5v14a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"/>
+    <path d="M14 2v5h5"/>
+    <path d="M8.5 13h7M8.5 17h5"/>
+  </g>
   <text x="48" y="26" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#2b6cb0">Generic</text>
 </svg>

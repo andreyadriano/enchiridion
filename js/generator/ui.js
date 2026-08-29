@@ -21,6 +21,7 @@ import { FONT_STACKS, CUSTOM_FONT_VALUE, CUSTOM_HEADING_FAMILY, CUSTOM_BODY_FAMI
 import { buildComponentColorRows, reseedAutoComponentColors, currentComponentColors, restoreComponentColors, resetComponentColorsToAuto } from './theme/component-colors.js';
 import { contrastRatio, WCAG_AA_TEXT_MIN } from './theme/contrast.js';
 import { interceptPdfLinks } from './pdf-export.js';
+import { findPreset } from './presets.js';
 
 renderSiteFooter();
 
@@ -391,6 +392,28 @@ function resetToDefaults() {
 }
 resetButton.addEventListener('click', resetToDefaults);
 
+function applyPreset(preset, { reloadPreview = true } = {}) {
+  if (!preset) return;
+  for (const key of Object.keys(colorInputs)) colorInputs[key].value = preset.colors[key];
+  borderRadiusSelect.value = preset.borderRadius;
+
+  fontHeadingSelect.value = preset.fontHeading;
+  fontBodySelect.value = preset.fontBody;
+  fontHeadingFileInput.hidden = true;
+  fontBodyFileInput.hidden = true;
+  fontHeadingFileInput.value = '';
+  fontBodyFileInput.value = '';
+  customFonts = { heading: null, body: null };
+
+  if (preset.componentColors) {
+    restoreComponentColors(componentColors, preset.componentColors, colorInputs);
+  } else {
+    resetComponentColorsToAuto(componentColors, colorInputs);
+  }
+  selectLayout(preset.layout);
+  if (reloadPreview) setPreviewSrc(iframe, { brand: 'generic', layout: preset.layout });
+}
+
 function validateCustomFonts() {
   if (fontHeadingSelect.value === CUSTOM_FONT_VALUE && !customFonts.heading) {
     return currentDict['generator.status.missingFontHeading'] || 'Please upload a heading font file.';
@@ -470,8 +493,13 @@ if (savedRaw) {
   }
 }
 
+const presetFromUrl = findPreset(new URLSearchParams(location.search).get('preset'));
+if (presetFromUrl) applyPreset(presetFromUrl, { reloadPreview: false });
+
 setPreviewSrc(iframe, { brand: 'generic', layout: currentCustomLayout() });
 
-if (restoredFromSave) {
+if (presetFromUrl) {
+  saveStatusEl.textContent = currentDict['generator.preset.appliedStatus'] || 'Starting point applied — tweak anything below.';
+} else if (restoredFromSave) {
   saveStatusEl.textContent = currentDict['generator.save.restoredStatus'] || 'Restored your saved customization.';
 }

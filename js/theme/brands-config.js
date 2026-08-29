@@ -3,19 +3,40 @@
 // multi-brand build (see themes/theme-schema.md for the CSS contract each
 // theme file must follow).
 export const BRANDS = {
-  intelbras: {
-    label: 'Intelbras',
-    theme: 'themes/theme-intelbras.css',
-    logo: 'assets/logos/intelbras.svg',
-    favicon: 'assets/favicons/intelbras.png',
+  amethyst: {
+    label: 'Amethyst',
+    theme: 'themes/theme-amethyst.css',
+    logo: 'assets/logos/amethyst.svg',
+    favicon: 'assets/favicons/amethyst.svg',
+    layout: 'navbar',
+  },
+  ember: {
+    label: 'Ember',
+    theme: 'themes/theme-ember.css',
+    logo: 'assets/logos/ember.svg',
+    favicon: 'assets/favicons/ember.svg',
+    layout: 'hybrid',
+  },
+  nocturne: {
+    label: 'Nocturne',
+    theme: 'themes/theme-nocturne.css',
+    logo: 'assets/logos/nocturne.svg',
+    favicon: 'assets/favicons/nocturne.svg',
     layout: 'sidebar',
   },
-  'marca-b': {
-    label: 'Marca B',
-    theme: 'themes/theme-marca-b.css',
-    logo: 'assets/logos/marca-b.svg',
-    favicon: 'assets/favicons/marca-b.svg',
+  juniper: {
+    label: 'Juniper',
+    theme: 'themes/theme-juniper.css',
+    logo: 'assets/logos/juniper.svg',
+    favicon: 'assets/favicons/juniper.svg',
     layout: 'navbar',
+  },
+  coral: {
+    label: 'Coral',
+    theme: 'themes/theme-coral.css',
+    logo: 'assets/logos/coral.svg',
+    favicon: 'assets/favicons/coral.svg',
+    layout: 'scroll',
   },
   generic: {
     label: 'Generic',

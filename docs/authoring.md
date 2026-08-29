@@ -164,9 +164,12 @@ default layout:
 
 ```js
 export const BRANDS = {
-  intelbras: { theme: 'themes/theme-intelbras.css', logo: 'assets/logos/intelbras.svg', layout: 'sidebar' },
-  'marca-b':  { theme: 'themes/theme-marca-b.css',  logo: 'assets/logos/marca-b.svg',   layout: 'navbar' },
-  generic:    { theme: 'themes/theme-generic.css',  logo: 'assets/logos/generic.svg',   layout: 'scroll' },
+  amethyst: { theme: 'themes/theme-amethyst.css', logo: 'assets/logos/amethyst.svg', layout: 'navbar' },
+  ember:    { theme: 'themes/theme-ember.css',    logo: 'assets/logos/ember.svg',    layout: 'hybrid' },
+  nocturne: { theme: 'themes/theme-nocturne.css', logo: 'assets/logos/nocturne.svg', layout: 'sidebar' },
+  juniper:  { theme: 'themes/theme-juniper.css',  logo: 'assets/logos/juniper.svg',  layout: 'navbar' },
+  coral:    { theme: 'themes/theme-coral.css',    logo: 'assets/logos/coral.svg',    layout: 'scroll' },
+  generic:  { theme: 'themes/theme-generic.css',  logo: 'assets/logos/generic.svg',  layout: 'scroll' },
 };
 ```
 
@@ -181,9 +184,10 @@ text and background in each state (normal, hover, selected), the navbar's
 dropdown submenu panel, and the header/footer background — see the
 "Component colors" table in `themes/theme-schema.md`. Every one of these is
 optional and falls back to the base palette if left unset, so a minimal
-theme (just the required variables) still looks correct; `theme-marca-b.css`
-has a live example of several of them actually set. Every variable, in every
-theme file, has an inline comment saying exactly what it controls.
+theme (just the required variables) still looks correct; `theme-amethyst.css`
+and `theme-nocturne.css` (the dark-mode brand) have live examples of several
+of them actually set. Every variable, in every theme file, has an inline
+comment saying exactly what it controls.
 
 The layout selector in the header lets you override a brand's default
 layout manually (handy for comparing all four side by side). `BRANDS[id]

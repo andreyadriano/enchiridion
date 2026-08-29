@@ -1,0 +1,21 @@
+/* Example brand theme — "Ember". See themes/theme-schema.md for the full
+   variable contract. #a3430c and #2b2013 both pass WCAG AA on white. */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #a3430c;   /* links, active menu item, buttons, accents */
+  --color-secondary: #f5ece1; /* borders, subtle backgrounds */
+  --color-text: #2b2013;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: 'Trebuchet MS', 'Segoe UI', sans-serif; /* h1/h2/h3, product name */
+  --font-body: 'Trebuchet MS', 'Segoe UI', sans-serif;    /* everything else */
+  --border-radius: 6px;       /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/ember.svg');
+
+  /* --- Component colors (optional) ---
+     Every one of these falls back to a combination of the base palette
+     above if left out; set here just to show them working. */
+  --color-sidebar-bg: #fbf5ee;              /* sidebar / scroll-layout nav column */
+  --color-nav-link-bg-active: #f0ddc9;      /* menu/submenu link background (selected) */
+  --color-nav-link-text-active: #7c3a10;    /* menu/submenu link text (selected) */
+  --color-header-bg: #fbf5ee;               /* header bar / hybrid layout's top bar */
+}

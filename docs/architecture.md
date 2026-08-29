@@ -54,7 +54,7 @@ the rest of the visit without repeating it in every link afterwards.
   `scroll-margin-top` in `css/base.css` so the fixed header doesn't cover the
   heading.)
 - Brand/language/layout can be forced from outside with the same query
-  params: `pages/en/menu1/submenu1.html?lang=pt&brand=marca-b`. See "State"
+  params: `pages/en/menu1/submenu1.html?lang=pt&brand=amethyst`. See "State"
   above for how that interacts with `localStorage`.
 
 ## Layouts

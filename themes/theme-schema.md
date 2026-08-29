@@ -22,7 +22,7 @@ in any text editor without reading this document first.
 | `--font-heading` | `h1`/`h2`/`h3`, product name | `'Montserrat', sans-serif` |
 | `--font-body` | Everything else | `'Inter', sans-serif` |
 | `--border-radius` | Buttons, selects, active nav item | `8px` |
-| `--logo-url` | Optional CSS-level reference to the brand logo (the header/print cover use an `<img>` set via `js/theme/brands-config.js` instead, but this is available for any CSS background-image use) | `url('../assets/logos/intelbras.svg')` |
+| `--logo-url` | Optional CSS-level reference to the brand logo (the header/print cover use an `<img>` set via `js/theme/brands-config.js` instead, but this is available for any CSS background-image use) | `url('../assets/logos/ember.svg')` |
 
 ## Component colors (optional — every one falls back to the base palette above)
 
@@ -33,6 +33,7 @@ combination of the base palette if you leave it out, so a minimal theme file
 
 | Variable | Used for | Falls back to |
 |---|---|---|
+| `--color-scheme` | Tells the browser whether to draw native form-control chrome (select dropdown arrows, scrollbars, focus rings) in light or dark mode — set to `dark` on a dark-background theme, or its native `<select>`/`<input>` edges keep showing light-mode chrome no matter what `--color-control-bg` says. See `themes/theme-nocturne.css` for a live example. | `light` |
 | `--color-header-bg` | Top header bar background (also the top "topbar" bar in navbar/hybrid layouts) | `--color-bg` |
 | `--color-footer-bg` | Footer background | `--color-bg` |
 | `--color-sidebar-bg` | Sidebar/scroll-layout nav column background, and Navbar layout's own dropdown submenu background | `--color-bg` |

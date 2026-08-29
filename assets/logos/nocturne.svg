@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
+  <rect width="40" height="40" rx="8" fill="#1f2230"/>
+  <g transform="translate(8,8)" fill="#8ea8ff">
+    <path d="M15 3a9 9 0 1 0 0 18 7 7 0 1 1 0-18Z"/>
+    <path d="M19 2l0.8 2.2L22 5l-2.2 0.8L19 8l-0.8-2.2L16 5l2.2-0.8Z"/>
+  </g>
+  <text x="48" y="26" font-family="'Segoe UI', system-ui, sans-serif" font-size="18" font-weight="700" fill="#8ea8ff">Nocturne</text>
+</svg>

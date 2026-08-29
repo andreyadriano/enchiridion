@@ -1,11 +1,6 @@
-/* Example brand theme. See themes/theme-schema.md for the full variable
-   contract every theme file must implement. Every variable is commented in
-   plain English — change a value, save, reload the page.
-
-   This file also shows the optional "component colors" in actual use (not
-   just commented out), so there's a live example of each one doing
-   something: a tinted sidebar column and a slightly different "selected
-   menu item" color than the plain default. */
+/* Example brand theme — "Amethyst". See themes/theme-schema.md for the
+   full variable contract; this file also shows the optional component
+   colors actually set, not just commented out. */
 :root {
   /* --- Base palette (required) --- */
   --color-primary: #7a1fa2;   /* links, active menu item, buttons, accents */
@@ -15,7 +10,7 @@
   --font-heading: 'Georgia', serif;   /* h1/h2/h3, product name */
   --font-body: 'Verdana', sans-serif; /* everything else */
   --border-radius: 2px;       /* buttons, selects, active menu item */
-  --logo-url: url('../assets/logos/marca-b.svg');
+  --logo-url: url('../assets/logos/amethyst.svg');
 
   /* --- Component colors (optional) ---
      Every one of these falls back to a combination of the base palette

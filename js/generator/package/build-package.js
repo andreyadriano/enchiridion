@@ -5,6 +5,7 @@
 import { CORE_FILES, LAYOUT_CSS, I18N_FILES, FALLBACK_LOGO, FALLBACK_FAVICON } from './file-manifest.js';
 import { rootUrl } from '../paths.js';
 import { loadNav, flattenNav, langPath } from '../../nav/nav-config.js';
+import { isDarkBackground } from '../theme/contrast.js';
 
 const MIME_EXT = {
   'image/svg+xml': 'svg',
@@ -51,6 +52,8 @@ function buildThemeCustomCss(template, { colors, componentColors = {}, borderRad
     css = css.replace(re, `$1 ${value};`);
   }
   const facesBlock = fontFaces.length ? fontFaces.join('\n') + '\n\n' : '';
+  const colorScheme = isDarkBackground(colors.bg) ? 'dark' : 'light';
+  const schemeBlock = `\n\n/* Derived from --color-bg — see themes/theme-schema.md's --color-scheme entry. */\n:root {\n  --color-scheme: ${colorScheme};\n}\n`;
   // Appended as a separate :root rule rather than patched into the
   // template's own component-color block, which lives inside a CSS
   // comment (see themes/theme-generic.css).
@@ -60,7 +63,7 @@ function buildThemeCustomCss(template, { colors, componentColors = {}, borderRad
         .map(([cssVar, value]) => `  ${cssVar}: ${value};`)
         .join('\n')}\n}\n`
     : '';
-  return facesBlock + css + componentBlock;
+  return facesBlock + css + schemeBlock + componentBlock;
 }
 
 function buildFontFace(family, relativeAssetPath) {

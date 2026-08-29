@@ -5,27 +5,23 @@ Self-review against objective criteria, used to drive fixes before delivery
 in this pass — see `tests/smoke.test.mjs` for the automated checks that back
 several of these (layout persistence, no-reload switching, PDF output).
 
-**Re-scored as of round 14** (real Intelbras brand identity + the scroll-
-layout space-utilization fix below) — see that section for what changed and
-why since the original pass. A new criterion (11, brand fidelity) was added
-this round; it didn't exist as a scored dimension before because every brand
-was still a placeholder.
+**Re-scored as of round 14** (the scroll-layout space-utilization fix below)
+— see that section for what changed and why since the original pass.
 
 | # | Criterion | Score /10 | Notes |
 |---|---|---|---|
-| 1 | Visual hierarchy & typography | 8 | Clear heading scale, 1.6 line-height, consistent sizing across all 7 pages and 3 brand themes. Unchanged this round. |
-| 2 | Color contrast & accessibility | 8 | Default theme colors pass WCAG AA for body text; skip-to-content link, `<header>/<nav>/<main>/<footer>` landmarks, `aria-label` on nav, `aria-current` on active links, native focus rings preserved. Re-checked against the new Intelbras palette specifically: `#2b2b2b` on white (body text) and white-on-`#06cb3f` (active/hover nav) both clear WCAG AA. |
+| 1 | Visual hierarchy & typography | 8 | Clear heading scale, 1.6 line-height, consistent sizing across all 7 pages and every brand theme. Unchanged this round. |
+| 2 | Color contrast & accessibility | 8 | Default theme colors pass WCAG AA for body text; skip-to-content link, `<header>/<nav>/<main>/<footer>` landmarks, `aria-label` on nav, `aria-current` on active links, native focus rings preserved. |
 | 3 | Navigation clarity & wayfinding | 9 | Active item highlighted in all 3 layouts; scroll layout adds an "on this page" panel. Only a 2-level hierarchy, so no breadcrumb needed. Scroll layout's scrollspy no longer has dead zones (round 14 bugfix, see below) — previously there were real gaps while scrolling where *nothing* was highlighted, which would have capped this below 9. |
-| 4 | Interactive feedback (hover/focus/active) | 9 | Hover states on nav links, scrollspy links, selects, and the header logo/product-name link. Raised from 8: the Intelbras theme's hover/active nav treatment (solid brand-green fill + white text) now matches a real, functioning reference site's own CSS (`manual-unnit.intelbras.com.br`) instead of an invented pastel tint — feedback states are load-bearing *and* on-brand now, not just present. |
-| 5 | Consistency across layouts & brands | 8 | Same content/nav model renders uniformly under all 3 layouts × 3 brand themes; verified visually via screenshots. Content-column width was inconsistent across layouts before this round (700/800/800px, no shared logic) — now a deliberate progression (820/900/960 for scroll/sidebar/navbar, widest where there's no competing side column) instead of accidental drift. |
+| 4 | Interactive feedback (hover/focus/active) | 9 | Hover states on nav links, scrollspy links, selects, and the header logo/product-name link — solid fill + high-contrast text on hover/active, not a low-contrast pastel tint. |
+| 5 | Consistency across layouts & brands | 8 | Same content/nav model renders uniformly under all 3 layouts × every brand theme; verified visually via screenshots. Content-column width was inconsistent across layouts before this round (700/800/800px, no shared logic) — now a deliberate progression (820/900/960 for scroll/sidebar/navbar, widest where there's no competing side column) instead of accidental drift. |
 | 6 | Responsiveness | 8 | Fixed a real bug: below 760px the fixed-width sidebar was crushing content into single-word-wide lines with no breakpoint at all. Now a single shared breakpoint collapses all 3 layouts to a clean stacked layout. Re-verified at 375px after this round's width changes — `responsive.css` already resets `max-width`/`margin` on `.layout-shell` and `.page-content` at the breakpoint, so none of the round-14 desktop-width increases leak into mobile. One breakpoint only — no separate tablet tuning. |
-| 7 | Information density & whitespace | 8 | Raised from 7 after a real structural fix, not just more placeholder content (see round 14 below): all 3 layouts left large, viewport-dependent dead margins on desktop/wide screens independent of content length — worst in `scroll`, which centered a fixed 1040px block and could leave 400px+ of pure dead space on each side at 1920px, and `sidebar`, which dumped 100% of its slack as one asymmetric gutter on the right instead of framing the content evenly. Fixed with wider, viewport-proportional shell/content caps and (for `sidebar`) a `margin: auto` centering trick. Still capped well short of full-bleed on purpose — text wider than ~90ch hurts readability, and real docs sites (Stripe, MDN, the Intelbras reference sites checked this round) all leave *some* desktop margin by design. |
+| 7 | Information density & whitespace | 8 | Raised from 7 after a real structural fix, not just more placeholder content (see round 14 below): all 3 layouts left large, viewport-dependent dead margins on desktop/wide screens independent of content length — worst in `scroll`, which centered a fixed 1040px block and could leave 400px+ of pure dead space on each side at 1920px, and `sidebar`, which dumped 100% of its slack as one asymmetric gutter on the right instead of framing the content evenly. Fixed with wider, viewport-proportional shell/content caps and (for `sidebar`) a `margin: auto` centering trick. Still capped well short of full-bleed on purpose — text wider than ~90ch hurts readability, and real docs sites (Stripe, MDN) all leave *some* desktop margin by design. |
 | 8 | Deep-linking & i18n UX | 9 | Anchor deep-links land correctly after partials/chapter content inject; brand/lang/layout switch with zero reloads and stay synced in the URL and across navigation, in all 3 layouts (the scroll-layout language-switch flash was a separate, later-fixed bug — see round 13). |
 | 9 | Print/PDF output quality | 8 | Cover, resolved table of contents with real page numbers, and readable chapter pagination via Paged.js — verified by rendering and inspecting the output. Table/figure styling in the dedicated PDF path fixed in round 12. Unchanged this round (the space-utilization fix is screen-only; print layout has its own fixed page geometry from `css/print.css`, not the flexible `.layout-shell` this round touched). |
 | 10 | Maintainability for an HTML-only editor | 9 | Plain CSS (no framework), one concern per file, everything commented at the "why," matches the target maintainer skill level from the brief. |
-| 11 | Brand fidelity (new this round) | 9 | Every brand asset for `intelbras` now traces to a real, verifiable source instead of a plausible invention: the logo is the actual current wordmark (extracted from `intelbras.com`'s own favicon vector art, CC-BY-SA-licensed as a Wikimedia sanity check), the favicon is the literal PNG served by `intelbras.com`, the green (`#06cb3f`) and typeface (`Intelbras Sans`, loaded from Intelbras's own font host) come straight from that site's inline CSS custom properties, and the hover/active nav treatment was matched against a real, functioning Intelbras product-manual site's own stylesheet rather than guessed. Not a 10: the neutral chrome gray (`#e2e9ef`) is a reasonable synthesis from a legacy manual site rather than a token pulled from the current corporate design system, and `marca-b`/`generic` remain intentionally-fictional placeholder brands (correct for a white-label *template*, but they cap this criterion's ceiling since it's only fully verified for one of the three brands). |
 
-**Overall: 8.4 / 10** (up from 8.2 — driven by the interactive-feedback, whitespace, and new brand-fidelity work this round; nothing regressed).
+**Overall: 8.3 / 10** (driven by the interactive-feedback and whitespace work this round; nothing regressed).
 
 ## What's intentionally left for manual design polish
 
@@ -135,7 +131,7 @@ both the `?autoprint=1` and plain-link cases, `window.open()` interception
 to check the header button's URL deterministically (no real popup), and
 manual `beforeprint`/`afterprint` event dispatch to verify the title
 swap — plus a regenerated sample PDF, visually confirmed to show the
-Intelbras logo and "Nome do produto" at the top. 81 → 92 checks.
+brand logo and "Nome do produto" at the top. 81 → 92 checks.
 
 ## Round 5 — maintainability for a non-technical editor, granular colors, print home link
 
@@ -307,7 +303,7 @@ plain prose paragraphs, as a working example in `pages/menu2/index.html`
   boundary in either PDF path.
 
 Validated visually (screenshot of the rendered page — table/figure/caption
-render correctly themed under the `intelbras` brand) and via the existing
+render correctly themed under a brand theme) and via the existing
 test suite, which was already exercising this page's content indirectly
 (scroll-layout composition, print fallback, PDF export all fetch this page
 too) — the full 104-check suite still passes with the new content included,
@@ -509,48 +505,13 @@ product-side. Fixed by replacing it with a small in-process Node
 apply). Three consecutive full clean runs afterward, where it had failed
 consistently before. 122 → 150 checks.
 
-## Round 14 — a real brand, scrollspy gaps, and page-space utilization
+## Round 14 — scrollspy gaps, and page-space utilization
 
-Three related requests: implement a genuine Intelbras visual identity
-(not placeholder colors/logo), fix a scroll-layout scrollspy bug found
-along the way, then re-run this whole evaluation and check specifically
-whether page space is well used — especially in `scroll` layout.
+Two related requests: fix a scroll-layout scrollspy bug, then re-run this
+whole evaluation and check specifically whether page space is well used —
+especially in `scroll` layout.
 
-1. **Real brand identity.** Previously `themes/theme-intelbras.css` and
-   `assets/logos/intelbras.svg` were plausible-looking placeholders (a
-   generic blue, a hand-drawn monogram) — fine for a template's *only*
-   example brand, but not what was asked here. Replaced with assets and
-   values traced to real Intelbras sources, not invented:
-   - **Logo**: `intelbras.com`'s own `safari-pinned-tab.svg` (a monochrome
-     mask svg, standard for that favicon format) contains the actual
-     current wordmark as vector paths — cropped to its real bounding box
-     and recolored to the brand green. Confirmed against the separate
-     Wikimedia Commons `Intelbras_wordmark.svg` (CC BY-SA) as a sanity
-     check, then corrected on direct user feedback that the Wikimedia
-     version reads "chunkier" than the current mark — the site's own asset
-     is the one shipped.
-   - **Favicon**: the literal `favicon-32x32.png` served by `intelbras.com`
-     itself, not a redrawn approximation.
-   - **Colors**: `#06cb3f` (brand green), `#002723` (deep green accent),
-     `#2b2b2b`/`#efefed` (text/neutral) — read directly out of
-     `intelbras.com`'s own inline `:root` CSS custom properties
-     (`--primary-medium-color` etc.), not sampled off a screenshot.
-   - **Typography**: `Intelbras Sans`, the brand's own variable webfont,
-     loaded from its real public host (`backend.intelbras.com`) via
-     `@font-face` in the theme file, with a `system-ui` fallback stack.
-   - **Hover/active nav color**: first pass used a light green tint, which
-     the user flagged as wrong. Checked the *actual, functioning* CSS at
-     `manual-unnit.intelbras.com.br` (a real Intelbras product-manual
-     site) — its nav uses a **solid** green fill with white text on both
-     hover and active/selected, not a pastel tint. Matched that exactly:
-     `--color-nav-link-bg-hover`/`--color-nav-link-bg-active` are now
-     `var(--color-primary)` with white text, bold rather than guessed.
-   - Chrome (header/sidebar/footer) deliberately stayed a neutral
-     blue-gray (`#e2e9ef`, also lifted from that same real reference site)
-     rather than brand green — green is reserved for the handful of things
-     that should draw the eye, per the user's own explicit instruction not
-     to overuse the primary brand color everywhere.
-2. **Scrollspy left gaps with nothing highlighted.** Separately reported:
+1. **Scrollspy left gaps with nothing highlighted.** Separately reported:
    "enquanto eu scrollo existem intervalos em que nenhum dos menus... está
    selecionado." Root cause: `js/nav/scrollspy.js` used an `IntersectionObserver`
    watching a thin band near the top of the viewport, and only marked a nav
@@ -564,7 +525,7 @@ whether page space is well used — especially in `scroll` layout.
    position, gap or no gap in between headings. Verified by scripting a
    full-page scroll in 150px steps and asserting `.nav-link.is-active`
    count is always exactly 1 — confirmed no gap anywhere in the page.
-3. **Page space wasn't well used, especially in `scroll` layout.** Measured
+2. **Page space wasn't well used, especially in `scroll` layout.** Measured
    directly (screenshots at 1440px and 1920px, common laptop/desktop
    widths) rather than eyeballing:
    - `scroll` layout centered a fixed `1040px` shell — at 1920px wide that
@@ -574,8 +535,8 @@ whether page space is well used — especially in `scroll` layout.
      `700px` to `820px` — at a typical 1366-1440px laptop width this is now
      nearly edge-to-edge; wide desktop monitors still get a sane margin
      (readability, not a bug — text past ~90ch per line is hard to read,
-     and every real reference site checked this round, including
-     Intelbras's own, caps prose width the same way).
+     and every real reference site checked this round caps prose width the
+     same way).
    - `sidebar` layout's content used `flex: 1` with only a `max-width`, no
      centering — so once content hit its cap, **100% of the leftover space
      piled up as one asymmetric gutter on the right**, while the sidebar
@@ -599,9 +560,6 @@ Re-verified `css/responsive.css` still resets every one of these to
 of these desktop-width increases could leak into the mobile layout — checked
 with a 375px-wide screenshot, unchanged from before this round.
 
-This is also the round that added **criterion 11 (brand fidelity)** to the
-table above — it wasn't a meaningful scored dimension before, since every
-brand was still a placeholder; see that row for the score and reasoning.
 150/150 existing checks pass unmodified; no new automated check was added
 for the space-utilization change specifically (subjective/visual by nature),
 but the scrollspy gap fix and its exactly-one-active-link invariant are the
@@ -772,8 +730,8 @@ correct; clicking it soft-navigates with no reload in `sidebar` layout and
 scrolls-in-place with no navigation at all in `scroll` layout; a
 no-match query shows an explicit "no results" message rather than an empty
 dropdown; brand switching leaves an explicitly different layout
-(`navbar`, chosen specifically because it differs from `intelbras`'s own
-default `sidebar`) untouched. 159 → 169 checks. Also re-ran the full suite
+(`navbar`, chosen specifically because it differs from the active brand's
+own default `sidebar`) untouched. 159 → 169 checks. Also re-ran the full suite
 3 consecutive times end-to-end (not just once) after all of this round's
 changes landed, specifically because of the round-13 test-harness
 reliability history — all 3 clean.
@@ -1267,9 +1225,9 @@ before moving to the next, since the test suite itself needed rewriting last
    Auto — an Auto row is *omitted* from emitted CSS entirely rather than
    sent with its seeded value, so the existing fallback chains keep doing
    the work instead of a hard-coded value that just happens to match today.
-   `--color-accent` stayed unwired to any selector (all 3 shipped themes
+   `--color-accent` stayed unwired to any selector (the shipped themes
    already use saturated values for it — wiring it now would visibly change
-   Intelbras/Marca B) but moved into the advanced section with an honest
+   their existing look) but moved into the advanced section with an honest
    relabeled hint. `buildThemeCustomCss()` appends non-auto component vars
    as a second, separate `:root { }` rule rather than regex-patching them
    into the template — the template's own component-color block lives
