@@ -1,8 +1,9 @@
 {
   "_readme": "UI-chrome dictionary for index.html/generator/index.html/generator/templates.html (the generator tool itself, not one of the manuals it produces — see js/generator/i18n.js). Keep en/pt/es with the exact same set of keys. NOT part of js/generator/package/file-manifest.js — never gets copied into a generated manual's own zip.",
   "generator.eyebrow": "Criador de manuais",
+  "generator.home": "Voltar para o início",
   "generator.title": "Gerador de manual",
-  "generator.subtitle": "Escolha as cores, o logo e os idiomas, acompanhe a pré-visualização atualizar em tempo real e baixe um .zip pronto pra publicar. Não precisa de conta nem de servidor.",
+  "generator.subtitle": "Escolha cores, logo e layout, depois baixe um .zip pronto para publicar.",
   "generator.language": "Idioma",
   "generator.templatesCta": "Explorar os visuais prontos",
   "generator.section.product": "Produto",

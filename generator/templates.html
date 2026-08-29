@@ -17,22 +17,27 @@
 </head>
 <body class="templates-page-body">
   <header class="templates-page-header">
-    <div class="templates-page-header-top">
-      <a class="templates-page-back" href="index.html" data-i18n="generator.explore.back">← Back to the generator</a>
-      <label class="generator-lang-picker">
-        <span class="sr-only" data-i18n="generator.language">Language</span>
-        <select id="generator-lang-selector">
-          <option value="en">English</option>
-          <option value="pt">Português</option>
-          <option value="es">Español</option>
-        </select>
-      </label>
+    <a class="gen-home-link" href="../index.html" data-i18n-attr="aria-label:generator.home" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5C10 3.5 6.5 3 3 3v16c3.5 0 7 0.5 9 2"/><path d="M12 5c2-1.5 5.5-2 9-2v16c-3.5 0-7 0.5-9 2Z"/><path d="M12 5v18"/></svg>
+    </a>
+    <div class="templates-page-header-inner">
+      <div class="templates-page-header-top">
+        <a class="templates-page-back" href="index.html" data-i18n="generator.explore.back">← Back to the generator</a>
+        <label class="generator-lang-picker">
+          <span class="sr-only" data-i18n="generator.language">Language</span>
+          <select id="generator-lang-selector">
+            <option value="en">English</option>
+            <option value="pt">Português</option>
+            <option value="es">Español</option>
+          </select>
+        </label>
+      </div>
+      <p class="gen-eyebrow" data-i18n="generator.eyebrow">Manual builder</p>
+      <h1 data-i18n="generator.explore.title">Explore</h1>
+      <p class="generator-hint" data-i18n="generator.explore.hint">
+        See how each built-in look feels in a real manual, then use one as your starting point.
+      </p>
     </div>
-    <p class="gen-eyebrow" data-i18n="generator.eyebrow">Manual builder</p>
-    <h1 data-i18n="generator.explore.title">Explore</h1>
-    <p class="generator-hint" data-i18n="generator.explore.hint">
-      See how each built-in look feels in a real manual, then use one as your starting point.
-    </p>
   </header>
 
   <div class="explore-grid" id="explore-grid"></div>
