@@ -46,25 +46,55 @@
   </div>
 
   <main class="landing-main">
-    <h1 class="sr-only" data-i18n="landing.title">White-label manual template</h1>
-    <p class="landing-subtitle" data-i18n="landing.subtitle">A no-account, no-server tool for turning this template into your own product manual.</p>
+    <section class="hero">
+      <div class="hero-content">
+        <p class="gen-eyebrow" data-i18n="landing.hero.eyebrow">Free · No account · No backend</p>
+        <h1 class="hero-headline" data-i18n="landing.hero.headline">Your product manual, branded and ready in minutes</h1>
+        <p class="hero-subtitle" data-i18n="landing.subtitle">A no-account, no-server tool for turning this template into your own product manual.</p>
+        <ul class="hero-trust">
+          <li data-i18n="landing.hero.trust.layouts">4 layouts</li>
+          <li data-i18n="landing.hero.trust.looks">6 built-in looks</li>
+          <li data-i18n="landing.hero.trust.langs">3 languages</li>
+          <li data-i18n="landing.hero.trust.pdf">PDF export</li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="hero-btn hero-btn-primary" href="generator/index.html" data-i18n="landing.build.cta">Open the generator</a>
+          <a class="hero-btn hero-btn-secondary" href="generator/templates.html" data-i18n="landing.explore.cta">Explore</a>
+        </div>
+      </div>
+      <div class="hero-visual" id="hero-visual" aria-hidden="true"></div>
+    </section>
 
-    <div class="landing-panels">
-      <a class="landing-panel landing-panel-build" href="generator/index.html">
-        <div class="landing-panel-inner">
-          <h2 data-i18n="landing.build.title">Build your own manual</h2>
-          <p data-i18n="landing.build.desc">Pick your colors, logo, favicon, layout, and languages, watch a live preview update as you go, then download a ready-to-serve .zip.</p>
-          <span class="landing-panel-cta" data-i18n="landing.build.cta">Open the generator</span>
-        </div>
-      </a>
-      <a class="landing-panel landing-panel-browse" href="generator/templates.html">
-        <div class="landing-panel-inner">
-          <h2 data-i18n="landing.explore.title">Explore the built-in looks</h2>
-          <p data-i18n="landing.explore.desc">See what each built-in brand feels like in a real manual, then use one as your starting point.</p>
-          <span class="landing-panel-cta" data-i18n="landing.explore.cta">Explore</span>
-        </div>
-      </a>
-    </div>
+    <section class="features">
+      <h2 class="gen-section-heading" data-i18n="landing.features.title">What you get</h2>
+      <div class="feature-grid" id="feature-grid"></div>
+    </section>
+
+    <section class="start-section">
+      <h2 class="gen-section-heading" data-i18n="landing.start.title">Two ways to start</h2>
+      <div class="landing-panels">
+        <a class="landing-panel landing-panel-build" href="generator/index.html">
+          <div class="landing-panel-inner">
+            <span class="landing-panel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </span>
+            <h2 data-i18n="landing.build.title">Build your own manual</h2>
+            <p data-i18n="landing.build.desc">Pick your colors, logo, favicon, layout, and languages, watch a live preview update as you go, then download a ready-to-serve .zip.</p>
+            <span class="landing-panel-cta" data-i18n="landing.build.cta">Open the generator</span>
+          </div>
+        </a>
+        <a class="landing-panel landing-panel-browse" href="generator/templates.html">
+          <div class="landing-panel-inner">
+            <span class="landing-panel-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+            </span>
+            <h2 data-i18n="landing.explore.title">Explore the built-in looks</h2>
+            <p data-i18n="landing.explore.desc">See what each built-in brand feels like in a real manual, then use one as your starting point.</p>
+            <span class="landing-panel-cta" data-i18n="landing.explore.cta">Explore</span>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
 
   <script type="module" src="js/generator/landing.js"></script>
