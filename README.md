@@ -75,6 +75,10 @@ which stays dependency-free.
 | [`themes/theme-schema.md`](themes/theme-schema.md) | The CSS variable contract every brand theme follows |
 | [`docs/ux-evaluation.md`](docs/ux-evaluation.md) | Design/UX decision log |
 
+## License
+
+[MIT](LICENSE)
+
 ---
 
 Built by [andreyrosa.dev](https://andreyrosa.dev).
