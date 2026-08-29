@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suporte</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../../css/base.css">
+  <link rel="stylesheet" href="../../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <div class="content-type-label">Como fazer</div>
+      <h1>Suporte</h1>
+      <p>O que verificar por conta própria, e como contatar o fabricante se isso não resolver.</p>
+
+      <h2 id="menu3-topic1">Obtendo Ajuda</h2>
+      <p>O suporte está disponível de segunda a sexta, das 9h às 18h, pelo portal de suporte do fabricante, por e-mail ou por telefone — veja a contracapa do manual impresso (ou o próprio rodapé deste template) para os dados de contato reais.</p>
+
+      <h2 id="menu3-topic2">Antes de Contatar o Suporte</h2>
+      <p>Ter estas informações em mãos agiliza qualquer atendimento:</p>
+      <ul class="contents-list">
+        <li>O número do modelo e o número de série do dispositivo (veja a etiqueta na parte inferior da unidade)</li>
+        <li>O que os LEDs de status estão fazendo no momento — veja <a href="../menu2/index.html#menu2-topic4">Indicadores de LED</a></li>
+        <li>Se o problema começou logo após alguma mudança (cabo novo, novo firmware, queda de energia)</li>
+        <li>Se você já tentou um ciclo de energia (desligue por 10 segundos e reconecte)</li>
+      </ul>
+
+      <h2 id="menu3-topic3">Solução de Problemas</h2>
+      <p>Uma tabela de sintoma / causa possível / solução é o formato padrão para uma seção de solução de problemas — mesmo padrão <code>.spec-table</code>, com três colunas em vez de duas.</p>
+      <table class="spec-table">
+        <caption>Tabela 7 — Solução de problemas</caption>
+        <thead>
+          <tr>
+            <th>Sintoma</th>
+            <th>Causa possível</th>
+            <th>Solução</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>O LED de energia não acende</td><td>Fonte de alimentação desconectada, ou tomada com defeito</td><td>Verifique as duas pontas do cabo e tente outra tomada</td></tr>
+          <tr><td>LED de energia pisca em vermelho</td><td>Falha no autoteste de inicialização</td><td>Desligue por 10 segundos e ligue novamente; contate o suporte se persistir</td></tr>
+          <tr><td>Sem acesso à internet</td><td>Cabo WAN desconectado, ou instabilidade do provedor</td><td>Verifique o LED WAN (veja <a href="../menu2/index.html#menu2-topic4">Indicadores de LED</a>); confirme o cabo nas duas pontas</td></tr>
+          <tr><td>Não consigo acessar a interface web</td><td>Computador está em uma sub-rede diferente</td><td>Confirme que o computador recebeu um endereço IP do dispositivo via DHCP</td></tr>
+        </tbody>
+      </table>
+      <div class="callout callout-warning">
+        <p class="callout-title">Aviso</p>
+        <p>Se nenhuma das etapas acima resolver o problema, não tente abrir o dispositivo — entre em contato com o suporte técnico autorizado.</p>
+      </div>
+
+      <h2 id="menu3-topic4">Perguntas Frequentes</h2>
+      <p>Um FAQ funciona melhor como pares de pergunta/resposta do que como tabela — usa o padrão <code>.faq-list</code>, uma <code>&lt;dl&gt;</code> simples com um par <code>&lt;dt&gt;</code>/<code>&lt;dd&gt;</code> por pergunta.</p>
+      <dl class="faq-list">
+        <dt>Como restauro o dispositivo para os padrões de fábrica?</dt>
+        <dd>Veja <a href="submenu1.html#menu3-submenu1-topic4">Procedimento de Atualização de Firmware</a>, que também cobre o botão de reset de fábrica.</dd>
+        <dt>Posso usar uma fonte de alimentação de terceiros?</dt>
+        <dd>Não — veja o aviso em <a href="../menu1/index.html#menu1-topic4">Avisos de Segurança</a>.</dd>
+        <dt>Onde encontro o número de série do dispositivo?</dt>
+        <dd>Impresso em uma etiqueta na parte inferior do aparelho, e também exibido na página de status da interface web.</dd>
+      </dl>
+
+      <h2 id="menu3-topic5">Garantia</h2>
+      <p>Uma declaração de garantia limitada é prática padrão ao final da seção de suporte de um manual de hardware — parágrafos simples, sem necessidade de um padrão CSS especial.</p>
+      <p>Este produto tem garantia contra defeitos de material e fabricação por 12 meses a partir da data original de compra. Durante esse período, o fabricante irá, a seu critério, reparar ou substituir o produto sem custo, mediante apresentação da nota fiscal original.</p>
+      <p>Esta garantia não cobre danos resultantes de uso indevido, modificação não autorizada, exposição a líquidos, ou uso com uma fonte de alimentação diferente da fornecida — veja <a href="../menu1/index.html#menu1-topic4">Avisos de Segurança</a>. Para acionar a garantia, entre em contato com o suporte usando os dados em <a href="#menu3-topic1">Obtendo Ajuda</a> acima.</p>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../../js/core/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

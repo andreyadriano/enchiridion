@@ -50,16 +50,16 @@ first pass missed:
    was broader than the link-query-string bug fixed in round 1: state lived
    in the URL at all, and nothing ever persisted it to `localStorage`
    despite being read from there. Rather than patch that further, state
-   management moved to `js/state.js` — `localStorage`-first, with the URL
+   management moved to `js/core/state.js` — `localStorage`-first, with the URL
    only as an explicit one-time override for external deep links (see
    README "State"). This removes the bug class entirely: nav links are
    plain URLs again, nothing to thread through.
 2. **Scroll layout wasn't actually a single page.** Round 1 made it
    continuous within one chapter, but cross-chapter links still navigated
-   — contradicting the "single page" brief. `js/continuous-manual.js` now
+   — contradicting the "single page" brief. `js/content/continuous-manual.js` now
    composes the *entire* manual (every menu, every submenu) onto whichever
    page was loaded; every nav entry becomes an in-page anchor;
-   `js/scrollspy.js` highlights position across chapter boundaries, not
+   `js/nav/scrollspy.js` highlights position across chapter boundaries, not
    just within one.
 3. **PDF discoverability.** `print.html` already pulled every menu (this
    was verified, not actually broken), but nothing in the UI linked to it —
@@ -87,8 +87,8 @@ coincidence, not by design.
 Not a Paged.js/library limitation — it's what "print the current page"
 means on any multi-page site by default. Fixed by giving `sidebar`/`navbar`
 their own hidden, full-manual content for print media specifically
-(`js/print-fallback.js` + `css/print-fallback.css`, reusing
-`js/continuous-manual.js`), so an unmodified Ctrl+P is correct regardless
+(`js/print/print-fallback.js` + `css/print-fallback.css`, reusing
+`js/content/continuous-manual.js`), so an unmodified Ctrl+P is correct regardless
 of layout.
 
 **Validation method** (the user specifically asked this not be hand-wavy):
@@ -144,7 +144,7 @@ brief's "kept by a non-technical editor" bar wasn't fully met yet, and
 color theming wasn't granular enough for real per-component branding.
 
 1. **Editing a page's text silently did nothing.** Every page's `<h1>`/`<h2>`/
-   `<p>` had `data-i18n`, so `js/i18n.js` overwrote whatever the HTML said
+   `<p>` had `data-i18n`, so `js/core/i18n.js` overwrote whatever the HTML said
    with the matching `i18n/*.json` value on every load — a non-technical
    editor changing the HTML directly would see their edit vanish, with no
    error to explain why. Removed `data-i18n` (and the corresponding
@@ -189,7 +189,7 @@ per-page translation.
 **Design chosen (offered as options, this one picked):** one real HTML file
 per language, not a return to JSON-driven content. `pages/menu1/index.html`
 (default/English) gets a sibling `pages/menu1/index.pt.html`; which pages
-have one is declared per-item via `langs: ['pt']` in `js/nav-config.js`
+have one is declared per-item via `langs: ['pt']` in `js/nav/nav-config.js`
 (`pages/menu1/index.pt.html` + that declaration now ship as a real, working
 example, not just documentation). This was picked over two alternatives:
 reinstating `data-i18n` per page (brings back the round-5 editing trap) or
@@ -198,21 +198,21 @@ explicitly asks for `en`/`pt`).
 
 Consequences worked through:
 
-- `js/nav-config.js` gained `langPath(item, lang)` (resolves to the
+- `js/nav/nav-config.js` gained `langPath(item, lang)` (resolves to the
   translated file only if declared) and `stripLangSuffix(pathname)` (so a
   loaded `index.pt.html` still resolves to the `menu1` nav item/chapter,
   used by `findNavContext`, deep-linking, and active-item highlighting).
-- Nav links (`js/nav-render.js`) now point at the current language's actual
+- Nav links (`js/nav/nav-render.js`) now point at the current language's actual
   file — the `langs` declaration decides this at render time, no network
   probing, so a link is never generated to a file that doesn't exist.
-- The language selector (`js/page-init.js`) now does a real navigation when
+- The language selector (`js/core/page-init.js`) now does a real navigation when
   switching to/from a page that has a translated file — unlike brand/layout,
   content is genuinely different HTML, not a re-render. On a page with no
   translation it just re-renders chrome, same as before.
 - Every view that composes the *whole* manual together (scroll layout,
   `print.html`'s PDF, the Ctrl+P print fallback) needed to fetch each page
   in the visitor's language too, still working for a manual where only some
-  pages are translated. `js/nav-config.js` added `fetchLocalizedHTML(item,
+  pages are translated. `js/nav/nav-config.js` added `fetchLocalizedHTML(item,
   lang)` for this, used by `continuous-manual.js` and `print-builder.js`.
 
 **A real bug found while validating this:** the first implementation
@@ -252,9 +252,9 @@ model with only one page (`menu1`) actually translated:
    pages are now genuinely bilingual, not just the one demo page.
 2. **"Se o usuário quiser adicionar mais páginas, vai precisar mexer em
    algo que não seja HTML?"** Honest answer at the time: yes, one `.js`
-   file (`js/nav-config.js`'s `NAV` array). Fixed by moving that data out
+   file (`js/nav/nav-config.js`'s `NAV` array). Fixed by moving that data out
    of JavaScript entirely into `nav-config.json` — a plain JSON file,
-   editable the same way `i18n/*.json` already is. `js/nav-config.js` now
+   editable the same way `i18n/*.json` already is. `js/nav/nav-config.js` now
    only holds the *functions* that operate on it (`loadNav`, `langPath`,
    `findNavContext`, etc.), fetched once via `fetch()` like `i18n/*.json`
    already was. Every consumer (`nav-render.js`, `continuous-manual.js`,
@@ -319,7 +319,7 @@ don't choke on a table or figure sitting between headings.
 "A troca de página/menu nos modos sidebar e navbar não está suave e
 consigo ver a página recarregando todos os elementos." Accurate: clicking
 any nav link in those two layouts was, and always had been, a full browser
-navigation — the header/nav/footer chrome (`js/partial-loader.js`) is
+navigation — the header/nav/footer chrome (`js/core/partial-loader.js`) is
 fetched via JS on every page load, so every click blanked the whole page
 and re-fetched identical chrome. `scroll` layout never had this problem
 (its nav is all in-page anchors), which is presumably why it wasn't
@@ -381,7 +381,7 @@ Three reports right after round 9 shipped soft navigation:
 1. **The fade felt like a delay, and blocked feeling "clickable" for a
    moment.** Removed entirely — `css/base.css`'s `.is-transitioning`
    opacity toggle and the `requestAnimationFrame` pair driving it in
-   `js/page-init.js` are gone. The swap is now a plain, instant
+   `js/core/page-init.js` are gone. The swap is now a plain, instant
    `innerHTML` replace.
 2. **Clicking a link sometimes highlighted the previous item instead of
    the one just clicked.** Not actually about highlighting logic (round 9
@@ -418,7 +418,7 @@ including re-clicking the current page's own link). 122 → 134 checks.
 
 "Ao clicar no ícone da logo, ele está voltando para o index.html ao invés
 de voltar para o index do idioma atual." Correct: the header logo/home link
-(`js/page-init.js`) was hard-coded to `pages/menu1/index.html` — a leftover
+(`js/core/page-init.js`) was hard-coded to `pages/menu1/index.html` — a leftover
 from before round 6 added per-language content files — instead of going
 through `langPath()` like every other nav link does. Clicking it from a
 Portuguese page silently dropped you back into English. Fixed with the same
@@ -455,7 +455,7 @@ regress if `css/print.css` and `css/base.css` drift apart again.
 Four related requests in one round:
 
 1. **"Adicione o idioma espanhol."** Added `es` to `LANGS` in
-   `js/brands-config.js`, `i18n/es.json` (chrome strings), a real
+   `js/theme/brands-config.js`, `i18n/es.json` (chrome strings), a real
    `.es.html` sibling for all 7 pages (not just a demo page — every page is
    now fully trilingual), and `"es"` alongside `"pt"` in every `langs`
    array in `nav-config.json`.
@@ -463,7 +463,7 @@ Four related requests in one round:
    idioma por extenso e no próprio idioma."** The dropdown showed `EN`/`PT`
    (`lang.toUpperCase()`). Added `LANG_LABELS` (`{ en: 'English', pt:
    'Português', es: 'Español' }`) next to `LANGS` in `brands-config.js`,
-   used by both the header's dropdown (`js/page-init.js`) and `print.html`'s
+   used by both the header's dropdown (`js/core/page-init.js`) and `print.html`'s
    own brand/language selector.
 3. **"A troca de idiomas faz a página recarregar daquela forma brusca."**
    The language selector did a real `window.location.href` navigation to
@@ -552,7 +552,7 @@ whether page space is well used — especially in `scroll` layout.
      to overuse the primary brand color everywhere.
 2. **Scrollspy left gaps with nothing highlighted.** Separately reported:
    "enquanto eu scrollo existem intervalos em que nenhum dos menus... está
-   selecionado." Root cause: `js/scrollspy.js` used an `IntersectionObserver`
+   selecionado." Root cause: `js/nav/scrollspy.js` used an `IntersectionObserver`
    watching a thin band near the top of the viewport, and only marked a nav
    link active while its *own* heading intersected that band — once a long
    section's heading scrolled past the band, nothing intersected it again
@@ -648,7 +648,7 @@ layout, plus a new layout entirely:
    chapter you're currently inside showing its own submenus as a separate,
    contextual sidebar — a cross between `navbar` and `sidebar`. Implemented
    as `css/layout-hybrid.css` + a dedicated `renderHybridTree()` branch in
-   `js/nav-render.js`.
+   `js/nav/nav-render.js`.
    **A real, reproducible rendering bug found while building this, not a
    CSS mistake to tune away:** the first implementation nested both the
    top-bar list and the contextual sidebar inside the one `<nav id=
@@ -665,7 +665,7 @@ layout, plus a new layout entirely:
    identically, and confirmed working correctly in a minimal isolated
    reproduction *without* the extra nesting level. Root cause isolated by
    bisection, not guesswork. Fixed by giving up on the shared-`<nav>`
-   approach entirely: `js/page-init.js`'s `getHybridSidebarRoot()` creates
+   approach entirely: `js/core/page-init.js`'s `getHybridSidebarRoot()` creates
    the contextual sidebar as a second, genuinely separate element — a real
    sibling of `#site-nav`/`#page-content` inside `.layout-shell`, not nested
    inside either — so both pieces are true, non-promoted grid items and the
@@ -727,14 +727,14 @@ as round 14, this is a subjective/visual class of change.
    selector's change handler forced `state.layout` to that brand's own
    default layout on every switch (`BRANDS[id].layout`), stepping on
    whatever layout the visitor had actually chosen. That field is still
-   meaningful as the *first-visit* default (`js/state.js` `resolveState()`
+   meaningful as the *first-visit* default (`js/core/state.js` `resolveState()`
    already falls back to it only when there's nothing in `localStorage`
    yet) — removed only the *later* forcing behavior from the brand
    selector itself, so switching brands now only swaps theme/logo/favicon.
    A round-9-era test asserted the old (now explicitly unwanted) behavior;
    updated it to assert the new one instead of just deleting the coverage.
 4. **Full-manual search.** "Tem como fazer... independente do layout?" —
-   yes: `js/search.js` builds a small in-memory index by fetching every
+   yes: `js/content/search.js` builds a small in-memory index by fetching every
    page once (the same `fetchLocalizedHTML()` scroll layout/PDF export
    already use), splitting each page's content into sections by heading
    (reusing each `<h2>`'s own hand-authored id — the same ids scroll
@@ -879,7 +879,7 @@ landed, given this round's size — all 3 clean.
    to `localStorage` despite it being read. The next page fell back to the
    default brand (`generic`), whose default layout is `scroll` — so clicking
    any link while in `sidebar` mode looked like it randomly switched to
-   `scroll`. Fixed in `js/page-init.js` / `js/nav-render.js`.
+   `scroll`. Fixed in `js/core/page-init.js` / `js/nav/nav-render.js`.
 2. **Scroll layout wasn't actually continuous.** Each submenu was a full
    separate page load; layout 5 looked identical to the others. Now
    `js/continuous-chapter.js` composes a whole chapter (menu + submenus) on
@@ -902,3 +902,419 @@ landed, given this round's size — all 3 clean.
    scroll layout, before the rest of the chapter composed), shifting the
    page after the initial scroll. Fixed by re-applying the scroll once
    layout settles.
+
+## Round 18 — a web-based generator for a custom white-label manual
+
+The ask: turn this template into something a non-technical brand owner can
+use directly, without cloning the repo or editing a `.js` file at all —
+either browse the existing brand/layout combinations, or build a fully
+custom one (colors, logo, favicon, layout, languages) and walk away with a
+working `.zip`. Still no backend, same philosophy as everything else here:
+plain HTML/CSS/JS, no build step, everything client-side.
+
+`generator.html` (see `docs/generator-plan.md` for the design) is a new,
+separate entry point with two modes sharing one preview `<iframe>`:
+
+- **Ready-made templates** — the real app, unmodified, in an `<iframe>`
+  driven by `?brand=&layout=` on its `src`, exactly like the header's own
+  selectors already work. No new rendering logic needed here at all.
+- **Custom manual** — a form for the 5 required theme colors, corner
+  radius, heading/body font, a logo/favicon upload, product name, one
+  layout, and which extra languages to include (English is always in).
+  Because the preview iframe is same-origin, color/font/product-name edits
+  apply straight to `iframe.contentDocument` — an injected
+  `#custom-theme-preview` `<style>`, the `[data-brand-logo]`/`#favicon-link`
+  elements, and `[data-i18n="product.name"]` — with no reload; only a
+  layout change reloads the iframe (there's no way to change `body.layout-*`
+  from outside without re-running `js/core/page-init.js`, so this one thing was
+  left as a fresh load rather than adding new plumbing for it alone).
+
+Packaging (`js/generator/package/build-package.js`, `js/generator/package/file-manifest.js`)
+follows a "copy everything, override what changes" strategy: every static
+file in the hand-maintained manifest is `fetch()`ed and added to the zip
+(via a vendored `vendor/jszip.min.js`) unmodified, except
+`js/theme/brands-config.js` (regenerated as one `custom` brand/layout, no
+switcher), `themes/theme-custom.css` (generated from
+`themes/theme-generic.css` with the chosen values substituted in),
+`i18n/*.json` (only the selected languages, `product.name` replaced),
+`nav-config.json` (each item's `langs` filtered to what was picked), the
+uploaded logo/favicon bytes, and a freshly generated `README.md`. Everything
+not touched by a given selection (the other two brands' theme/logo files,
+the three unused `layout-*.css` files) still ships in the zip unmodified —
+inert but harmless, and far simpler than rewriting `<link>` tags across 21
+static pages just to trim them out.
+
+Two small, genuinely reusable generalizations landed in `js/core/page-init.js`
+alongside this: the header's brand selector now hides itself when `BRANDS`
+has only one entry, and the layout selector when `LAYOUTS` has only one —
+gated on `length <= 1`, so today's 3-brand/4-layout build is unaffected,
+but a generated single-brand/single-layout manual (or a hand-edited
+single-brand fork, see "Single-brand build" in `README.md`) no longer shows
+a pointless one-option dropdown.
+
+Validated three ways: (1) headless-browser checks in
+`tests/smoke.test.mjs` driving `generator.html` itself — Mode A's selectors
+reload the iframe with the right brand/layout, Mode B's color and
+product-name edits apply to the SAME iframe document (a `window.__marker`
+stashed on `iframe.contentDocument.defaultView` survives every edit, the
+same no-reload proof the soft-nav tests elsewhere in this suite use); (2)
+`buildManualZip()` called directly and checked for a plausibly-sized zip
+`Blob`; (3) manually generating a zip end-to-end (2 languages, `navbar`
+layout, a custom logo/favicon), extracting it, and loading it in a real
+headless browser as its own static site — confirmed the custom logo/
+favicon/product name applied, only `en`/`es` in the language dropdown, no
+`pt.html` files present, both the brand and layout selectors hidden (single
+option each), `body.layout-navbar` applied with no selector to change it,
+and zero console errors. 171 → 177 checks.
+
+## Round 19 — generator layout: not responsive, wrong feature got top billing
+
+Two user-reported problems with the round-18 `generator.html` layout: "A
+tela não está muito responsiva. Você colocou os gradientes de cores lá na
+direita e eles são cortados pelo fim da tela" (the color pickers were
+getting cut off at the viewport edge), and the priority was backwards —
+the live preview should be for the manual actually being customized, side
+by side with the form, and "ready-made templates" (a secondary feature)
+was taking equal billing via a tab instead of getting out of the way.
+
+Root cause of the cut-off: `.generator-body`'s CSS Grid columns had no
+`min-width: 0` on their items, so each track sized itself to its content's
+default automatic minimum instead of actually shrinking — on a narrower
+window the grid's total intrinsic width exceeded the viewport and the
+whole layout overflowed sideways rather than reflowing, with the Colors
+fieldset's `justify-content: space-between` rows (label pinned left, swatch
+pinned right) the most visibly affected. Fixed with a universal `min-width:
+0` reset plus `minmax(0, …)` tracks instead of a hard pixel floor. The
+color swatches themselves also got restructured from one full-width row
+each to a wrapping `repeat(auto-fit, minmax(...))` grid with the label
+above the swatch instead of beside it — a row layout has no room to shrink
+before truncating a label like "Secondary"/"Background"; a column one just
+reflows to fewer per row.
+
+Restructured the whole page to fix the priority problem directly rather
+than just re-styling the same information architecture: removed the
+tab/panel pair entirely. The custom-manual form + its live preview
+`<iframe>` (already side by side) are now the page's only main content, no
+click needed to reach them. "Ready-made templates" moved into a `<dialog>`
+opened from a small corner button in the header — its own brand/layout
+`<select>`s and its own separate preview `<iframe>`, lazily pointed at a
+page only once the dialog is first opened, closable via an ✕ button, its
+own Escape key (free, native `<dialog>` behavior), or a backdrop click
+(hit-tested against the dialog's own rect, the standard way to tell a
+backdrop click from a content click on an element with no separate
+backdrop node to listen on).
+
+Validated with `tests/smoke.test.mjs`: a direct `scrollWidth <=
+innerWidth` check at a 375px viewport (the concrete mechanism behind "cut
+off", not a screenshot); the custom-manual live-preview checks from round
+18 adapted to no longer need a tab click first; and a new check that
+opening/using the templates dialog never touches the custom-manual
+builder's own preview `<iframe>` underneath (compares its `src` before and
+during), plus that the dialog actually opens and closes. Also checked
+manually with real screenshots at 1440/1024/768/375px widths — no
+overflow at any of them, and the color-swatch labels are fully legible at
+every width instead of truncating. 177 → 179 checks.
+
+## Round 20 — generator: translatable UI, font previews, single scroll, no redundant dropdowns, and a real answer on templates
+
+Five separate pieces of feedback on the round-19 `generator.html`, tackled
+together since several touch the same files:
+
+1. **The generator's own UI had no language switcher.** Its labels/buttons/
+   status text are all fixed strings, exactly the shape `i18n/*.json` +
+   `js/core/i18n.js` already solve for the manuals themselves — so this reused
+   that pattern rather than inventing a new one, just pointed at a
+   *different* dictionary set: `i18n/generator-en.json` /
+   `-pt.json` / `-es.json` (a new small loader, `js/generator/i18n.js`,
+   since these keys describe this tool's own form fields, not a manual's
+   chrome, and deliberately live outside `js/generator/package/file-manifest.js` —
+   they must never end up inside a generated `.zip`). A `<select>` in the
+   header switches it live and persists the choice to `localStorage`
+   (`generator-lang`), shared with `templates.html` below so both pages
+   stay in the same language without a query string.
+2. **Font dropdown options now render IN their own font** (`option.style.
+   fontFamily = stack.value` at creation) — picking "Classic Serif" shows
+   you a serif right there in the closed list, not just a name. Also added
+   an actual answer to "posso importar minha própria fonte": an "Upload
+   your own font…" entry per field (heading/body independently) that
+   reveals a file input; the upload previews live via a `data:`-URL
+   `@font-face` rule injected into the iframe (`applyCustomFontFaces`,
+   `js/generator/theme/preview.js`) and, at download time, gets embedded as a
+   real font file (`assets/font-{heading,body}-custom.<ext>`) with its own
+   `@font-face` block prepended to the generated `theme-custom.css` — a
+   real asset, not a giant data URI baked into the CSS, so the shipped
+   theme file stays as plain and editable as every other one.
+3. **Double scroll on desktop.** `.generator-controls` and `.generator-
+   preview` already scrolled independently (round 19), but the *page*
+   could still grow taller than the viewport around them (mainly once the
+   language `<select>` widened the header) and pick up its own scrollbar
+   on top — two nested scrollbars fighting each other. Restructured `body`
+   into a column flex box pinned to `height: 100%` with `overflow: hidden`
+   — the header takes its natural height, `.generator-body` gets exactly
+   what's left (`flex: 1 1 auto; min-height: 0`), and only the two panels
+   inside it scroll. Below 960px this reverts to a normal scrolling page
+   instead: once the two panels stack instead of sitting side by side,
+   there's no shared viewport budget to protect, and forcing every stacked
+   section into its own fixed-height scroll box on a small screen is worse
+   than one ordinary page scroll — the concrete answer to "não sei como
+   resolver isso no mobile".
+4. **The previewed manual's own brand/layout dropdowns were redundant.**
+   The generator's controls (the form's radio group, or `templates.html`'s
+   own `<select>`s) already pick both from outside — showing the *same*
+   choice a second time, inside the iframe's own header, just invited
+   confusion about which control actually did anything. `preview.js` grew
+   `hidePreviewChromeSelectors()`, an injected `<style>` targeting
+   `#brand-selector-wrap`/`#layout-selector-wrap` by id (the layout one
+   didn't have an id yet — added it to `partials/header.html`, and
+   simplified `js/core/page-init.js`'s own single-layout-hiding check to match
+   instead of a `.closest()` walk). Confirmed the custom-manual preview
+   already defaulted to the generic brand and the form's own default
+   layout (`sidebar`) — that part just needed the redundant dropdown gone,
+   not new default logic.
+5. **The ready-made-templates modal itself.** Talked through options with
+   the user (new tab / bigger modal / side drawer / inline accordion) —
+   landed on a dedicated page, `templates.html`, opened in a new tab. No
+   overlay sizing to fight, the custom-manual form's state in the original
+   tab is completely untouched by it, and browsing templates reuses the
+   exact same `setPreviewSrc()`/hidden-chrome-dropdown machinery as the
+   main builder's own preview. The corner CTA is now a plain `<a href=
+   "templates.html" target="_blank">` — no JS needed for it at all.
+
+Validated with `tests/smoke.test.mjs`: preview defaults (brand=generic,
+layout=sidebar) and both hidden dropdowns checked via `getComputedStyle`
+on the iframe's own DOM; `getComputedStyle(document.body).overflow ===
+'hidden'` as the direct mechanism check for "no page-level scroll on
+desktop"; a language switch checked three ways (translated `<h1>` text,
+persisted `localStorage` key, and survives a reload) plus a translated
+`<option>` to confirm static `data-i18n` markup keeps working under the
+new dictionary; a font `<option>`'s own `style.fontFamily`; and
+`templates.html` re-tested standalone (defaults, brand/layout switching,
+hidden dropdowns, the back link) now that it's a real page instead of
+`<dialog>` markup. Packaging got a new check that an uploaded custom font
+actually lands as a real zip asset with a matching `@font-face` rule and
+that `--font-heading` points at it. Also checked manually with real
+screenshots: the custom-font file input appearing/disappearing with the
+dropdown choice, the previewed manual's header showing only Language +
+Download PDF (no more Brand/Layout) in both `generator.html` and
+`templates.html`, and a full-page mobile screenshot confirming the
+single-scroll fallback reads naturally stacked, no broken inner scroll
+boxes. 179 → 196 checks.
+
+## Round 21 — PDF export from the live preview, color hints, and two real races
+
+Four more pieces of feedback on the generator, plus a mid-round addition:
+
+1. **"Download PDF" from inside the live preview only ever exported the
+   generic brand.** Root cause: `print.html` is a completely separate
+   navigation, reading brand/theme from `js/theme/brands-config.js`'s real
+   `BRANDS` map — it has no way to know about a custom theme that only ever
+   existed as `generator.html`'s own in-memory form state. Fixed by
+   intercepting the click (both the header button and the footer link,
+   same-origin so reachable from `js/generator/ui.js`) in the CAPTURE phase
+   on the iframe's own `document` — capture vs. bubble only changes
+   propagation order between different elements, not between two listeners
+   on the exact same node, so a listener on the button itself couldn't have
+   run before `js/core/page-init.js`'s own — and stashing the current theme into
+   `sessionStorage` before opening `print.html?generatorPreview=1` in a new
+   tab (session storage is shared with a same-origin tab opened via
+   `window.open()`). `js/print/print-builder.js` grew a small, purely additive
+   `overrides` parameter to `buildAndPaginate()` — `undefined` on every
+   normal call, including every PDF export inside a *generated* manual
+   (that file ships there too — see `js/generator/package/file-manifest.js` — so it
+   deliberately does NOT import anything from `js/generator/*`, which isn't
+   part of that copy, to avoid a 404 on a path that would otherwise always
+   exist in the tool but never in its output).
+2. **No indication of which elements a color actually affects.** Added a
+   small ⓘ hint (native `title` tooltip, focusable) next to each of the 5
+   color fields, naming the elements it controls (mirrors the "Used for"
+   column in `themes/theme-schema.md`'s own base-palette table) —
+   translated in all 3 UI languages like everything else in the generator.
+3. **The previewed manual's own language dropdown always showed all 3
+   languages**, regardless of which ones were actually checked in the
+   generator's own Languages section. Added `filterPreviewLanguages()`
+   (`js/generator/theme/preview.js`): hides the un-checked `<option>`s inside the
+   iframe's own `#lang-selector` (live, no reload — wired to both the
+   checkboxes' `change` and the preview's readiness signal), and falls back
+   the previewed language to English through the select's own existing
+   `change` handler if the language currently showing got deselected.
+4. **Logo/favicon were required, blocking the download if skipped.** Made
+   both genuinely optional: `buildManualZip()` now falls back to this
+   template's own `assets/logos/generic.svg` /
+   `assets/favicons/generic.svg` (already in the zip either way) for
+   whichever one wasn't uploaded — `logo`/`favicon` in the regenerated
+   `js/theme/brands-config.js` and `--logo-url` in the generated
+   `theme-custom.css` just point at that path instead of a
+   `logo-custom.<ext>` that was never written. Every other customization
+   made still applies regardless.
+
+Two real races surfaced while validating #1 and testing a layout switch
+with a live customization applied:
+
+- **The iframe's `'load'` event fires before `js/core/page-init.js`'s own async
+  `initPage()` chain is actually done** — `waitForPreviewReady()`
+  (introduced this round) originally polled only for the nav tree's own
+  links, reasoning that `renderNav()` runs right after the first
+  `applyTranslations()` call resolves. That's true, but incomplete:
+  `js/core/page-init.js`'s `syncPrintFallback()` kicks off building the hidden
+  `#print-manual` fallback in the background and, once that's done (it
+  fetches every other page), calls `applyTranslations()` a SECOND time —
+  which was clobbering a product-name override applied right after the nav
+  tree first appeared, later than that alone suggested was safe (colors
+  were never affected, since nothing else in `initPage()` touches the CSS
+  variables). Root-caused with a debug build that logged every call to
+  `applyProductName()` and its match count over time, confirming a second,
+  later call reset the DOM back to the dictionary default. Fixed by also
+  waiting for `#print-manual[data-ready="true"]` (already the concrete
+  "the fallback build finished" signal `js/print/print-fallback.js` sets, and
+  reused elsewhere in `tests/smoke.test.mjs`) before applying anything —
+  'scroll' layout, which never builds a fallback at all, is exempted from
+  that half of the check.
+- **A `waitForFunction` polling `doc.body.classList` can throw** if it
+  happens to run in the narrow window where a new document exists (mid
+  cross-navigation) but hasn't parsed a `<body>` yet — and this
+  environment's Puppeteer doesn't reliably keep polling past an exception
+  thrown by the predicate, so the whole wait can hang all the way to
+  timeout even though the condition becomes true a moment later. Found via
+  a battery of isolated repro runs (deterministic reproduction takes ~5-10
+  iterations) that logged every network request and the DOM's actual final
+  state on failure: the state was already correct by the time the *next*
+  `page.evaluate()` checked it, and a stray `PAGEERROR: Cannot read
+  properties of null (reading 'classList')` pinned down the exact
+  mechanism. Fixed by guarding every such check with `doc.body &&` before
+  `.classList`, in both `tests/smoke.test.mjs` and this round's own new
+  checks — `js/generator/theme/preview.js`'s own `waitForPreviewReady()` already
+  had this guard from the start.
+
+Validated with `tests/smoke.test.mjs`: the PDF-from-preview fix checked via
+`browser.once('targetcreated', ...)` to catch the popup, confirming both
+the header button and the footer link produce a PDF with the custom
+color/product name AND that the footer link opens a new tab rather than
+navigating the preview iframe itself away (its old, broken behavior); the
+layout-switch race re-checked end-to-end (color AND product name survive a
+real layout switch, not just a same-load edit); the language filter checked
+by reading `<option>.hidden` before/after checking Português; the color
+hints checked via their `title` attribute text. 196 → 216 checks (6 net new
+behaviors + 3 straightforward assertions each, on average).
+
+## Round 22 — per-language folders, minimal packaging, a real landing page, granular colors, deploy
+
+A large structural pass across nine linked pieces of feedback, in dependency
+order (each phase verified independently with throwaway Puppeteer scripts
+before moving to the next, since the test suite itself needed rewriting last
+— its ~110 hardcoded path literals were exactly what phase 1 broke):
+
+1. **Per-language folders, not `.pt.html`/`.es.html` siblings.** Scheme:
+   `pages/<menu>/<lang>/<page>.html`, English included (uniform depth
+   everywhere). `nav-config.json`'s `path` became a `{lang}` template;
+   `js/nav/nav-config.js`'s `langPath()` substitutes it, and `stripLangSuffix()`
+   was replaced by `canonicalizePagePath()` — needed for more than the
+   folder move: it also normalizes the URL shapes a real static host's own
+   routing produces (`/foo` instead of `/foo.html`, `/dir/` instead of
+   `/dir/index.html` — see point 8). 21 files moved via `git mv`, every
+   in-body cross-link rewritten to match its own containing file's
+   language, not just its depth — a language-mismatched link is exactly the
+   kind of bug that fails silently, no console error, only caught by
+   actually clicking through pt/es pages.
+2. **Generator/manual physical separation.** `generator.html`/`css/
+   generator.css`/`i18n/generator-<lang>.json` moved into a `generator/`
+   folder (`generator/index.html`, `generator/css/generator.css`,
+   `generator/i18n/<lang>.json`); `js/generator/*.js` stayed where it was
+   (already the right boundary). Done in two steps on purpose: first made
+   every document-relative `fetch()`/`new URL()` in `js/generator/*.js`
+   resolve via a new `js/generator/paths.js` (`rootUrl()`, same
+   `import.meta.url` trick `js/nav/nav-config.js` already uses), verified with
+   the full suite, *then* moved the files — doing it in one step would have
+   made a real path bug indistinguishable from every other change landing
+   at once.
+3. **`index.html` is now the tool's own landing page** — two big linked
+   panels, "build your own manual" / "browse ready-made templates" — not a
+   manual redirector. That redirector didn't disappear: `build-package.js`
+   now *generates* a manual's own `index.html` at download time
+   (`buildManualIndexHtml()`), removed from the manifest and re-added as a
+   generated file in the same change (a zip with no entry point is a
+   silent, only-visible-after-unzipping failure).
+4. **Minimal downloaded package.** `js/generator/package/file-manifest.js` went
+   from one flat "copy everything" list to categories (`CORE_FILES` always
+   shipped, `LAYOUT_CSS`/`I18N_FILES` keyed by selection, `FALLBACK_LOGO`/
+   `FALLBACK_FAVICON`), and the manual's own pages are now *derived* from
+   `nav-config.json` + selected languages instead of hand-listed (can't
+   drift out of sync). `buildManualZip()` fetches only the one chosen
+   layout's CSS, the one generated theme, and one logo/favicon under a
+   fixed `assets/{logo,favicon}-custom.<ext>` name regardless of whether
+   anything was actually uploaded (the generic-brand bytes get re-saved
+   under that name otherwise, so `brands-config.js`/`theme-custom.css`
+   never branch on upload-or-not). The real risk here was leaving pages
+   with dead `<link>`s to files the zip no longer ships — `rewriteManualPage()`
+   strips the unused layout `<link>`s and repoints the theme/favicon
+   `<link>`s using each `<link>`'s own existing relative-path prefix as a
+   regex capture group, so it works unmodified whether it's rewriting a
+   `pages/**/*.html` file (3 levels deep) or `print.html` (project root).
+   Verified by actually unzipping a built manual to disk and loading it
+   from a second, independent static server — the only way to catch a
+   missing-file 404 that a JS-level check on the zip's file list wouldn't.
+5. **Granular per-component colors.** The CSS already had
+   `--color-header-bg`/`--color-sidebar-bg`/`--color-footer-bg`/`--color-nav-link-*`/
+   `--color-submenu-*` wired into `base.css`/`layout-*.css` with sane
+   fallback chains — just never surfaced in the generator UI, and never
+   written by `buildThemeCustomCss()`. One real gap: `body.layout-navbar
+   .site-nav` had no background wiring at all (its top bar just inherited
+   the plain page background). "Topbar" turned out to mean "the header"
+   in the user's own words, not a new independent concept — so instead of
+   inventing a new CSS variable, `--color-header-bg` was simply extended to
+   also cover `layout-navbar`'s own top bar. New "Advanced colors"
+   `<details>` section: each row is an Auto checkbox (seeded from, and
+   re-seeded live from, the matching base color) + a swatch, disabled while
+   Auto — an Auto row is *omitted* from emitted CSS entirely rather than
+   sent with its seeded value, so the existing fallback chains keep doing
+   the work instead of a hard-coded value that just happens to match today.
+   `--color-accent` stayed unwired to any selector (all 3 shipped themes
+   already use saturated values for it — wiring it now would visibly change
+   Intelbras/Marca B) but moved into the advanced section with an honest
+   relabeled hint. `buildThemeCustomCss()` appends non-auto component vars
+   as a second, separate `:root { }` rule rather than regex-patching them
+   into the template — the template's own component-color block lives
+   inside a CSS *comment*, so an in-place edit would have generated text
+   that still looked commented out.
+6. **First-visit "use a bigger screen" modal**, `generator/index.html`
+   only, shown once ever (narrow viewport OR coarse pointer, dismissal
+   persisted to `localStorage`) — no existing modal pattern anywhere in the
+   project to reuse, built from scratch as a fixed-position overlay.
+7. **Site credit footer** ("made by Andrey · andreyrosa.dev") on the
+   landing page, `generator/index.html`, and `generator/templates.html` —
+   explicitly *not* touching `partials/footer.html`, which ships inside
+   every generated manual; the one thing this whole round couldn't ever do
+   is leak the tool author's name into a user's own downloaded manual.
+8. **Cloudflare Pages deploy.** `_headers` (long-cache immutable for
+   `assets/`/`vendor/`) and `_redirects` (301s for the pre-reorg
+   `/generator.html`/`/templates.html` URLs) added at the repo root — both
+   absent from `CORE_FILES`, so neither ships in a generated manual. The
+   one real gotcha, and the reason `canonicalizePagePath()` needed to do
+   more than the folder-move rename: Cloudflare Pages canonicalizes
+   `/foo.html` → `/foo` and `/dir/index.html` → `/dir/`, which would
+   otherwise silently break active-nav-highlighting and the language
+   switch in production while passing every local test (the dev/test
+   server doesn't perform that redirect) — `canonicalizePagePath()` now
+   normalizes both shapes back to the same nav item, and the test suite's
+   own static server was taught to resolve any trailing-slash path to that
+   directory's `index.html`, matching real host behavior.
+9. **Test suite.** `tests/smoke.test.mjs` needed its ~110 hardcoded
+   `/pages/menuN/...`/`.pt.html`/`.es.html`/`generator.html`/`templates.html`
+   path literals swept to the new scheme (mechanical, via targeted regex
+   passes — the file has no central path-abstraction layer), the packaging
+   tests (19/19b) rewritten from a `size > 50000` proxy check to actual
+   content-set assertions (exact one layout CSS, one theme, no unselected
+   brand's logo/favicon/theme files, generated `index.html` present), and
+   5 new test sections added for the landing page, `canonicalizePagePath()`
+   (unit-style, all 4 URL shapes), advanced/component colors (toggle
+   Auto off/on live + in the built zip), the desktop-hint modal (shows
+   once, persists, absent on the other two tool pages), and the credit
+   footer (present on all 3 tool pages, explicitly absent from the manual's
+   own footer partial). One incidental fix along the way: `print.html`'s
+   "back to manual" link used to be the literal `index.html` — correct back
+   when that file *was* the manual's own redirector, silently wrong once
+   `index.html` became the landing page (would send a PDF export's "back"
+   link to the tool's marketing page instead of the manual). Changed to
+   point directly at `pages/en/menu1/index.html`, which is simultaneously
+   more correct for the source repo's own deployed site and for every
+   generated manual (which always ships `en`) — no indirection through a
+   redirector needed either way. 216 → 247 checks, 3 consecutive clean runs.

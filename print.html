@@ -45,7 +45,7 @@
       <select id="lang-selector"></select>
     </label>
     <span id="status">Building document…</span>
-    <a id="back-to-manual" href="index.html" data-i18n="print.backToManual">Back to manual</a>
+    <a id="back-to-manual" href="pages/en/menu1/index.html" data-i18n="print.backToManual">Back to manual</a>
   </div>
 
   <!-- Assembled here (cover + TOC + every chapter, in nav-config.js order),
@@ -55,12 +55,12 @@
   <div id="output"></div>
 
   <script type="module">
-    import { BRANDS, LANGS, LANG_LABELS } from './js/brands-config.js';
-    import { resolveState } from './js/state.js';
-    import { buildAndPaginate } from './js/print-builder.js';
+    import { BRANDS, LANGS, LANG_LABELS } from './js/theme/brands-config.js';
+    import { resolveState } from './js/core/state.js';
+    import { buildAndPaginate } from './js/print/print-builder.js';
 
     // Defaults to whatever brand/language the visitor is currently
-    // browsing the manual in (see js/state.js) — a plain "Download as PDF"
+    // browsing the manual in (see js/core/state.js) — a plain "Download as PDF"
     // link with no query string still produces the right document.
     const initial = resolveState();
     const brandSelect = document.getElementById('brand-selector');
@@ -76,6 +76,23 @@
     brandSelect.value = initial.brand;
     langSelect.value = initial.lang;
 
+    // Only ever set right before generator/index.html's live preview opens this
+    // page (see js/generator/ui.js interceptPdfLinks()) — sessionStorage,
+    // not a query param, since a full color/font/logo/font-face payload is
+    // too big and awkward for a URL; ?generatorPreview=1 just says whether
+    // to actually look for it. Left in place rather than one-shot-cleared:
+    // switching brand/lang here does a full reload (regenerate() below),
+    // and that reload keeps ?generatorPreview=1 in its URL, so the
+    // customization needs to still be readable afterwards too.
+    let overrides = null;
+    if (new URLSearchParams(window.location.search).get('generatorPreview') === '1') {
+      try {
+        overrides = JSON.parse(sessionStorage.getItem('generator-preview-override'));
+      } catch {
+        overrides = null;
+      }
+    }
+
     function regenerate() {
       const url = new URL(window.location.href);
       url.searchParams.set('brand', brandSelect.value);
@@ -89,6 +106,7 @@
       sourceEl: document.getElementById('source'),
       outputEl: document.getElementById('output'),
       statusEl: document.getElementById('status'),
+      overrides,
     }).then((translations) => {
       // The browser's native print header/footer (when enabled) shows
       // document.title — brand it instead of leaving the generic
@@ -96,7 +114,7 @@
       document.title = `${translations['product.name'] || ''} — ${translations['print.subtitle'] || ''}`.trim();
 
       // Opened via the header's one-click "download PDF" button
-      // (js/page-init.js): skip straight to the browser's print dialog
+      // (js/core/page-init.js): skip straight to the browser's print dialog
       // instead of making the visitor press Ctrl+P themselves once ready.
       if (new URLSearchParams(window.location.search).get('autoprint') === '1') {
         window.print();

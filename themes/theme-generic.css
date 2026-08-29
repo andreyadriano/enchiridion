@@ -6,7 +6,6 @@
   /* --- Base palette (required) --- */
   --color-primary: #2b6cb0;   /* links, active menu item, buttons, accents */
   --color-secondary: #edf2f7; /* borders, subtle backgrounds */
-  --color-accent: #38a169;    /* optional second accent color, free to use */
   --color-text: #1a202c;      /* body and heading text */
   --color-bg: #ffffff;        /* page background */
   --font-heading: system-ui, sans-serif; /* h1/h2/h3, product name */
@@ -19,7 +18,7 @@
      Left alone, each one falls back to a combination of the base palette
      above, so you only need to touch the ones you actually want to change.
 
-  --color-header-bg: var(--color-bg);              # top header bar
+  --color-header-bg: var(--color-bg);              # top header bar (also the top "topbar" bar in navbar/hybrid layouts)
   --color-footer-bg: var(--color-bg);              # footer
   --color-sidebar-bg: var(--color-bg);             # sidebar / scroll-layout nav column
   --color-nav-link-text: var(--color-text);        # menu/submenu link text (normal)
@@ -27,7 +26,17 @@
   --color-nav-link-text-hover: var(--color-text);    # menu/submenu link text (hover)
   --color-nav-link-bg-active: var(--color-secondary); # menu/submenu link background (selected)
   --color-nav-link-text-active: var(--color-primary); # menu/submenu link text (selected)
-  --color-submenu-bg: var(--color-bg);             # dropdown submenu panel background (navbar layout)
-  --color-submenu-border: var(--color-secondary);  # dropdown submenu panel border (navbar layout)
+  --color-search-results-bg: var(--color-bg);             # header search results panel background
+  --color-search-results-border: var(--color-secondary);  # header search results panel border
+  --color-search-results-hover-bg: var(--color-secondary); # search result highlight on hover/focus
+  --color-control-bg: #ffffff;                     # search box and header selects background
+  --color-border: var(--color-secondary);          # thin dividing lines: under header, above footer, around fields/images, sidebar columns
+  --color-table-border: var(--color-border);       # spec/comparison table cell borders
+  --color-table-header-bg: var(--color-secondary); # spec/comparison table header row background
+  --color-callout-note: #2b6cb0;    # "Note" callout border/title color
+  --color-callout-tip: #2f855a;     # "Tip" callout border/title color
+  --color-callout-caution: #8a6512; # "Caution" callout border/title color
+  --color-callout-warning: #a34e12; # "Warning" callout border/title color
+  --color-callout-danger: #c53030;  # "Danger" callout border/title color
   */
 }

@@ -26,7 +26,7 @@ body.layout-hybrid .layout-shell {
 body.layout-hybrid .site-nav {
   grid-row: 1;
   grid-column: 1 / -1;
-  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+  border-bottom: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   padding: 0.5rem 1.5rem;
   background: var(--color-header-bg, var(--color-bg, #ffffff));
 }
@@ -60,7 +60,7 @@ body.layout-hybrid .hybrid-sidebar {
   top: var(--header-height);
   max-height: calc(100vh - var(--header-height));
   overflow-y: auto;
-  border-right: 1px solid var(--color-secondary, #e5e5e5);
+  border-right: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   padding: 1.5rem 1rem;
   background: var(--color-sidebar-bg, var(--color-bg, #ffffff));
 }

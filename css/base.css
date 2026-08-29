@@ -49,6 +49,16 @@ a {
   color: var(--color-primary, #0057b8);
 }
 
+/* Keyboard-only focus ring, consistent across every interactive element
+   that doesn't already define its own (more specific rules below win). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-primary, #0057b8);
+  outline-offset: 2px;
+}
+
 .skip-link {
   position: absolute;
   width: 1px;
@@ -57,9 +67,9 @@ a {
   clip: rect(0 0 0 0);
   z-index: 100;
   padding: 0.6rem 1rem;
-  background: var(--color-bg, #fff);
+  background: var(--color-control-bg, #ffffff);
   color: var(--color-primary, #0057b8);
-  border: 1px solid var(--color-secondary, #ccc);
+  border: 1px solid var(--color-border, var(--color-secondary, #ccc));
   border-radius: var(--border-radius, 4px);
 }
 
@@ -77,7 +87,7 @@ a {
   height: var(--header-height);
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+  border-bottom: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   padding: 0 1.5rem;
   position: sticky;
   top: 0;
@@ -133,9 +143,9 @@ a {
 .header-control select {
   font-family: var(--font-body, sans-serif);
   padding: 0.25rem 0.5rem;
-  border: 1px solid var(--color-secondary, #ccc);
+  border: 1px solid var(--color-border, var(--color-secondary, #ccc));
   border-radius: var(--border-radius, 4px);
-  background: var(--color-bg, #fff);
+  background: var(--color-control-bg, #ffffff);
   color: var(--color-text, #1a1a1a);
   cursor: pointer;
 }
@@ -154,9 +164,9 @@ a {
   font-size: 0.85rem;
   width: 220px;
   padding: 0.3rem 0.6rem;
-  border: 1px solid var(--color-secondary, #ccc);
+  border: 1px solid var(--color-border, var(--color-secondary, #ccc));
   border-radius: var(--border-radius, 4px);
-  background: var(--color-bg, #fff);
+  background: var(--color-control-bg, #ffffff);
   color: var(--color-text, #1a1a1a);
 }
 
@@ -172,8 +182,8 @@ a {
   width: 360px;
   max-height: 70vh;
   overflow-y: auto;
-  background: var(--color-submenu-bg, var(--color-bg, #fff));
-  border: 1px solid var(--color-submenu-border, var(--color-secondary, #e5e5e5));
+  background: var(--color-search-results-bg, var(--color-bg, #fff));
+  border: 1px solid var(--color-search-results-border, var(--color-secondary, #e5e5e5));
   border-radius: var(--border-radius, 4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
   z-index: 30;
@@ -184,7 +194,7 @@ a {
   padding: 0.5rem 0.75rem;
   text-decoration: none;
   color: var(--color-text, #1a1a1a);
-  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+  border-bottom: 1px solid var(--color-search-results-border, var(--color-secondary, #e5e5e5));
 }
 
 .search-result:last-child {
@@ -193,7 +203,7 @@ a {
 
 .search-result:hover,
 .search-result:focus {
-  background: var(--color-nav-link-bg-hover, var(--color-secondary, #f2f2f2));
+  background: var(--color-search-results-hover-bg, var(--color-secondary, #f2f2f2));
 }
 
 .search-result-page {
@@ -230,7 +240,7 @@ a {
   border: 1px solid var(--color-primary, #0057b8);
   border-radius: var(--border-radius, 4px);
   background: var(--color-primary, #0057b8);
-  color: var(--color-bg, #fff);
+  color: #ffffff;
   cursor: pointer;
 }
 
@@ -271,6 +281,109 @@ a {
   max-width: 900px;
 }
 
+/* ---------- Breadcrumb + prev/next chapter links ---------- */
+/* Both rendered by js/nav/page-trail.js as the first/last child of
+   .page-content, straight from nav-config.json — never in 'scroll' layout,
+   where the whole manual is already one continuous page. */
+.page-breadcrumb {
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.breadcrumb-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb-list li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-list li:not(:last-child)::after {
+  content: '/';
+  margin: 0 0.5rem;
+  color: var(--color-border, var(--color-secondary, #ccc));
+}
+
+.breadcrumb-list a {
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.65;
+  text-decoration: none;
+}
+
+.breadcrumb-list a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.breadcrumb-current {
+  font-weight: 600;
+}
+
+.page-pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
+}
+
+.page-pager-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  max-width: 45%;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--border-radius, 4px);
+  text-decoration: none;
+  color: var(--color-text, #1a1a1a);
+}
+
+.page-pager-link:hover {
+  background: var(--color-secondary, #f2f2f2);
+}
+
+.page-pager-next {
+  text-align: right;
+  margin-left: auto;
+}
+
+.page-pager-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.page-pager-title {
+  font-weight: 600;
+  color: var(--color-primary, #0057b8);
+}
+
+/* ---------- Content-type label (Diátaxis: tutorial / how-to / reference /
+   explanation) ---------- */
+/* One per page (right before the <h1>) for a page that's one type
+   throughout, or one per <h2> for a page that mixes types (see
+   pages/en/menu3/submenu1.html for both patterns in the same template). */
+.content-type-label {
+  display: inline-block;
+  margin: 0 0 0.4rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--border-radius, 4px);
+  border: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.7;
+}
+
 /* 'hybrid' layout's contextual sidebar (see css/layout-hybrid.css /
    js/page-init.js's getHybridSidebarRoot()) — created once and left in the
    DOM even when a different layout is active, so hidden by default here;
@@ -298,14 +411,14 @@ a {
 
 .spec-table th,
 .spec-table td {
-  border: 1px solid var(--color-secondary, #e5e5e5);
+  border: 1px solid var(--color-table-border, var(--color-border, var(--color-secondary, #e5e5e5)));
   padding: 0.5rem 0.75rem;
   text-align: left;
   vertical-align: top;
 }
 
 .spec-table thead th {
-  background: var(--color-secondary, #f2f2f2);
+  background: var(--color-table-header-bg, var(--color-secondary, #f2f2f2));
   font-weight: 700;
 }
 
@@ -331,7 +444,7 @@ a {
 .manual-figure img {
   max-width: 100%;
   height: auto;
-  border: 1px solid var(--color-secondary, #e5e5e5);
+  border: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   border-radius: var(--border-radius, 4px);
 }
 
@@ -342,12 +455,142 @@ a {
   opacity: 0.75;
 }
 
-/* ---------- Callouts (note / tip / warning / danger) ---------- */
+/* Numbered parts legend for a diagram whose numbers are baked into the
+   image itself (see assets/example-product-rear.svg) — the classic
+   hardware-manual "① Label  ② Label" key below a labeled illustration. */
+.manual-figure-legend {
+  list-style: none;
+  margin: 0.75rem auto 0;
+  padding: 0;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.35rem 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.manual-figure-legend li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.manual-figure-legend .legend-number {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 50%;
+  background: var(--color-primary, #0057b8);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* ---------- Alphabetical index (browse by term, not by chapter) ---------- */
+.az-index {
+  columns: 2;
+  column-gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.az-index-group {
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+}
+
+.az-index-letter {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary, #0057b8);
+  border-bottom: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.15rem;
+}
+
+.az-index-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.az-index-group li {
+  padding: 0.2rem 0;
+}
+
+/* ---------- Embedded video (install walkthroughs, config demos) ---------- */
+/* Not used by this template's own demo content — embedding a real video
+   would mean either a fabricated external URL (breaks offline/print) or a
+   binary asset this repo has no way to generate — but the responsive
+   wrapper is real and ready: point an <iframe> or <video> at whatever a
+   manual actually has (self-hosted file or an already-approved host) and
+   it fills the box below at a fixed 16:9 ratio, no layout shift.
+   <div class="manual-video"><iframe src="…" title="…" allowfullscreen></iframe></div> */
+.manual-video {
+  position: relative;
+  margin: 1.5rem 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius, 4px);
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.manual-video iframe,
+.manual-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------- Downloadable attachments (datasheets, diagrams, firmware) --- */
+.attachment-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1.5rem;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
+  border-radius: var(--border-radius, 4px);
+  text-decoration: none;
+  color: var(--color-text, #1a1a1a);
+}
+
+.attachment-link:hover {
+  background: var(--color-secondary, #f2f2f2);
+}
+
+.attachment-link-icon {
+  font-weight: 700;
+  color: var(--color-primary, #0057b8);
+}
+
+.attachment-link-meta {
+  font-size: 0.8rem;
+  opacity: 0.65;
+}
+
+/* ---------- Callouts (note / tip / caution / warning / danger) ---------- */
 /* Common in every telecom hardware manual: safety warnings before a power
    or wiring step, tips for a smoother setup, notes calling out an edge
    case. Color is intentionally NOT driven by --color-primary (a callout's
    meaning — "this is a safety warning" — has to stay legible/recognizable
-   no matter which brand's accent color is active). */
+   no matter which brand's accent color is active).
+   Caution/Warning/Danger map to IEC/IEEE 82079-1's three personal-injury
+   signal words (CAUTION: minor/moderate injury, WARNING: death or serious
+   injury, DANGER: imminent death or serious injury) — the escalation is
+   also why their colors run gold -> orange -> red. Note/Tip aren't safety
+   signal words at all, just general asides; the standard's 4th signal word
+   (NOTICE, property damage only) has no equivalent here since none of the
+   demo content in this template describes a property-damage-only hazard —
+   add a `.callout-notice` following the same pattern if a manual needs one.
+   Every color below is redundant with its own text label ("Caution"/
+   "Warning"/…), not color alone, satisfying WCAG 1.4.1. */
 .callout {
   margin: 1rem 0 1.5rem;
   padding: 0.9rem 1.1rem;
@@ -372,31 +615,38 @@ a {
 }
 
 .callout-note {
-  border-left-color: #2b6cb0;
+  border-left-color: var(--color-callout-note, #2b6cb0);
 }
 .callout-note .callout-title {
-  color: #2b6cb0;
+  color: var(--color-callout-note, #2b6cb0);
 }
 
 .callout-tip {
-  border-left-color: #2f855a;
+  border-left-color: var(--color-callout-tip, #2f855a);
 }
 .callout-tip .callout-title {
-  color: #2f855a;
+  color: var(--color-callout-tip, #2f855a);
+}
+
+.callout-caution {
+  border-left-color: var(--color-callout-caution, #8a6512);
+}
+.callout-caution .callout-title {
+  color: var(--color-callout-caution, #8a6512);
 }
 
 .callout-warning {
-  border-left-color: #b7791f;
+  border-left-color: var(--color-callout-warning, #a34e12);
 }
 .callout-warning .callout-title {
-  color: #b7791f;
+  color: var(--color-callout-warning, #a34e12);
 }
 
 .callout-danger {
-  border-left-color: #c53030;
+  border-left-color: var(--color-callout-danger, #c53030);
 }
 .callout-danger .callout-title {
-  color: #c53030;
+  color: var(--color-callout-danger, #c53030);
 }
 
 /* ---------- Numbered step-by-step instructions ---------- */
@@ -424,7 +674,7 @@ a {
   height: 1.9rem;
   border-radius: 50%;
   background: var(--color-primary, #0057b8);
-  color: var(--color-bg, #fff);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.9rem;
   display: flex;
@@ -484,7 +734,7 @@ a {
 
 /* ---------- Footer ---------- */
 .site-footer {
-  border-top: 1px solid var(--color-secondary, #e5e5e5);
+  border-top: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   padding: 1.5rem;
   font-size: 0.85rem;
   color: var(--color-text, #1a1a1a);
@@ -502,4 +752,8 @@ a {
 
 .footer-inner a {
   color: inherit;
+}
+
+.footer-version {
+  white-space: nowrap;
 }

@@ -1,5 +1,5 @@
 {
-  "_readme": "Diccionario de textos fijos (encabezado/pie, nombres del menú, etiquetas de impresión) del template de manual white-label. NO contiene el contenido de las páginas (títulos/párrafos): eso vive directamente en cada archivo pages/**/*.html como HTML simple, para que alguien sin conocimientos técnicos solo necesite abrir un archivo HTML para cambiar lo que dice la página. Solo edite este JSON para renombrar una entrada del menú/barra lateral, o cambiar el texto del encabezado/pie/botones. Mantenga en.json, pt.json y es.json con exactamente las mismas claves.",
+  "_readme": "Diccionario de textos fijos (encabezado/pie, nombres del menú, etiquetas de impresión) del template de manual white-label. NO contiene el contenido de las páginas (títulos/párrafos): eso vive directamente en cada archivo pages/**/*.html como HTML simple, para que alguien sin conocimientos técnicos solo necesite abrir un archivo HTML para cambiar lo que dice la página. Tampoco contiene datos del manual que no dependen del idioma, como la versión del documento — vea manual-config.json. Solo edite este JSON para renombrar una entrada del menú/barra lateral, o cambiar el texto del encabezado/pie/botones. Mantenga en.json, pt.json y es.json con exactamente las mismas claves.",
 
   "product.name": "Nombre del producto",
   "a11y.skipToContent": "Saltar al contenido",
@@ -11,11 +11,23 @@
   "header.downloadPdfTitle": "Abre el manual completo en PDF, listo para guardar",
   "header.searchPlaceholder": "Buscar en el manual…",
   "search.noResults": "No se encontraron resultados.",
+  "search.resultsFound": "resultados encontrados",
   "footer.text": "Nombre del producto — manual del usuario.",
+  "footer.versionLabel": "Versión",
   "footer.downloadPdf": "Descargar en PDF",
   "print.subtitle": "Manual del usuario",
   "print.toc": "Índice",
   "print.backToManual": "Volver al manual",
+  "print.quickRef.title": "Referencia Rápida",
+  "print.quickRef.webInterface": "Interfaz web",
+  "print.quickRef.defaultLogin": "Acceso predeterminado",
+  "print.quickRef.defaultLoginValue": "Usuario admin, contraseña impresa en la etiqueta del dispositivo",
+  "print.quickRef.factoryReset": "Restablecimiento de fábrica",
+  "print.quickRef.factoryResetValue": "Mantenga presionado el botón empotrado Reset durante 10 segundos con el equipo encendido",
+  "print.quickRef.needHelp": "¿Necesita más ayuda?",
+  "print.quickRef.needHelpValue": "Vea el capítulo Soporte para los datos de contacto",
+  "pager.prev": "Anterior",
+  "pager.next": "Siguiente",
 
   "nav.menu1": "Primeros Pasos",
   "nav.menu1.submenu1": "Instalación",
@@ -23,5 +35,6 @@
   "nav.menu2": "Especificaciones",
   "nav.menu2.submenu1": "Cumplimiento",
   "nav.menu3": "Soporte",
-  "nav.menu3.submenu1": "Temas Avanzados"
+  "nav.menu3.submenu1": "Temas Avanzados",
+  "nav.menu4": "Índice"
 }

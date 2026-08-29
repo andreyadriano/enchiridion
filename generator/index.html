@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="generator.title">Manual generator</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="css/generator.css">
+  <script src="../vendor/jszip.min.js"></script>
+</head>
+<body>
+  <div class="generator-modal" id="desktop-hint" hidden>
+    <div class="generator-modal-backdrop"></div>
+    <div class="generator-modal-panel" role="dialog" aria-modal="true" aria-labelledby="desktop-hint-title">
+      <h2 id="desktop-hint-title" data-i18n="generator.desktopHint.title">For the best experience…</h2>
+      <p data-i18n="generator.desktopHint.body">This tool works on a phone, but the side-by-side form and live preview are easier to use on a larger screen, like a tablet or a computer.</p>
+      <button type="button" id="desktop-hint-ok" data-i18n="generator.desktopHint.ok">Got it</button>
+    </div>
+  </div>
+
+  <header class="generator-header">
+    <div class="generator-header-text">
+      <h1 data-i18n="generator.title">Manual generator</h1>
+      <p data-i18n="generator.subtitle">Pick your colors, logo, and languages, watch the preview update as you go, then download a ready-to-serve .zip. No account needed, no server to set up.</p>
+    </div>
+    <div class="generator-header-actions">
+      <label class="generator-lang-picker">
+        <span class="sr-only" data-i18n="generator.language">Language</span>
+        <select id="generator-lang-selector">
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+          <option value="es">Español</option>
+        </select>
+      </label>
+      <a class="generator-templates-cta" id="open-templates-page" href="templates.html" target="_blank" rel="noopener" data-i18n="generator.templatesCta">
+        Browse ready-made templates
+      </a>
+    </div>
+  </header>
+
+  <main class="generator-body">
+    <form class="generator-controls" id="custom-form">
+      <div class="generator-save-bar">
+        <button type="button" class="generator-save-button" id="save-progress" data-i18n="generator.save.button">Save</button>
+        <button type="button" class="generator-reset-button" id="reset-defaults" data-i18n="generator.reset.button">Restore default</button>
+        <span class="generator-save-status" id="save-status" aria-live="polite"></span>
+      </div>
+
+      <fieldset class="generator-fieldset">
+        <legend data-i18n="generator.section.product">Product</legend>
+        <label class="generator-field">
+          <span data-i18n="generator.field.productName">Product name</span>
+          <input type="text" id="custom-product-name" value="My Product" required>
+        </label>
+      </fieldset>
+
+      <fieldset class="generator-fieldset">
+        <legend data-i18n="generator.section.colors">Colors</legend>
+        <div class="generator-color-grid">
+          <label class="generator-field generator-field-color">
+            <span class="generator-field-label">
+              <span data-i18n="generator.color.primary">Primary</span>
+              <span class="generator-hint-icon" tabindex="0" data-i18n-attr="title:generator.color.primary.hint" title="Links, the active menu item, the product name, buttons, and accents.">ⓘ</span>
+            </span>
+            <input type="color" id="custom-color-primary" value="#2b6cb0">
+          </label>
+          <label class="generator-field generator-field-color">
+            <span class="generator-field-label">
+              <span data-i18n="generator.color.secondary">Secondary</span>
+              <span class="generator-hint-icon" tabindex="0" data-i18n-attr="title:generator.color.secondary.hint" title="Borders and subtle backgrounds (menu hover/active, table stripes).">ⓘ</span>
+            </span>
+            <input type="color" id="custom-color-secondary" value="#edf2f7">
+          </label>
+          <label class="generator-field generator-field-color">
+            <span class="generator-field-label">
+              <span data-i18n="generator.color.text">Text</span>
+              <span class="generator-hint-icon" tabindex="0" data-i18n-attr="title:generator.color.text.hint" title="Body and heading text color.">ⓘ</span>
+            </span>
+            <input type="color" id="custom-color-text" value="#1a202c">
+          </label>
+          <label class="generator-field generator-field-color">
+            <span class="generator-field-label">
+              <span data-i18n="generator.color.bg">Background</span>
+              <span class="generator-hint-icon" tabindex="0" data-i18n-attr="title:generator.color.bg.hint" title="The page background.">ⓘ</span>
+            </span>
+            <input type="color" id="custom-color-bg" value="#ffffff">
+          </label>
+        </div>
+
+        <p id="contrast-warning" class="generator-contrast-warning" role="status" aria-live="polite" hidden></p>
+
+        <details class="generator-advanced">
+          <summary data-i18n="generator.section.advancedColors">Advanced: individual element colors</summary>
+          <p class="generator-hint" data-i18n="generator.advancedColors.hint">Left on "auto", each piece below just follows the colors above. Turn a row off auto to set it independently.</p>
+          <div class="generator-color-grid-advanced" id="advanced-colors-grid"></div>
+        </details>
+      </fieldset>
+
+      <fieldset class="generator-fieldset">
+        <legend data-i18n="generator.section.typography">Shape &amp; typography</legend>
+        <label class="generator-field">
+          <span data-i18n="generator.field.cornerRadius">Corner radius</span>
+          <select id="custom-border-radius">
+            <option value="0px" data-i18n="generator.radius.square">Square (0px)</option>
+            <option value="4px" selected data-i18n="generator.radius.subtle">Subtle (4px)</option>
+            <option value="8px" data-i18n="generator.radius.rounded">Rounded (8px)</option>
+            <option value="16px" data-i18n="generator.radius.veryRounded">Very rounded (16px)</option>
+          </select>
+        </label>
+        <label class="generator-field">
+          <span data-i18n="generator.field.headingFont">Heading font</span>
+          <select id="custom-font-heading"></select>
+          <input type="file" id="custom-font-heading-file" accept=".woff2,.woff,.ttf,.otf,font/*" hidden>
+        </label>
+        <label class="generator-field">
+          <span data-i18n="generator.field.bodyFont">Body font</span>
+          <select id="custom-font-body"></select>
+          <input type="file" id="custom-font-body-file" accept=".woff2,.woff,.ttf,.otf,font/*" hidden>
+        </label>
+      </fieldset>
+
+      <fieldset class="generator-fieldset">
+        <legend data-i18n="generator.section.logoFavicon">Logo &amp; favicon</legend>
+        <label class="generator-field">
+          <span data-i18n="generator.field.logo">Logo (SVG or PNG, optional)</span>
+          <input type="file" id="custom-logo" accept="image/*">
+        </label>
+        <label class="generator-field">
+          <span data-i18n="generator.field.favicon">Favicon (SVG, PNG or ICO, optional)</span>
+          <input type="file" id="custom-favicon" accept="image/*">
+        </label>
+      </fieldset>
+
+      <fieldset class="generator-fieldset">
+        <legend data-i18n="generator.section.layout">Layout</legend>
+        <div class="generator-radio-group" id="custom-layout-group"></div>
+      </fieldset>
+
+      <fieldset class="generator-fieldset">
+        <legend data-i18n="generator.section.languages">Languages</legend>
+        <div class="generator-checkbox-group">
+          <label class="generator-checkbox">
+            <input type="checkbox" checked disabled>
+            <span data-i18n="generator.lang.enAlways">English (always included)</span>
+          </label>
+          <label class="generator-checkbox">
+            <input type="checkbox" id="custom-lang-pt">
+            <span data-i18n="generator.lang.pt">Português</span>
+          </label>
+          <label class="generator-checkbox">
+            <input type="checkbox" id="custom-lang-es">
+            <span data-i18n="generator.lang.es">Español</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="generator-download-button" id="custom-download" data-i18n="generator.download">Download my manual</button>
+      <p class="generator-status" id="custom-status" aria-live="polite"></p>
+    </form>
+
+    <div class="generator-preview">
+      <div class="generator-preview-label" data-i18n="generator.preview.label">Live preview — your manual</div>
+      <iframe id="preview-frame" title="Manual preview"></iframe>
+    </div>
+  </main>
+
+  <script type="module" src="../js/generator/desktop-hint.js"></script>
+  <script type="module" src="../js/generator/ui.js"></script>
+</body>
+</html>

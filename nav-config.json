@@ -2,19 +2,19 @@
   {
     "id": "menu1",
     "labelKey": "nav.menu1",
-    "path": "pages/menu1/index.html",
+    "path": "pages/{lang}/menu1/index.html",
     "langs": ["pt", "es"],
     "children": [
       {
         "id": "menu1-submenu1",
         "labelKey": "nav.menu1.submenu1",
-        "path": "pages/menu1/submenu1.html",
+        "path": "pages/{lang}/menu1/submenu1.html",
         "langs": ["pt", "es"]
       },
       {
         "id": "menu1-submenu2",
         "labelKey": "nav.menu1.submenu2",
-        "path": "pages/menu1/submenu2.html",
+        "path": "pages/{lang}/menu1/submenu2.html",
         "langs": ["pt", "es"]
       }
     ]
@@ -22,13 +22,13 @@
   {
     "id": "menu2",
     "labelKey": "nav.menu2",
-    "path": "pages/menu2/index.html",
+    "path": "pages/{lang}/menu2/index.html",
     "langs": ["pt", "es"],
     "children": [
       {
         "id": "menu2-submenu1",
         "labelKey": "nav.menu2.submenu1",
-        "path": "pages/menu2/submenu1.html",
+        "path": "pages/{lang}/menu2/submenu1.html",
         "langs": ["pt", "es"]
       }
     ]
@@ -36,15 +36,21 @@
   {
     "id": "menu3",
     "labelKey": "nav.menu3",
-    "path": "pages/menu3/index.html",
+    "path": "pages/{lang}/menu3/index.html",
     "langs": ["pt", "es"],
     "children": [
       {
         "id": "menu3-submenu1",
         "labelKey": "nav.menu3.submenu1",
-        "path": "pages/menu3/submenu1.html",
+        "path": "pages/{lang}/menu3/submenu1.html",
         "langs": ["pt", "es"]
       }
     ]
+  },
+  {
+    "id": "menu4",
+    "labelKey": "nav.menu4",
+    "path": "pages/{lang}/menu4/index.html",
+    "langs": ["pt", "es"]
   }
 ]

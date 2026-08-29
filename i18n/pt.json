@@ -1,5 +1,5 @@
 {
-  "_readme": "Dicionario de textos fixos (cabecalho/rodape, nomes do menu, rotulos de impressao) do template de manual white-label. NÃO contém o conteúdo das páginas (títulos/parágrafos): isso fica diretamente em cada arquivo pages/**/*.html como HTML simples, para que quem não é técnico só precise abrir um arquivo HTML para mudar o que a página diz. Só edite este JSON para renomear uma entrada do menu/sidebar, ou mudar o texto do cabeçalho/rodapé/botões. Mantenha en.json, pt.json e es.json com exatamente as mesmas chaves.",
+  "_readme": "Dicionario de textos fixos (cabecalho/rodape, nomes do menu, rotulos de impressao) do template de manual white-label. NÃO contém o conteúdo das páginas (títulos/parágrafos): isso fica diretamente em cada arquivo pages/**/*.html como HTML simples, para que quem não é técnico só precise abrir um arquivo HTML para mudar o que a página diz. Também NÃO contém fatos do manual que independem de idioma, como a versão do documento — veja manual-config.json. Só edite este JSON para renomear uma entrada do menu/sidebar, ou mudar o texto do cabeçalho/rodapé/botões. Mantenha en.json, pt.json e es.json com exatamente as mesmas chaves.",
 
   "product.name": "Nome do produto",
   "a11y.skipToContent": "Pular para o conteúdo",
@@ -11,11 +11,23 @@
   "header.downloadPdfTitle": "Abre o manual completo em PDF, pronto para salvar",
   "header.searchPlaceholder": "Buscar no manual…",
   "search.noResults": "Nenhum resultado encontrado.",
+  "search.resultsFound": "resultados encontrados",
   "footer.text": "Nome do produto — manual do usuário.",
+  "footer.versionLabel": "Versão",
   "footer.downloadPdf": "Baixar em PDF",
   "print.subtitle": "Manual do usuário",
   "print.toc": "Sumário",
   "print.backToManual": "Voltar ao manual",
+  "print.quickRef.title": "Referência Rápida",
+  "print.quickRef.webInterface": "Interface web",
+  "print.quickRef.defaultLogin": "Login padrão",
+  "print.quickRef.defaultLoginValue": "Usuário admin, senha impressa na etiqueta do dispositivo",
+  "print.quickRef.factoryReset": "Reset de fábrica",
+  "print.quickRef.factoryResetValue": "Segure o botão recuado Reset por 10 segundos com o dispositivo ligado",
+  "print.quickRef.needHelp": "Precisa de mais ajuda?",
+  "print.quickRef.needHelpValue": "Veja o capítulo Suporte para os dados de contato",
+  "pager.prev": "Anterior",
+  "pager.next": "Próximo",
 
   "nav.menu1": "Primeiros Passos",
   "nav.menu1.submenu1": "Instalação",
@@ -23,5 +35,6 @@
   "nav.menu2": "Especificações",
   "nav.menu2.submenu1": "Conformidade",
   "nav.menu3": "Suporte",
-  "nav.menu3.submenu1": "Tópicos Avançados"
+  "nav.menu3.submenu1": "Tópicos Avançados",
+  "nav.menu4": "Índice"
 }

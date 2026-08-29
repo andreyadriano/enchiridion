@@ -1,0 +1,4 @@
+# Old paths from before the generator tool moved into its own generator/
+# folder — harmless to keep even if nothing ever linked to them yet.
+/generator.html   /generator/index.html   301
+/templates.html   /generator/templates.html   301

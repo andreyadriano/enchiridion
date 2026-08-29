@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" width="640" height="280" role="img" aria-labelledby="example-product-rear-title">
-  <title id="example-product-rear-title">Example product rear panel diagram</title>
+  <title id="example-product-rear-title">Example product rear panel diagram, connectors numbered 1-7 left to right</title>
 
   <!-- Device body -->
   <rect x="40" y="40" width="560" height="150" rx="8" fill="#3a3f44"/>
@@ -30,23 +30,34 @@
   <circle cx="555" cy="102" r="16" fill="#c7ccd1" stroke="#5b6167" stroke-width="1.5"/>
   <circle cx="555" cy="102" r="6" fill="#3a3f44"/>
 
-  <!-- Labels -->
-  <g font-family="system-ui, sans-serif" font-size="13" fill="#1a1a1a" text-anchor="middle">
-    <text x="83"  y="235">LAN 1</text>
-    <text x="163" y="235">LAN 2</text>
-    <text x="243" y="235">LAN 3</text>
-    <text x="323" y="235">LAN 4</text>
-    <text x="423" y="235">WAN</text>
-    <text x="500" y="235">USB</text>
-    <text x="555" y="235">POWER</text>
-  </g>
+  <!-- Leader lines from each connector down to its numbered marker -->
   <g stroke="#8a8f94" stroke-width="1" stroke-dasharray="2 2">
-    <line x1="83"  y1="190" x2="83"  y2="222"/>
-    <line x1="163" y1="190" x2="163" y2="222"/>
-    <line x1="243" y1="190" x2="243" y2="222"/>
-    <line x1="323" y1="190" x2="323" y2="222"/>
-    <line x1="423" y1="190" x2="423" y2="222"/>
-    <line x1="500" y1="190" x2="500" y2="222"/>
-    <line x1="555" y1="190" x2="555" y2="222"/>
+    <line x1="83"  y1="190" x2="83"  y2="215"/>
+    <line x1="163" y1="190" x2="163" y2="215"/>
+    <line x1="243" y1="190" x2="243" y2="215"/>
+    <line x1="323" y1="190" x2="323" y2="215"/>
+    <line x1="423" y1="190" x2="423" y2="215"/>
+    <line x1="500" y1="190" x2="500" y2="215"/>
+    <line x1="555" y1="190" x2="555" y2="215"/>
+  </g>
+
+  <!-- Numbered markers, 1-7 left to right — meanings in the figure's HTML
+       legend list (js/print-builder.js and pages/**/*.html keep the two in
+       sync manually, same as any other figure/caption pair in this template) -->
+  <g font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <circle cx="83" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="83" y="233">1</text>
+    <circle cx="163" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="163" y="233">2</text>
+    <circle cx="243" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="243" y="233">3</text>
+    <circle cx="323" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="323" y="233">4</text>
+    <circle cx="423" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="423" y="233">5</text>
+    <circle cx="500" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="500" y="233">6</text>
+    <circle cx="555" cy="228" r="13" fill="#2b6cb0"/>
+    <text x="555" y="233">7</text>
   </g>
 </svg>

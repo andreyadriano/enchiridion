@@ -11,10 +11,15 @@
         id="search-input"
         class="search-input"
         autocomplete="off"
+        role="combobox"
+        aria-expanded="false"
+        aria-controls="search-results"
+        aria-autocomplete="list"
         data-i18n-attr="placeholder:header.searchPlaceholder"
         placeholder="Search the manual…"
       >
-      <div id="search-results" class="search-results" hidden></div>
+      <div id="search-results" class="search-results" role="listbox" hidden></div>
+      <div id="search-status" class="sr-only" aria-live="polite"></div>
     </div>
 
     <label class="header-control">
@@ -22,7 +27,7 @@
       <select id="lang-selector"></select>
     </label>
 
-    <label class="header-control">
+    <label class="header-control" id="layout-selector-wrap">
       <span data-i18n="header.layout">Layout</span>
       <select id="layout-selector"></select>
     </label>

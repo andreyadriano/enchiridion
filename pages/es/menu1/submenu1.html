@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalación</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../../css/base.css">
+  <link rel="stylesheet" href="../../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <div class="content-type-label">Tutorial</div>
+      <h1>Instalación</h1>
+      <p>Este capítulo cubre la instalación física del dispositivo — dónde colocarlo, qué conectarle, y los pasos exactos para ponerlo en funcionamiento.</p>
+
+      <h2 id="menu1-submenu1-topic1">Eligiendo una Ubicación</h2>
+      <p>Coloque el dispositivo sobre una superficie plana y estable, o móntelo en la pared usando el soporte incluido. Deje al menos 10 cm de espacio libre en todos los lados para la ventilación, y manténgalo alejado de otros dispositivos electrónicos, gabinetes metálicos y paredes gruesas que puedan debilitar la señal inalámbrica.</p>
+
+      <h2 id="menu1-submenu1-topic2">Conexiones Físicas de un Vistazo</h2>
+      <p>El panel trasero (vea la figura en <a href="../menu2/index.html#menu2-topic3">Especificaciones Técnicas</a>) tiene cuatro tipos de conectores que usará durante la instalación:</p>
+      <ul class="contents-list">
+        <li><strong>WAN</strong> — se conecta a su fuente de internet (ONT, módem)</li>
+        <li><strong>LAN 1–4</strong> — conectan dispositivos con cable a su red local</li>
+        <li><strong>USB</strong> — para una unidad externa compartida o impresora</li>
+        <li><strong>Alimentación</strong> — solo el adaptador incluido de 12 V / 1 A</li>
+      </ul>
+
+      <h2 id="menu1-submenu1-topic3">Pasos de Instalación</h2>
+      <p>Las instrucciones numeradas paso a paso son la base de cualquier sección de instalación — usa el patrón <code>.steps</code> (una <code>&lt;ol&gt;</code> simple con círculos numerados vía CSS counters, sin JS).</p>
+      <ol class="steps">
+        <li>Elija una superficie plana y ventilada, o el soporte de pared incluido, alejado de la luz solar directa y otras fuentes de calor.</li>
+        <li>Conecte un cable Ethernet desde la toma de pared (ONT/módem) al puerto WAN del dispositivo.</li>
+        <li>Conecte el dispositivo a su router o switch con un segundo cable Ethernet.</li>
+        <li>Conecte el adaptador de corriente y espere a que el LED de estado se ponga verde fijo (unos 60 segundos).</li>
+        <li>Continúe con <a href="submenu2.html">Configuración Inicial</a>.</li>
+      </ol>
+
+      <figure class="manual-figure">
+        <img src="../../../assets/example-installation-diagram.svg" alt="Diagrama de instalación típico: de la toma de pared a este producto, luego al router o switch, y después a los dispositivos finales" width="640" height="220">
+        <figcaption><strong>Figura 2.</strong> Diagrama de instalación típico.</figcaption>
+      </figure>
+
+      <a class="attachment-link" href="../../../assets/example-installation-diagram.svg" download>
+        <span class="attachment-link-icon">↓</span>
+        <span>Descargar el diagrama de instalación (SVG)</span>
+        <span class="attachment-link-meta">2,5 KB</span>
+      </a>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../../js/core/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

@@ -7,7 +7,8 @@ body.layout-navbar .layout-shell {
 
 body.layout-navbar .site-nav {
   width: 100%;
-  border-bottom: 1px solid var(--color-secondary, #e5e5e5);
+  background: var(--color-header-bg, var(--color-bg, #ffffff));
+  border-bottom: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   padding: 0.5rem 1.5rem;
 }
 
@@ -41,8 +42,8 @@ body.layout-navbar .nav-sublist {
   top: 100%;
   left: 0;
   min-width: 200px;
-  background: var(--color-submenu-bg, var(--color-bg, #fff));
-  border: 1px solid var(--color-submenu-border, var(--color-secondary, #e5e5e5));
+  background: var(--color-sidebar-bg, var(--color-bg, #fff));
+  border: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
   border-radius: var(--border-radius, 4px);
   padding: 0.5rem;
   z-index: 20;

@@ -52,6 +52,57 @@ h1, h2, h3 {
   opacity: 0.7;
 }
 
+.cover .cover-version {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.55;
+}
+
+/* ---------- Back cover (last page): quick reference ---------- */
+.back-cover {
+  height: 24cm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  break-before: page;
+}
+
+.back-cover h1 {
+  font-size: 1.6rem;
+  color: var(--color-primary, #0057b8);
+  margin-bottom: 1.5rem;
+}
+
+.quick-ref-list {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.4rem 1rem;
+  text-align: left;
+  margin: 0;
+}
+
+.quick-ref-list dt {
+  font-weight: 700;
+  color: var(--color-text, #1a1a1a);
+  text-align: right;
+}
+
+.quick-ref-list dd {
+  margin: 0;
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.85;
+}
+
+.back-cover .cover-version {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.55;
+}
+
 /* ---------- Table of contents ---------- */
 .toc {
   break-after: page;
@@ -74,7 +125,7 @@ h1, h2, h3 {
   text-decoration: none;
   color: var(--color-text, #1a1a1a);
   padding: 0.3rem 0;
-  border-bottom: 1px dotted var(--color-secondary, #ccc);
+  border-bottom: 1px dotted var(--color-border, var(--color-secondary, #ccc));
 }
 
 .toc-entry a::after {
@@ -88,6 +139,20 @@ h1, h2, h3 {
 
 .chapter h1[id], .chapter h2[id], .chapter h3[id] {
   scroll-margin-top: 0;
+}
+
+.content-type-label {
+  display: inline-block;
+  margin: 0 0 0.4rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: var(--border-radius, 4px);
+  border: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text, #1a1a1a);
+  opacity: 0.7;
 }
 
 /* ---------- Spec tables / figures ----------
@@ -115,14 +180,14 @@ h1, h2, h3 {
 
 .spec-table th,
 .spec-table td {
-  border: 1px solid var(--color-secondary, #e5e5e5);
+  border: 1px solid var(--color-table-border, var(--color-border, var(--color-secondary, #e5e5e5)));
   padding: 0.4rem 0.6rem;
   text-align: left;
   vertical-align: top;
 }
 
 .spec-table thead th {
-  background: var(--color-secondary, #f2f2f2);
+  background: var(--color-table-header-bg, var(--color-secondary, #f2f2f2));
   font-weight: 700;
 }
 
@@ -145,7 +210,7 @@ h1, h2, h3 {
 .manual-figure img {
   max-width: 100%;
   height: auto;
-  border: 1px solid var(--color-secondary, #e5e5e5);
+  border: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
 }
 
 .manual-figure figcaption {
@@ -153,6 +218,69 @@ h1, h2, h3 {
   font-size: 0.85rem;
   color: var(--color-text, #1a1a1a);
   opacity: 0.75;
+}
+
+.manual-figure-legend {
+  list-style: none;
+  margin: 0.75rem auto 0;
+  padding: 0;
+  max-width: 480px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.35rem 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.manual-figure-legend li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+
+.manual-figure-legend .legend-number {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.3em;
+  height: 1.3em;
+  border-radius: 50%;
+  background: var(--color-primary, #0057b8);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.az-index {
+  columns: 2;
+  column-gap: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.az-index-group {
+  break-inside: avoid;
+  margin: 0 0 1.25rem;
+}
+
+.az-index-letter {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary, #0057b8);
+  border-bottom: 1px solid var(--color-border, var(--color-secondary, #e5e5e5));
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.15rem;
+}
+
+.az-index-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.az-index-group li {
+  padding: 0.2rem 0;
 }
 
 /* Same story as .spec-table/.manual-figure above: this dedicated PDF export
@@ -177,14 +305,16 @@ h1, h2, h3 {
   font-size: 0.75rem;
   letter-spacing: 0.04em;
 }
-.callout-note { border-left-color: #2b6cb0; }
-.callout-note .callout-title { color: #2b6cb0; }
-.callout-tip { border-left-color: #2f855a; }
-.callout-tip .callout-title { color: #2f855a; }
-.callout-warning { border-left-color: #b7791f; }
-.callout-warning .callout-title { color: #b7791f; }
-.callout-danger { border-left-color: #c53030; }
-.callout-danger .callout-title { color: #c53030; }
+.callout-note { border-left-color: var(--color-callout-note, #2b6cb0); }
+.callout-note .callout-title { color: var(--color-callout-note, #2b6cb0); }
+.callout-tip { border-left-color: var(--color-callout-tip, #2f855a); }
+.callout-tip .callout-title { color: var(--color-callout-tip, #2f855a); }
+.callout-caution { border-left-color: var(--color-callout-caution, #8a6512); }
+.callout-caution .callout-title { color: var(--color-callout-caution, #8a6512); }
+.callout-warning { border-left-color: var(--color-callout-warning, #a34e12); }
+.callout-warning .callout-title { color: var(--color-callout-warning, #a34e12); }
+.callout-danger { border-left-color: var(--color-callout-danger, #c53030); }
+.callout-danger .callout-title { color: var(--color-callout-danger, #c53030); }
 
 .steps {
   counter-reset: step;
@@ -207,7 +337,7 @@ h1, h2, h3 {
   height: 1.9rem;
   border-radius: 50%;
   background: var(--color-primary, #0057b8);
-  color: var(--color-bg, #fff);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.9rem;
   display: flex;

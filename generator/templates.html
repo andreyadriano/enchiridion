@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="generator.templates.title">Ready-made templates</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="css/generator.css">
+</head>
+<body class="templates-page-body">
+  <header class="templates-page-header">
+    <a class="templates-page-back" href="index.html" data-i18n="generator.templates.back">← Back to the generator</a>
+    <h1 data-i18n="generator.templates.title">Ready-made templates</h1>
+    <p class="generator-hint" data-i18n="generator.templates.hint">
+      Browse the existing brand/layout combinations exactly as they ship — nothing to download here, just a way to compare options.
+    </p>
+    <div class="templates-page-controls">
+      <label class="generator-field">
+        <span data-i18n="generator.templates.brand">Brand</span>
+        <select id="templates-brand"></select>
+      </label>
+      <label class="generator-field">
+        <span data-i18n="generator.templates.layout">Layout</span>
+        <select id="templates-layout"></select>
+      </label>
+    </div>
+  </header>
+
+  <iframe id="templates-preview-frame" class="templates-page-iframe" title="Ready-made template preview"></iframe>
+
+  <script type="module" src="../js/generator/templates-page.js"></script>
+</body>
+</html>

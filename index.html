@@ -3,17 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecting…</title>
-  <link rel="icon" type="image/svg+xml" id="favicon-link" href="assets/favicon.svg">
-  <script type="module">
-    // Landing page: sends the visitor straight to the first manual page,
-    // preserving any deep-link query params (?brand=&lang=&layout=).
-    const target = new URL('pages/menu1/index.html', window.location.href);
-    target.search = window.location.search;
-    window.location.replace(target.href);
-  </script>
+  <title data-i18n="landing.title">White-label manual template</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="generator/css/generator.css">
 </head>
-<body>
-  <p>Redirecting to the user guide… If nothing happens, <a href="pages/menu1/index.html">click here</a>.</p>
+<body class="landing-body">
+  <div class="landing-topbar">
+    <label class="generator-lang-picker">
+      <span class="sr-only" data-i18n="generator.language">Language</span>
+      <select id="generator-lang-selector">
+        <option value="en">English</option>
+        <option value="pt">Português</option>
+        <option value="es">Español</option>
+      </select>
+    </label>
+  </div>
+
+  <main class="landing-main">
+    <h1 class="sr-only" data-i18n="landing.title">White-label manual template</h1>
+    <p class="landing-subtitle" data-i18n="landing.subtitle">A no-account, no-server tool for turning this template into your own product manual.</p>
+
+    <div class="landing-panels">
+      <a class="landing-panel landing-panel-build" href="generator/index.html">
+        <div class="landing-panel-inner">
+          <h2 data-i18n="landing.build.title">Build your own manual</h2>
+          <p data-i18n="landing.build.desc">Pick your colors, logo, favicon, layout, and languages, watch a live preview update as you go, then download a ready-to-serve .zip.</p>
+          <span class="landing-panel-cta" data-i18n="landing.build.cta">Open the generator</span>
+        </div>
+      </a>
+      <a class="landing-panel landing-panel-browse" href="generator/templates.html">
+        <div class="landing-panel-inner">
+          <h2 data-i18n="landing.browse.title">Browse ready-made templates</h2>
+          <p data-i18n="landing.browse.desc">See the brand and layout combinations that already ship with this template, exactly as they look out of the box.</p>
+          <span class="landing-panel-cta" data-i18n="landing.browse.cta">Browse templates</span>
+        </div>
+      </a>
+    </div>
+
+    <a class="landing-demo-link" href="pages/en/menu1/index.html" data-i18n="landing.demo">Or view the demo manual</a>
+  </main>
+
+  <script type="module" src="js/generator/landing.js"></script>
 </body>
 </html>

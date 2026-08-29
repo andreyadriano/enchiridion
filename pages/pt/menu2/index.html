@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especificações</title>
+  <link rel="icon" type="image/svg+xml" id="favicon-link" href="../../../assets/favicon.svg">
+  <link rel="stylesheet" href="../../../css/base.css">
+  <link rel="stylesheet" href="../../../css/layout-sidebar.css">
+  <link rel="stylesheet" href="../../../css/layout-navbar.css">
+  <link rel="stylesheet" href="../../../css/layout-scroll.css">
+  <link rel="stylesheet" href="../../../css/layout-hybrid.css">
+  <link rel="stylesheet" href="../../../css/responsive.css">
+  <link rel="stylesheet" href="../../../css/print-fallback.css">
+  <link rel="stylesheet" id="theme-css" href="../../../themes/theme-generic.css">
+</head>
+<body>
+  <a class="skip-link" href="#page-content" data-i18n="a11y.skipToContent">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+  <div class="layout-shell">
+    <nav id="site-nav" class="site-nav" aria-label="Section navigation"></nav>
+    <main id="page-content" class="page-content">
+      <div class="content-type-label">Referência</div>
+      <h1>Especificações</h1>
+      <p>O capítulo de referência: padrões sem fio, conexões, alimentação, dimensões físicas e comportamento dos LEDs — o tipo de conteúdo mais consultado do que lido do início ao fim (experimente a caixa de busca no cabeçalho para qualquer um destes).</p>
+
+      <h2 id="menu2-topic1">Padrões Sem Fio</h2>
+      <table class="spec-table">
+        <caption>Tabela 1 — Especificações sem fio</caption>
+        <tbody>
+          <tr><th>Padrões</th><td>IEEE 802.11a/b/g/n/ac (Wi-Fi 5)</td></tr>
+          <tr><th>Faixas de frequência</th><td>2,4 GHz e 5 GHz, dual-band simultâneo</td></tr>
+          <tr><th>Taxa máxima de link</th><td>Até 1200 Mbps (5 GHz) + 300 Mbps (2,4 GHz)</td></tr>
+          <tr><th>Antenas</th><td>2× internas, ganho de 5 dBi</td></tr>
+          <tr><th>Segurança</th><td>WPA2-PSK, WPA3-SAE</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="menu2-topic2">Desempenho</h2>
+      <p>Até 32 clientes sem fio conectados simultaneamente, e roteamento Gigabit em velocidade de linha entre a porta WAN e qualquer porta LAN em condições típicas de tráfego doméstico ou de pequeno escritório.</p>
+
+      <h2 id="menu2-topic3">Especificações Técnicas</h2>
+      <p>Tabelas como as abaixo são comuns em manuais de produto e datasheets — copie esse padrão para suas próprias tabelas de conexões, alimentação e especificações físicas.</p>
+
+      <table class="spec-table">
+        <caption>Tabela 2 — Conexões</caption>
+        <thead>
+          <tr>
+            <th>Conector</th>
+            <th>Tipo</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>LAN 1–4</td><td>RJ45, 10/100/1000 Mbps</td><td>Portas Ethernet Gigabit para dispositivos da rede local</td></tr>
+          <tr><td>WAN</td><td>RJ45, 10/100/1000 Mbps</td><td>Porta de conexão com a internet</td></tr>
+          <tr><td>USB</td><td>USB 2.0 Tipo-A</td><td>Armazenamento externo ou acessórios</td></tr>
+          <tr><td>Alimentação</td><td>Plugue DC, 12 V / 1 A</td><td>Entrada da fonte de alimentação externa</td></tr>
+        </tbody>
+      </table>
+
+      <figure class="manual-figure">
+        <img src="../../../assets/example-product-rear.svg" alt="Painel traseiro do produto, com cada conector numerado de 1 a 7 da esquerda para a direita" width="640" height="280">
+        <figcaption><strong>Figura 1.</strong> Conexões do painel traseiro.</figcaption>
+        <ol class="manual-figure-legend">
+          <li><span class="legend-number">1</span> Porta LAN 1</li>
+          <li><span class="legend-number">2</span> Porta LAN 2</li>
+          <li><span class="legend-number">3</span> Porta LAN 3</li>
+          <li><span class="legend-number">4</span> Porta LAN 4</li>
+          <li><span class="legend-number">5</span> Porta WAN</li>
+          <li><span class="legend-number">6</span> Porta USB 2.0</li>
+          <li><span class="legend-number">7</span> Entrada de energia</li>
+        </ol>
+      </figure>
+
+      <table class="spec-table">
+        <caption>Tabela 3 — Alimentação e especificações físicas</caption>
+        <tbody>
+          <tr><th>Fonte de alimentação</th><td>Entrada 100–240 V AC, 50/60 Hz — Saída 12 V DC / 1 A</td></tr>
+          <tr><th>Consumo de energia</th><td>Até 12 W</td></tr>
+          <tr><th>Dimensões (L &times; P &times; A)</th><td>180 &times; 120 &times; 30 mm</td></tr>
+          <tr><th>Peso</th><td>350 g</td></tr>
+          <tr><th>Temperatura de operação</th><td>0 &deg;C a 40 &deg;C</td></tr>
+          <tr><th>Umidade de armazenamento</th><td>10% a 90%, sem condensação</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="menu2-topic4">Indicadores de LED</h2>
+      <p>Uma tabela de status de LEDs é outra página quase universal em manuais de telecom — reaproveita o mesmo padrão <code>.spec-table</code> acima, só que com cabeçalhos de coluna diferentes.</p>
+      <table class="spec-table">
+        <caption>Tabela 4 — Comportamento dos LEDs</caption>
+        <thead>
+          <tr>
+            <th>LED</th>
+            <th>Cor / estado</th>
+            <th>Significado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Power</td><td>Verde fixo</td><td>Dispositivo ligado e pronto</td></tr>
+          <tr><td>Power</td><td>Vermelho piscando</td><td>Falha no autoteste de inicialização — veja <a href="../menu3/index.html#menu3-topic3">Solução de Problemas</a></td></tr>
+          <tr><td>WAN</td><td>Verde fixo</td><td>Conexão à internet ativa</td></tr>
+          <tr><td>WAN</td><td>Apagado</td><td>Nenhum cabo detectado ou link inativo</td></tr>
+          <tr><td>LAN 1–4</td><td>Verde piscando</td><td>Link ativo, dados sendo transferidos</td></tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+  <footer id="site-footer" class="site-footer"></footer>
+
+  <script type="module">
+    import { initPage } from '../../../js/core/page-init.js';
+    initPage();
+  </script>
+</body>
+</html>

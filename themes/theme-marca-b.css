@@ -10,7 +10,6 @@
   /* --- Base palette (required) --- */
   --color-primary: #7a1fa2;   /* links, active menu item, buttons, accents */
   --color-secondary: #f3ecf7; /* borders, subtle backgrounds */
-  --color-accent: #ffb703;    /* optional second accent color, free to use */
   --color-text: #22192b;      /* body and heading text */
   --color-bg: #ffffff;        /* page background */
   --font-heading: 'Georgia', serif;   /* h1/h2/h3, product name */
@@ -24,6 +23,6 @@
   --color-sidebar-bg: #faf7fc;              /* sidebar / scroll-layout nav column */
   --color-nav-link-bg-active: #ecdcf5;      /* menu/submenu link background (selected) */
   --color-nav-link-text-active: #5a1678;    /* menu/submenu link text (selected) */
-  --color-submenu-bg: #faf7fc;              /* dropdown submenu panel background (navbar layout) */
-  --color-submenu-border: #dcc7e8;          /* dropdown submenu panel border (navbar layout) */
+  --color-search-results-bg: #faf7fc;              /* dropdown submenu panel background (navbar layout) */
+  --color-search-results-border: #dcc7e8;          /* dropdown submenu panel border (navbar layout) */
 }
