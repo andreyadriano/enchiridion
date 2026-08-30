@@ -6,7 +6,7 @@
 
   "header.language": "Language",
   "header.layout": "Layout",
-  "header.brand": "Brand",
+  "header.brand": "Theme",
   "header.downloadPdf": "Download PDF",
   "header.downloadPdfTitle": "Opens the full manual as a PDF, ready to save",
   "header.searchPlaceholder": "Search the manual…",
