@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="editor.docTitle">Enchiridion — Content editor</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="css/generator.css">
+  <script src="../vendor/jszip.min.js"></script>
+</head>
+<body>
+  <header class="editor-header-slim">
+    <a class="gen-home-link" href="../index.html" data-i18n-attr="aria-label:generator.home" aria-label="Back to home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5C10 3.5 6.5 3 3 3v16c3.5 0 7 0.5 9 2"/><path d="M12 5c2-1.5 5.5-2 9-2v16c-3.5 0-7 0.5-9 2Z"/><path d="M12 5v18"/></svg>
+    </a>
+    <p class="editor-step-indicator">
+      <a href="index.html" data-i18n="editor.step.theme">1. Theme</a>
+      <span aria-hidden="true">·</span>
+      <strong data-i18n="editor.step.content">2. Content</strong>
+    </p>
+    <div class="editor-history-buttons">
+      <button type="button" class="editor-history-button" id="undo-button" data-i18n-attr="title:editor.history.undo" title="Undo (Ctrl+Z)" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-2"/></svg>
+        <span class="sr-only" data-i18n="editor.history.undo">Undo</span>
+      </button>
+      <button type="button" class="editor-history-button" id="redo-button" data-i18n-attr="title:editor.history.redo" title="Redo (Ctrl+Shift+Z)" disabled>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 14 5-5-5-5"/><path d="M20 9H10a6 6 0 0 0 0 12h2"/></svg>
+        <span class="sr-only" data-i18n="editor.history.redo">Redo</span>
+      </button>
+    </div>
+    <button type="button" class="editor-reset-button" id="reset-content-button" data-i18n="editor.reset.button">Restore original content</button>
+  </header>
+
+  <main class="editor-main">
+    <div class="editor-left">
+      <section class="editor-page-panel" aria-label="Page content">
+        <div class="editor-page-header">
+          <h2 class="editor-panel-title" id="editor-page-title" data-i18n="editor.page.noSelection">Select a page below</h2>
+          <div class="editor-lang-tabs" id="editor-lang-tabs"></div>
+        </div>
+        <p class="generator-hint" id="editor-lang-hint" hidden data-i18n="editor.page.langHint">This language has no content yet for this page — it won't be included for it.</p>
+        <div id="insert-toolbar" class="editor-insert-toolbar" role="group" aria-label="Insert"></div>
+        <div id="block-list" class="editor-block-list"></div>
+      </section>
+
+      <section class="editor-structure-panel" aria-label="Manual structure">
+        <div class="editor-structure-panel-head">
+          <h2 class="editor-panel-title" data-i18n="editor.structure.title">Structure</h2>
+          <div class="editor-add-row editor-add-row-compact">
+            <input type="text" id="new-menu-input" data-i18n-attr="placeholder:editor.structure.newMenuPlaceholder" placeholder="New menu name">
+            <button type="button" id="add-menu-button" data-i18n="editor.structure.addMenu">+ New menu</button>
+          </div>
+        </div>
+        <div id="structure-tree" class="editor-structure-tree"></div>
+      </section>
+
+    </div>
+
+    <div class="generator-preview">
+      <div class="generator-preview-label" data-i18n="generator.preview.label">Live preview — your manual</div>
+      <iframe id="preview-frame" title="Manual preview"></iframe>
+      <div class="editor-download-fab">
+        <p class="generator-status" id="status" aria-live="polite"></p>
+        <span class="generator-save-status" id="save-status" aria-live="polite"></span>
+        <button type="button" class="generator-download-button" id="download-button" data-i18n="generator.download">Download my manual</button>
+      </div>
+    </div>
+  </main>
+
+  <script type="module" src="../js/generator/editor-ui.js"></script>
+</body>
+</html>

@@ -13,6 +13,7 @@
   --gen-surface: #ffffff;
   --gen-text: #1c1a2b;
   --gen-muted: #5b5570;
+  --gen-muted-light: #bcb7cb;
   --gen-header-h: auto;
 }
 
@@ -524,6 +525,20 @@ body {
   cursor: wait;
 }
 
+.generator-continue-link {
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gen-primary);
+  text-decoration: none;
+}
+
+.generator-continue-link:hover {
+  text-decoration: underline;
+}
+
 .generator-status {
   margin: 0;
   font-size: 0.85rem;
@@ -532,6 +547,7 @@ body {
 }
 
 .generator-preview {
+  position: relative;
   background: var(--gen-surface);
   border: 1px solid var(--gen-border);
   border-radius: 8px;
@@ -1262,4 +1278,783 @@ body {
 
 .site-credit a {
   color: var(--gen-primary);
+}
+
+/* ---------- generator/editor.html (content editor, step 2) ---------- */
+.editor-header-slim {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 2rem;
+}
+
+.editor-step-indicator {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--gen-muted);
+}
+
+.editor-history-buttons {
+  margin-left: auto;
+  display: flex;
+  gap: 0.35rem;
+}
+
+.editor-history-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+  background: var(--gen-surface);
+  color: var(--gen-muted);
+  cursor: pointer;
+}
+
+.editor-history-button svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.editor-history-button:hover:not(:disabled) {
+  border-color: var(--gen-primary);
+  color: var(--gen-primary);
+}
+
+.editor-history-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.editor-reset-button {
+  font: inherit;
+  font-size: 0.78rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+  background: var(--gen-surface);
+  color: var(--gen-muted);
+  cursor: pointer;
+}
+
+.editor-reset-button:hover {
+  border-color: #c53030;
+  color: #c53030;
+}
+
+.editor-step-indicator a {
+  color: var(--gen-muted);
+  text-decoration: underline;
+}
+
+.editor-step-indicator strong {
+  color: var(--gen-text);
+}
+
+.editor-panel-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--gen-muted);
+}
+
+.editor-structure-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+
+.editor-structure-panel-head .editor-panel-title {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.editor-add-row-compact {
+  margin-top: 0;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  max-width: 260px;
+}
+
+.editor-add-row-compact input[type="text"] {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.82rem;
+}
+
+.editor-add-row-compact button {
+  padding: 0.3rem 0.55rem;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+/* Own top-level layout (not .generator-body) — the editor needs 3
+   independently-sized/scrolled regions (content, structure, preview)
+   instead of the generator's simple 2-column form+preview split. */
+.editor-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 0 2rem 1.5rem;
+  overflow: hidden;
+}
+
+.editor-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  min-height: 0;
+  background: var(--gen-surface);
+  border: 1px solid var(--gen-border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.editor-page-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 1.25rem;
+}
+
+.editor-structure-panel {
+  flex: 0 0 auto;
+  max-height: 22%;
+  overflow-y: auto;
+  padding: 0.85rem 1.25rem;
+  border-top: 1px solid var(--gen-border);
+  background: var(--gen-bg);
+}
+
+/* Floats over the preview's bottom-right corner instead of taking a row of
+   its own in the (already tight) editing column. */
+.editor-download-fab {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.3rem;
+  max-width: min(280px, 60%);
+}
+
+.editor-download-fab .generator-download-button {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.editor-download-fab .generator-status,
+.editor-download-fab .generator-save-status {
+  margin: 0;
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-align: right;
+  color: var(--gen-text);
+  background: var(--gen-surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.editor-download-fab .generator-status:empty,
+.editor-download-fab .generator-save-status:empty {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .editor-main {
+    display: block;
+    height: auto;
+    overflow: visible;
+    padding: 0 1.5rem 1.5rem;
+  }
+  .editor-left {
+    height: auto;
+    margin-bottom: 1.5rem;
+  }
+  .editor-page-panel,
+  .editor-structure-panel {
+    max-height: none;
+    overflow-y: visible;
+  }
+  .generator-preview {
+    height: 70vh;
+  }
+}
+
+.editor-tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.editor-structure-tree > .editor-tree-list {
+  padding-left: 0;
+}
+
+.editor-tree-row {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  border-radius: 4px;
+  padding: 0.02rem 0.2rem;
+}
+
+.editor-tree-row.is-selected {
+  background: var(--gen-primary-tint);
+}
+
+.editor-tree-item.is-dragging {
+  opacity: 0.4;
+}
+
+.editor-tree-row .editor-drag-handle {
+  width: 1rem;
+  height: 0.65rem;
+  opacity: 0;
+}
+
+.editor-tree-row:hover .editor-drag-handle,
+.editor-tree-row:focus-within .editor-drag-handle {
+  opacity: 1;
+}
+
+.editor-tree-row .editor-icon-button {
+  width: 1.3rem;
+  height: 1.3rem;
+  font-size: 0.68rem;
+}
+
+.editor-tree-label {
+  flex: 1 1 auto;
+  text-align: left;
+  border: none;
+  background: none;
+  font-size: 0.82rem;
+  color: var(--gen-text);
+  padding: 0.1rem 0.3rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.editor-tree-label:hover {
+  background: var(--gen-bg);
+}
+
+.editor-icon-button {
+  flex: 0 0 auto;
+  border: 1px solid var(--gen-border);
+  background: var(--gen-surface);
+  color: var(--gen-muted);
+  font-size: 0.75rem;
+  line-height: 1;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.editor-icon-button:hover {
+  border-color: var(--gen-primary);
+  color: var(--gen-primary);
+}
+
+.editor-add-submenu {
+  margin: 0 0 0.15rem 0.6rem;
+  border: none;
+  background: none;
+  color: var(--gen-primary);
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0.05rem 0.3rem;
+}
+
+.editor-add-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.editor-insert-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--gen-border);
+}
+
+.editor-insert-button {
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 999px;
+  background: var(--gen-surface);
+  color: var(--gen-text);
+  cursor: pointer;
+}
+
+.editor-insert-button:hover {
+  border-color: var(--gen-primary);
+  color: var(--gen-primary);
+  background: var(--gen-primary-tint);
+}
+
+.editor-add-row input[type="text"],
+.editor-add-row select {
+  flex: 1 1 auto;
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+}
+
+.editor-add-row button {
+  flex: 0 0 auto;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+  background: var(--gen-surface);
+  color: var(--gen-primary);
+  cursor: pointer;
+}
+
+.editor-page-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.editor-lang-tabs {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.editor-lang-tab {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 999px;
+  background: var(--gen-surface);
+  color: var(--gen-muted);
+  cursor: pointer;
+}
+
+.editor-lang-tab.is-active {
+  background: var(--gen-primary);
+  border-color: var(--gen-primary);
+  color: #fff;
+}
+
+.editor-block-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+}
+
+/* Notion-style flow: each block is a plain row, no card/border/collapse —
+   the move/remove controls only reveal on hover so the page reads like a
+   document, not a stack of boxes. */
+.editor-block-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding: 0.15rem 0;
+  border-radius: 4px;
+}
+
+.editor-block-row:hover {
+  background: var(--gen-bg);
+}
+
+.editor-block-row > .editor-drag-handle,
+.editor-block-row > .editor-block-delete {
+  flex: 0 0 auto;
+  margin-top: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+/* :not(:has(...)) so hovering/focusing a list ITEM (which has its own
+   drag/delete controls right there) doesn't also reveal the whole list
+   BLOCK's controls — showing both at once next to each other reads as "two
+   delete buttons for this line" and invites deleting the wrong thing. */
+.editor-block-row:hover:not(:has(.editor-inline-item-row:hover, .editor-inline-item-row:focus-within)) > .editor-drag-handle,
+.editor-block-row:hover:not(:has(.editor-inline-item-row:hover, .editor-inline-item-row:focus-within)) > .editor-block-delete,
+.editor-block-row:focus-within:not(:has(.editor-inline-item-row:hover, .editor-inline-item-row:focus-within)) > .editor-drag-handle,
+.editor-block-row:focus-within:not(:has(.editor-inline-item-row:hover, .editor-inline-item-row:focus-within)) > .editor-block-delete {
+  opacity: 1;
+}
+
+.editor-block-row.is-dragging {
+  opacity: 0.4;
+}
+
+/* The light-gray "this is only a preview" bar — see showDropPlaceholder()
+   — sized to roughly match a row so it reads as a real slot, not a line. */
+.editor-drop-placeholder {
+  height: 1.6rem;
+  margin: 0.1rem 0;
+  border-radius: 4px;
+  background: var(--gen-bg);
+  border: 1px dashed var(--gen-border);
+}
+
+/* A dot-grid bar rather than a text glyph, so it can be sized/stretched
+   freely — a plain unicode character doesn't grow cleanly. Wider than
+   tall (a horizontal grip), and only shown on hover — see the
+   :hover/:focus-within rules for each context below (block controls,
+   item controls, tree row). */
+/* Three thin stacked bars ("≡"), close together — not a dot grid. */
+.editor-drag-handle {
+  flex: 0 0 auto;
+  width: 1.2rem;
+  height: 0.75rem;
+  cursor: grab;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--gen-muted-light) 0,
+    var(--gen-muted-light) 2px,
+    transparent 2px,
+    transparent 5px
+  );
+  background-repeat: no-repeat;
+  user-select: none;
+}
+
+.editor-drag-handle:hover {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--gen-muted) 0,
+    var(--gen-muted) 2px,
+    transparent 2px,
+    transparent 5px
+  );
+}
+
+.editor-drag-handle:active {
+  cursor: grabbing;
+}
+
+.editor-block-content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.editor-block-field {
+  margin-bottom: 0.5rem;
+}
+
+.editor-block-field textarea {
+  font: inherit;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+  resize: vertical;
+}
+
+/* Direct-typing surface for heading/paragraph/label/list/code blocks —
+   borderless, grows with content, styled per block type so the page
+   already looks like the finished document while you type it. */
+.editor-inline-field {
+  display: block;
+  width: 100%;
+  border: none;
+  background: none;
+  resize: none;
+  overflow: hidden;
+  font: inherit;
+  color: var(--gen-text);
+  padding: 0.15rem 0.3rem;
+  border-radius: 4px;
+}
+
+.editor-inline-field:focus {
+  outline: none;
+  background: var(--gen-surface);
+  box-shadow: 0 0 0 1px var(--gen-border);
+}
+
+.editor-inline-field::placeholder {
+  color: var(--gen-muted);
+}
+
+/* contenteditable fields (paragraph/list-item/callout text — the ones that
+   may hold a link) don't support the placeholder attribute, so it's faked
+   with an ::before on the empty state. */
+.editor-inline-richtext:empty::before {
+  content: attr(data-placeholder);
+  color: var(--gen-muted);
+}
+
+.editor-inline-richtext a {
+  color: var(--gen-primary);
+  text-decoration: underline;
+}
+
+.editor-inline-richtext-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.editor-inline-richtext-wrap .editor-inline-richtext {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.editor-inline-link-button {
+  flex: 0 0 auto;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  margin-top: 0.15rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 999px;
+  background: var(--gen-surface);
+  color: var(--gen-muted);
+  cursor: pointer;
+  opacity: 0;
+}
+
+.editor-inline-richtext-wrap:hover .editor-inline-link-button,
+.editor-inline-richtext-wrap:focus-within .editor-inline-link-button {
+  opacity: 1;
+}
+
+.editor-inline-link-button:hover {
+  border-color: var(--gen-primary);
+  color: var(--gen-primary);
+}
+
+/* Visually groups every item under one boundary, so it reads as a single
+   list BLOCK (one ▲▼× in the page flow) rather than a stack of separate
+   blocks — item-level add/remove/reorder lives entirely inside this box. */
+.editor-list-block {
+  border-left: 2px solid var(--gen-border);
+  padding-left: 0.6rem;
+}
+
+.editor-add-item-pill {
+  margin: 0.45rem 0 0.2rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border: 1px dashed var(--gen-border);
+  border-radius: 999px;
+  background: var(--gen-surface);
+  color: var(--gen-primary);
+  cursor: pointer;
+}
+
+.editor-add-item-pill:hover {
+  border-style: solid;
+  border-color: var(--gen-primary);
+  background: var(--gen-primary-tint);
+}
+
+.editor-inline-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.editor-inline-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.editor-inline-item-row.is-dragging {
+  opacity: 0.4;
+}
+
+.editor-inline-item-bullet {
+  flex: 0 0 auto;
+  padding-top: 0.2rem;
+  font-size: 0.85rem;
+  color: var(--gen-muted);
+  min-width: 1.1rem;
+  text-align: right;
+}
+
+.editor-inline-item-row .editor-inline-richtext {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.editor-inline-item-row > .editor-drag-handle,
+.editor-inline-item-row > .editor-item-delete {
+  flex: 0 0 auto;
+  margin-top: 0.2rem;
+  opacity: 0;
+}
+
+.editor-inline-item-row:hover > .editor-drag-handle,
+.editor-inline-item-row:hover > .editor-item-delete,
+.editor-inline-item-row:focus-within > .editor-drag-handle,
+.editor-inline-item-row:focus-within > .editor-item-delete {
+  opacity: 1;
+}
+
+.editor-inline-h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.editor-inline-h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.editor-inline-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gen-muted);
+}
+
+.editor-inline-paragraph,
+.editor-inline-items,
+.editor-inline-callout-title {
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.editor-inline-callout-title {
+  font-weight: 700;
+}
+
+.editor-inline-code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  background: var(--gen-bg);
+  border: 1px solid var(--gen-border) !important;
+}
+
+/* Read-only — see the 'raw' case in renderBlockFields: never an editable
+   markup box, just a plain-text look at what's already there. */
+.editor-raw-preview {
+  padding: 0.5rem 0.65rem;
+  border: 1px dashed var(--gen-border);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--gen-muted);
+  white-space: pre-wrap;
+}
+
+.editor-callout-variants {
+  display: flex;
+  gap: 0.3rem;
+  margin: 0.2rem 0 0.35rem;
+}
+
+.editor-callout-variant-button {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 999px;
+  background: var(--gen-surface);
+  color: var(--gen-muted);
+  cursor: pointer;
+}
+
+.editor-callout-variant-button.is-selected {
+  border-color: currentColor;
+}
+
+.editor-callout-variant-note.is-selected { color: #2b6cb0; background: #eaf2fb; }
+.editor-callout-variant-tip.is-selected { color: #2f7d54; background: #e8f5ee; }
+.editor-callout-variant-caution.is-selected { color: #8a6512; background: #fdf3e0; }
+.editor-callout-variant-warning.is-selected { color: #a34e12; background: #fbeade; }
+.editor-callout-variant-danger.is-selected { color: #c53030; background: #fbe7e7; }
+
+.editor-checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.editor-table-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.editor-table-row {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.editor-table-row input {
+  flex: 1 1 auto;
+  font: inherit;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+}
+
+.editor-table-row-header input {
+  font-weight: 700;
+}
+
+.editor-table-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editor-table-buttons button {
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--gen-border);
+  border-radius: 4px;
+  background: var(--gen-surface);
+  cursor: pointer;
+}
+
+.editor-image-thumb {
+  max-width: 100%;
+  max-height: 120px;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.editor-image-thumb[hidden] {
+  display: none;
 }

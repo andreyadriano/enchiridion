@@ -6,6 +6,9 @@ import { CORE_FILES, LAYOUT_CSS, I18N_FILES, FALLBACK_LOGO, FALLBACK_FAVICON } f
 import { rootUrl } from '../paths.js';
 import { loadNav, flattenNav, langPath } from '../../nav/nav-config.js';
 import { isDarkBackground } from '../theme/contrast.js';
+import { renderBlock } from '../content/blocks.js';
+import { buildPageShell, relativePrefix } from '../content/page-shell.js';
+import { toNavConfig, collectLabels } from '../content/structure.js';
 
 const MIME_EXT = {
   'image/svg+xml': 'svg',
@@ -208,10 +211,73 @@ function extFromPath(path) {
   return dot > -1 ? path.slice(dot + 1).toLowerCase() : 'svg';
 }
 
+function extFromDataUrl(dataUrl) {
+  const match = /^data:([^;,]+)/.exec(dataUrl);
+  return (match && MIME_EXT[match[1]]) || 'png';
+}
+
+async function decodeDataUrlBuffer(dataUrl) {
+  const res = await fetch(dataUrl);
+  return res.arrayBuffer();
+}
+
+// Data URLs can't ship inside the generated HTML (they bloat every page and
+// defeat browser caching) — each image/attachment a block references gets
+// decoded into a real file under assets/manual-images/ once per manual, and
+// the rendered <img src>/<a href> is rewritten to the matching relative
+// path. Non-data sources (e.g. a figure imported from an existing demo page,
+// still pointing at assets/example-*.svg) are left untouched.
+function makeAssetWriter(zip, prefix) {
+  let counter = 0;
+  return async (dataUrl) => {
+    if (!dataUrl || !dataUrl.startsWith('data:')) return dataUrl;
+    counter += 1;
+    const ext = extFromDataUrl(dataUrl);
+    const fileName = `assets/manual-images/img-${Date.now().toString(36)}-${counter}.${ext}`;
+    zip.file(fileName, await decodeDataUrlBuffer(dataUrl));
+    return `${prefix}${fileName}`;
+  };
+}
+
+// Renders one edited/new page's HTML from its blocks — used instead of
+// fetch+rewriteManualPage() whenever build-package.js's caller (the content
+// editor) has an in-memory blocks[] for that item/lang. See the plan's
+// "Geracao dos arquivos HTML novos" section.
+async function renderEditedPage(zip, { item, lang, layout, page, faviconPath }) {
+  const path = item.path.replace('{lang}', lang);
+  const prefix = relativePrefix(path);
+  const writeAsset = makeAssetWriter(zip, prefix);
+  const resolveImageSrc = (block) => writeAsset(block.srcDataUrl);
+  const resolveAttachmentHref = (block) => writeAsset(block.href);
+  // Each block may need to await its own asset write, so render sequentially
+  // rather than reuse blocks.js's synchronous renderPage().
+  const rendered = [];
+  for (const block of page.blocks) {
+    if (block.type === 'figure' && block.srcDataUrl?.startsWith('data:')) {
+      const src = await resolveImageSrc(block);
+      rendered.push(renderBlock({ ...block, srcDataUrl: src }));
+    } else if (block.type === 'attachment' && block.href?.startsWith('data:')) {
+      const href = await resolveAttachmentHref(block);
+      rendered.push(renderBlock({ ...block, href }));
+    } else {
+      rendered.push(renderBlock(block));
+    }
+  }
+  const html = buildPageShell({
+    path,
+    lang,
+    title: page.title || item.id,
+    layout,
+    bodyHtml: rendered.join('\n\n'),
+    faviconPath,
+  });
+  zip.file(path, html);
+}
+
 // options.logoFile/faviconFile/customFonts are optional — an omitted logo
 // or favicon falls back to this template's own generic-brand asset.
 export async function buildManualZip(options) {
-  const { colors, componentColors, borderRadius, fontHeading, fontBody, logoFile, faviconFile, productName, layout, langs, customFonts } = options;
+  const { colors, componentColors, borderRadius, fontHeading, fontBody, logoFile, faviconFile, productName, layout, langs, customFonts, content } = options;
   const zip = new JSZip();
   const extraLangs = langs.filter((l) => l !== 'en');
   const selectedLangs = ['en', ...extraLangs];
@@ -228,20 +294,38 @@ export async function buildManualZip(options) {
 
   zip.file(LAYOUT_CSS[layout], await fetchBuffer(LAYOUT_CSS[layout]));
 
+  // Custom menu/submenu labels typed in the content editor have no real
+  // i18n/*.json entry (see content/structure.js's collectLabels) — merged
+  // into each dict here under their synthetic `custom.<id>` key before it's
+  // written, so nav-render.js's normal labelKey lookup just finds them.
+  const customLabels = content ? collectLabels(content.structure) : {};
   for (const lang of selectedLangs) {
     const path = I18N_FILES[lang];
     const dict = JSON.parse(await fetchText(path));
     dict['product.name'] = productName;
+    Object.assign(dict, customLabels[lang]);
     zip.file(path, JSON.stringify(dict, null, 2));
   }
+
   // Also the source this zip's own page list is derived from below, so it
-  // can never drift out of sync with which pages actually ship.
-  const nav = await loadNav();
+  // can never drift out of sync with which pages actually ship. When the
+  // content editor was used, the nav comes from its live structure (which
+  // may have added/removed/reordered menus) instead of the repo's own
+  // nav-config.json.
+  const nav = content ? toNavConfig(content.structure) : await loadNav();
   zip.file('nav-config.json', JSON.stringify(filterNavLangs(nav, extraLangs), null, 2));
 
   for (const item of flattenNav(nav)) {
     for (const lang of selectedLangs) {
       if (lang !== 'en' && !(item.langs || []).includes(lang)) continue;
+      const editedPage = content?.pages?.[`${item.id}::${lang}`];
+      if (editedPage) {
+        await renderEditedPage(zip, { item, lang, layout, page: editedPage, faviconPath });
+        continue;
+      }
+      // Reaching here for a custom (editor-created) item with no authored
+      // page would mean validate.js's pre-download checklist was skipped —
+      // it guarantees every included item has at least English content.
       const path = langPath(item, lang);
       const html = await fetchText(path);
       zip.file(path, rewriteManualPage(html, { layout, faviconExt }));

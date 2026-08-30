@@ -317,6 +317,10 @@ function saveProgress() {
 }
 saveButton.addEventListener('click', saveProgress);
 
+// The content editor (step 2) reads this same SAVE_KEY to know the theme —
+// save silently before handing off so it never opens with stale/no theme.
+document.getElementById('continue-to-content')?.addEventListener('click', saveProgress);
+
 async function restoreState(data) {
   if (data.productName !== undefined) productNameInput.value = data.productName;
   if (data.colors) {
