@@ -38,6 +38,13 @@ export const BRANDS = {
     favicon: 'assets/favicons/coral.svg',
     layout: 'scroll',
   },
+  rebeccapurple: {
+    label: 'Rebecca Purple',
+    theme: 'themes/theme-rebeccapurple.css',
+    logo: 'assets/logos/rebeccapurple.svg',
+    favicon: 'assets/favicons/rebeccapurple.svg',
+    layout: 'navbar',
+  },
   generic: {
     label: 'Generic',
     theme: 'themes/theme-generic.css',

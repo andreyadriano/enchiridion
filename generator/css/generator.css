@@ -50,10 +50,16 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 8px;
-  background-image: linear-gradient(135deg, var(--gen-primary), var(--gen-primary-dark));
+  background-image: linear-gradient(
+    135deg,
+    var(--gen-primary),
+    var(--gen-primary-dark)
+  );
   color: #fff;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .gen-home-link svg {
@@ -93,7 +99,11 @@
   height: 2rem;
   flex: 0 0 auto;
   border-radius: 7px;
-  background-image: linear-gradient(135deg, var(--gen-primary), var(--gen-primary-dark));
+  background-image: linear-gradient(
+    135deg,
+    var(--gen-primary),
+    var(--gen-primary-dark)
+  );
   color: #fff;
 }
 
@@ -275,9 +285,15 @@ body {
 
 .generator-save-button {
   border: none;
-  background-image: linear-gradient(135deg, var(--gen-primary), var(--gen-primary-dark));
+  background-image: linear-gradient(
+    135deg,
+    var(--gen-primary),
+    var(--gen-primary-dark)
+  );
   color: #fff;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .generator-save-button:hover {
@@ -485,11 +501,17 @@ body {
   padding: 0.8rem 1rem;
   border: none;
   border-radius: 999px;
-  background-image: linear-gradient(135deg, var(--gen-primary), var(--gen-primary-dark));
+  background-image: linear-gradient(
+    135deg,
+    var(--gen-primary),
+    var(--gen-primary-dark)
+  );
   color: #fff;
   cursor: pointer;
   box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .generator-download-button:hover {
@@ -627,10 +649,10 @@ body {
 .explore-grid {
   flex: 1 1 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
   gap: 1.5rem;
   padding: 1.5rem 2rem 2.5rem;
-  max-width: 1100px;
+  max-width: 1440px;
   margin: 0 auto;
   width: 100%;
 }
@@ -642,7 +664,10 @@ body {
   border-radius: 12px;
   background: var(--gen-surface);
   overflow: hidden;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 @media (hover: hover) {
@@ -839,7 +864,11 @@ body {
   padding: 0.55rem 1.1rem;
   border: none;
   border-radius: 999px;
-  background-image: linear-gradient(135deg, var(--gen-primary), var(--gen-primary-dark));
+  background-image: linear-gradient(
+    135deg,
+    var(--gen-primary),
+    var(--gen-primary-dark)
+  );
   color: #fff;
   cursor: pointer;
 }
@@ -940,12 +969,20 @@ body {
   font-weight: 700;
   font-size: 0.95rem;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .hero-btn-primary {
   color: #fff;
-  background-image: linear-gradient(135deg, var(--gen-primary), var(--gen-primary-dark));
+  background-image: linear-gradient(
+    135deg,
+    var(--gen-primary),
+    var(--gen-primary-dark)
+  );
   box-shadow: 0 10px 24px rgba(79, 70, 229, 0.28);
 }
 
@@ -1011,8 +1048,13 @@ body {
 }
 
 @keyframes hero-card-float {
-  0%, 100% { transform: rotate(3deg) translateY(0); }
-  50% { transform: rotate(3deg) translateY(-8px); }
+  0%,
+  100% {
+    transform: rotate(3deg) translateY(0);
+  }
+  50% {
+    transform: rotate(3deg) translateY(-8px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1123,7 +1165,10 @@ body {
   text-decoration: none;
   color: inherit;
   text-align: left;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
 }
 
 .landing-panel-inner {

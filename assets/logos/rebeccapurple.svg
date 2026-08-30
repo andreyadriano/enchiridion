@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40" width="200" height="40">
+  <rect width="40" height="40" rx="16" fill="#663399"/>
+  <g transform="translate(8,8)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="2.2"/>
+    <circle cx="12" cy="6.8" r="3.2"/>
+    <circle cx="16.94" cy="10.39" r="3.2"/>
+    <circle cx="15.06" cy="16.21" r="3.2"/>
+    <circle cx="8.94" cy="16.21" r="3.2"/>
+    <circle cx="7.06" cy="10.39" r="3.2"/>
+  </g>
+  <text x="48" y="26" font-family="'Segoe Print', 'Comic Sans MS', 'Chalkboard SE', 'Z003', cursive" font-size="16" font-weight="700" fill="#663399">Rebecca Purple</text>
+</svg>

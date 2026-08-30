@@ -1,0 +1,17 @@
+/* Example brand theme — "Rebecca Purple". #663399 on white is 8.4:1 (WCAG AA). */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #663399;   /* links, active menu item, buttons, accents */
+  --color-secondary: #f7eefc; /* borders, subtle backgrounds */
+  --color-text: #2b1a3d;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: 'Segoe Print', 'Comic Sans MS', 'Chalkboard SE', 'Z003', cursive; /* h1/h2/h3, product name */
+  --font-body: 'Segoe UI', Helvetica, Arial, sans-serif;                   /* everything else */
+  --border-radius: 20px;      /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/rebeccapurple.svg');
+
+  /* --- Component colors (optional) --- */
+  --color-sidebar-bg: #fbf6fe;
+  --color-nav-link-bg-active: #ecdcf7;
+  --color-nav-link-text-active: #4a2470;
+}

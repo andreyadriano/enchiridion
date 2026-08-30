@@ -10,6 +10,7 @@ export const FONT_STACKS = [
   { key: 'generator.font.humanistSans', value: "'Segoe UI', Helvetica, Arial, sans-serif" },
   { key: 'generator.font.modernGrotesk', value: 'Helvetica, Arial, sans-serif' },
   { key: 'generator.font.monospace', value: "'Courier New', monospace" },
+  { key: 'generator.font.handwritten', value: "'Segoe Print', 'Comic Sans MS', 'Chalkboard SE', 'Z003', cursive" },
 ];
 
 // Renders each stack's option IN that font, so picking one is a preview in

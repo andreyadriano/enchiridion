@@ -66,6 +66,16 @@ export const PRESETS = [
     layout: 'scroll',
   },
   {
+    id: 'rebeccapurple',
+    labelKey: 'generator.explore.card.rebeccapurple',
+    blurbKey: 'generator.explore.blurb.rebeccapurple',
+    colors: { primary: '#663399', secondary: '#f7eefc', text: '#2b1a3d', bg: '#ffffff' },
+    borderRadius: '20px',
+    fontHeading: "'Segoe Print', 'Comic Sans MS', 'Chalkboard SE', 'Z003', cursive",
+    fontBody: "'Segoe UI', Helvetica, Arial, sans-serif",
+    layout: 'navbar',
+  },
+  {
     id: 'generic',
     labelKey: 'generator.explore.card.generic',
     blurbKey: 'generator.explore.blurb.generic',

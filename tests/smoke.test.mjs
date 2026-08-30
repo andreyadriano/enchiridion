@@ -1288,7 +1288,7 @@ async function main() {
           baseHref: card.querySelector('.explore-card-cta-base').getAttribute('href'),
         }))
       );
-      await assertTrue('Explore shows one card per built-in brand', cards.length === 6, cards.length);
+      await assertTrue('Explore shows one card per built-in brand', cards.length === 7, cards.length);
       for (const { liveHref, baseHref } of cards) {
         await assertTrue(
           '"See it live" points at the real demo with brand+layout+lang forced',
