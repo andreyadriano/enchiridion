@@ -45,6 +45,13 @@ export const BRANDS = {
     favicon: 'assets/favicons/rebeccapurple.svg',
     layout: 'navbar',
   },
+  blueprint: {
+    label: 'Blueprint',
+    theme: 'themes/theme-blueprint.css',
+    logo: 'assets/logos/blueprint.svg',
+    favicon: 'assets/favicons/blueprint.svg',
+    layout: 'hybrid',
+  },
   generic: {
     label: 'Generic',
     theme: 'themes/theme-generic.css',

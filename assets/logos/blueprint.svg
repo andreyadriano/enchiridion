@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 170 40" width="170" height="40">
+  <rect width="40" height="40" rx="16" fill="#006680"/>
+  <g transform="translate(8,8)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="4" r="1.6"/>
+    <path d="M12 5.6V8"/>
+    <path d="M12 8L7 20"/>
+    <path d="M12 8L17 19"/>
+    <path d="M6 21A8 8 0 0 1 18 20"/>
+  </g>
+  <text x="48" y="26" font-family="'Courier New', monospace" font-size="17" font-weight="700" fill="#006680">Blueprint</text>
+</svg>

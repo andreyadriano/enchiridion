@@ -1,0 +1,17 @@
+/* Example brand theme — "Blueprint". #006680 on white is 6.5:1 (WCAG AA). */
+:root {
+  /* --- Base palette (required) --- */
+  --color-primary: #006680;   /* links, active menu item, buttons, accents */
+  --color-secondary: #e8f6f8; /* borders, subtle backgrounds */
+  --color-text: #0d2b30;      /* body and heading text */
+  --color-bg: #ffffff;        /* page background */
+  --font-heading: 'Courier New', monospace; /* h1/h2/h3, product name */
+  --font-body: 'Courier New', monospace;    /* everything else */
+  --border-radius: 0px;       /* buttons, selects, active menu item */
+  --logo-url: url('../assets/logos/blueprint.svg');
+
+  /* --- Component colors (optional) --- */
+  --color-sidebar-bg: #f2fbfc;
+  --color-nav-link-bg-active: #cdeef3;
+  --color-nav-link-text-active: #004a5c;
+}

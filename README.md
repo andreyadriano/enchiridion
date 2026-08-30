@@ -36,7 +36,7 @@ python3 -m http.server 8000
 ```
 
 Then open `http://localhost:8000/` — the landing page links to the
-generator and to Explore, a gallery of the 6 built-in looks you can preview
+generator and to Explore, a gallery of the built-in looks you can preview
 live or use as a starting point. (Double-clicking a file directly with
 `file://` won't work: the header/nav/footer are loaded via `fetch()`,
 which browsers block under `file://`.)

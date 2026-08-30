@@ -76,6 +76,16 @@ export const PRESETS = [
     layout: 'navbar',
   },
   {
+    id: 'blueprint',
+    labelKey: 'generator.explore.card.blueprint',
+    blurbKey: 'generator.explore.blurb.blueprint',
+    colors: { primary: '#006680', secondary: '#e8f6f8', text: '#0d2b30', bg: '#ffffff' },
+    borderRadius: '0px',
+    fontHeading: "'Courier New', monospace",
+    fontBody: "'Courier New', monospace",
+    layout: 'hybrid',
+  },
+  {
     id: 'generic',
     labelKey: 'generator.explore.card.generic',
     blurbKey: 'generator.explore.blurb.generic',
